@@ -1,10 +1,4 @@
-import type { ReactNode } from "react";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
-
-import "./global.css";
+import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
@@ -12,6 +6,8 @@ import { Providers } from "./providers";
 
 import Navbar from "@/app/components/Navbar";
 import LargeWithLogoCentered from "@/app/components/Footer";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AI Glimpse",
