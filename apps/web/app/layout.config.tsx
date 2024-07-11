@@ -1,16 +1,16 @@
-import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
-import { pageTree } from '@/app/source';
+import { type BaseLayoutProps, type DocsLayoutProps } from "fumadocs-ui/layout";
+import { pageTree } from "@/app/source";
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: 'My App',
+    title: "AI Glimpse",
   },
   links: [
     {
-      text: 'Documentation',
-      url: '/docs',
-      active: 'nested-url',
+      text: "Documentation",
+      url: "/docs",
+      active: "nested-url",
     },
   ],
 };
