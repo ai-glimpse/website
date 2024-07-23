@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import { Box, Heading, Text, Container, VStack } from "@chakra-ui/react";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import CodeBlock from "./CodeBlock";
 
 interface BlogPostContentProps {
   slug: string;
 }
+
+const components = {
+  code: CodeBlock,
+};
 
 export default function BlogPostContent({ slug }: BlogPostContentProps) {
   const [postData, setPostData] = useState<any>(null);
@@ -37,7 +42,7 @@ export default function BlogPostContent({ slug }: BlogPostContentProps) {
             </Text>
           </Box>
           <Box className="prose lg:prose-xl">
-            <MDXRemote {...postData.mdxSource} />
+            <MDXRemote {...postData.mdxSource} components={components} />
           </Box>
         </VStack>
       </Container>
