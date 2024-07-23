@@ -17,7 +17,7 @@ export default function BlogPostCard({
   excerpt,
 }: BlogPostCardProps) {
   return (
-    <Link href={`/blog/${slug}`} passHref>
+    <Link href={`/blog/${slug}`} passHref legacyBehavior>
       <Box
         as="a"
         bg="white"
