@@ -1,29 +1,22 @@
 "use client";
 
-import { Heading, Center } from '@chakra-ui/react'
+import { Heading, Center } from "@chakra-ui/react";
 
 import KmeansPlaygroundDemo from "@/app/toyml/clustering/kmeans/playground";
 import CodeEditor from "@/app/components/editor/CodeEditor";
-import { PythonProvider } from 'react-py'
-
-
-const packages = {
-  official: ['asciitree'],
-  micropip: ['toyml'],
-}
-
+import { PythonProvider } from "react-py";
 
 export default function KmeansPage() {
   return (
     <>
-      <PythonProvider packages={packages}>
-        <main>
-          <Center>
-            <Heading>Kmeans</Heading>
-          </Center>
+      <main>
+        <Center>
+          <Heading>Kmeans</Heading>
+        </Center>
+        <div className="w-[60%] mx-auto">
           <KmeansPlaygroundDemo />
-        </main>
-    </PythonProvider>
+        </div>
+      </main>
     </>
   );
 }
