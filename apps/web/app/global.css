@@ -84,3 +84,15 @@ body {
 .prose pre {
     @apply bg-gray-800 text-white p-4 rounded-lg overflow-x-auto;
 }
+
+pre,
+code {
+    border: none !important;
+    background: transparent !important;
+}
+
+pre *,
+code * {
+    border: none !important;
+    background: transparent !important;
+}
