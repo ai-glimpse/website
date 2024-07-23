@@ -21,11 +21,33 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
       background: "#f6f8fa",
       padding: "16px",
     },
+    'pre[class*="language-"]': {
+      ...github['pre[class*="language-"]'],
+      background: "#f6f8fa",
+      margin: 0,
+    },
+    'code[class*="language-"]': {
+      ...github['code[class*="language-"]'],
+      background: "transparent",
+      padding: 0,
+    },
+    ".linenumber": {
+      minWidth: "1em",
+      paddingRight: "1em",
+      textAlign: "right",
+      userSelect: "none",
+      color: "#6e7781",
+      borderRight: "1px solid #d0d7de",
+      marginRight: "16px",
+    },
   };
 
   return (
     <Box
       mb={6}
+      mx="auto"
+      width="90%"
+      maxWidth="900px"
       borderRadius="md"
       overflow="hidden"
       border="1px solid #d0d7de"

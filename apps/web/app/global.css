@@ -82,7 +82,7 @@ body {
 }
 
 .prose pre {
-    @apply bg-gray-800 text-white p-4 rounded-lg overflow-x-auto;
+    @apply bg-gray-800 text-white p-1 rounded-lg overflow-x-auto;
 }
 
 pre,
