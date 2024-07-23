@@ -9,12 +9,10 @@ import React from "react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <RootProvider>
-      <CacheProvider>
-        <ChakraProvider>
-          <PythonProvider>{children} </PythonProvider>
-        </ChakraProvider>
-      </CacheProvider>
-    </RootProvider>
+    <CacheProvider>
+      <ChakraProvider>
+        <RootProvider>{children} </RootProvider>
+      </ChakraProvider>
+    </CacheProvider>
   );
 }

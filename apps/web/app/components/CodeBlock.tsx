@@ -13,7 +13,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
   const language = className ? className.replace(/language-/, "") : "";
 
   // Custom theme with light background and contrasting colors
-  const customStyle = {
+  const customStyle: { [key: string]: React.CSSProperties } = {
     'code[class*="language-"]': {
       color: "#24292e",
       background: "none",
