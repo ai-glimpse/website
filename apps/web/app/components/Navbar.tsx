@@ -190,7 +190,7 @@ const DesktopNav = () => {
     },
     {
       label: "About",
-      href: "/about",
+      href: "https://github.com/ai-glimpse",
     },
   ];
   return (
