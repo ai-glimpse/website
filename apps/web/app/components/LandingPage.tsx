@@ -35,34 +35,6 @@ export default function LandingPage() {
         <Text color={'gray.500'} maxW={'3xl'}>
           Learning statistics, machine learning and deep learning from scratch!
         </Text>
-          {/* <div className="relative place-items-center">
-            <Image
-              className="relative"
-              src="/toyai.png"
-              alt="ToyAI"
-              width={150}
-              height={100}
-              priority
-            />
-          </div> */}
-
-        {/*<Stack spacing={6} direction={'row'}>*/}
-        {/*  <Button*/}
-        {/*    rounded={'full'}*/}
-        {/*    px={6}*/}
-        {/*    // colorScheme={'green'}*/}
-        {/*    // bg={'green.400'}*/}
-        {/*    _hover={{ bg: 'green.500' }}*/}
-        {/*  >*/}
-        {/*    Get started*/}
-        {/*  </Button>*/}
-        {/*  <Button rounded={'full'} px={6}>*/}
-        {/*    Learn more*/}
-        {/*  </Button>*/}
-        {/*</Stack>*/}
-        {/*<Flex w={'full'}>*/}
-        {/*  <Illustration height={{ sm: '24rem', lg: '28rem' }} mt={{ base: 12, sm: 16 }} />*/}
-        {/*</Flex>*/}
       </Stack>
     </Container>
     <ToyAIMember />

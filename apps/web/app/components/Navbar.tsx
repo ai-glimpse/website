@@ -1,14 +1,11 @@
 "use client";
 
 import Link from "next/link";
-
 import {
   Box,
   Flex,
   Text,
   IconButton,
-  Button,
-  ButtonGroup,
   Stack,
   Collapse,
   Icon,
@@ -19,200 +16,122 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  EmailIcon,
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
-import { FaDiscord, FaGithub, FaTwitter, FaNewspaper } from "react-icons/fa";
-import FlyoutNavbar from "./FlyoutNavbar";
+import { ChevronDownIcon, ChevronRightIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { FaGithub, FaTwitter } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 export default function Navbar() {
-  const listDisplay = useBreakpointValue({ base: "none", lg: "flex" });
-  const navItems = [
-    {
-      label: "Twitter",
-      icon: <FaTwitter />,
-      link: "https://twitter.com/MathewShen42",
-    },
-    {
-      label: "Github",
-      icon: <FaGithub />,
-      link: "https://github.com/ai-glimpse",
-    },
-    {
-      label: "Email",
-      icon: <EmailIcon />,
-      link: "mailto:datahonor@gmail.com",
-    },
-  ];
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Box>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
+        minH={"50px"}
+        py={{ base: 1 }}
+        px={{ base: 2, md: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
       >
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Link href={"/"}>
-            <Button
-              textAlign={useBreakpointValue({ base: "center", md: "left" })}
-              fontFamily={"heading"}
-              color={useColorModeValue("gray.800", "white")}
-              fontSize={{ base: "sm", sm: "sm", md: "lg" }}
-              _hover={{
-                bg: useColorModeValue("gray.100", "white"),
-              }}
-            >
-              AI Glimpse
-            </Button>
-          </Link>
+        <Flex
+          flex={{ base: 1, md: "auto" }}
+          ml={{ base: -2 }}
+          display={{ base: "flex", md: "none" }}
+        >
+          <IconButton
+            onClick={onToggle}
+            icon={<HamburgerIcon w={5} h={5} />}
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
+            size="sm"
+          />
+        </Flex>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }} align={"center"}>
+          <Text
+            textAlign={useBreakpointValue({ base: "center", md: "left" })}
+            fontFamily={"heading"}
+            color={useColorModeValue("gray.800", "white")}
+            fontWeight="bold"
+            fontSize={{ base: "md", md: "xl" }}
+          >
+            <Link href="/">AI Glimpse</Link>
+          </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
 
-        <Flex ml={10}>
-          <ButtonGroup variant="link" display={listDisplay}>
-            {navItems.map((item) => (
-              <IconButton
-                key={item.label}
-                as="a"
-                href={item.link}
-                target="_blank"
-                icon={item.icon}
-                variant="ghost"
-                aria-label={item.label}
-                px={2}
-              />
-            ))}
-          </ButtonGroup>
-        </Flex>
-
-        {/* disable signin and signup */}
-        {/* <SignInUp /> */}
+        <Stack
+          flex={{ base: 1, md: 0 }}
+          justify={"flex-end"}
+          direction={"row"}
+          spacing={{ base: 2, md: 6 }}
+        >
+          <IconButton
+            as="a"
+            href="https://twitter.com/MathewShen42"
+            target="_blank"
+            icon={<FaTwitter />}
+            variant="ghost"
+            aria-label="Twitter"
+            size="sm"
+          />
+          <IconButton
+            as="a"
+            href="https://github.com/ai-glimpse"
+            target="_blank"
+            icon={<FaGithub />}
+            variant="ghost"
+            aria-label="GitHub"
+            size="sm"
+          />
+          <IconButton
+            as="a"
+            href="mailto:datahonor@gmail.com"
+            icon={<MdEmail />}
+            variant="ghost"
+            aria-label="Email"
+            size="sm"
+          />
+        </Stack>
       </Flex>
+
+      <Collapse in={isOpen} animateOpacity>
+        <MobileNav />
+      </Collapse>
     </Box>
   );
 }
-
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
-
-const SignInUp = () => {
-  return (
-    <Stack
-      flex={{ base: 5, md: 7 }}
-      justify={"flex-end"}
-      direction={"row"}
-      spacing={6}
-    >
-      <Button
-        as={"a"}
-        size={"sm"}
-        fontSize={"sm"}
-        fontWeight={400}
-        color={"black"}
-        bg={"gray.100"}
-        href={"#"}
-        _hover={{
-          bg: "gray.400",
-        }}
-        // variant={'link'}
-      >
-        Sign In
-      </Button>
-      <Button
-        as={"a"}
-        // display={{ base: 'none', md: 'inline-flex' }}
-        size={"sm"}
-        fontSize={"sm"}
-        fontWeight={400}
-        color={"black"}
-        bg={"gray.100"}
-        href={"#"}
-        _hover={{
-          bg: "gray.400",
-        }}
-      >
-        Sign Up
-      </Button>
-    </Stack>
-  );
-};
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
-  const navItems: Array<NavItem> = [
-    // {
-    //   label: "Toys",
-    //   href: "#",
-    //   children: [
-    //     {
-    //       label: "ToyML",
-    //       subLabel: "Machine Learning Algorithms",
-    //       href: "/toys/toyml",
-    //     },
-    //     {
-    //       label: "ToyDL",
-    //       subLabel: "Neural Networks in Deep Learning",
-    //       href: "/toys/toydl",
-    //     },
-    //     {
-    //       label: "ToyStat",
-    //       subLabel: "Methods in Statistics",
-    //       href: "/toys/toystat",
-    //     },
-    //   ],
-    // },
-    {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "https://github.com/ai-glimpse",
-    },
-  ];
+
   return (
     <Stack direction={"row"} spacing={4}>
-      {navItems.map((navItem) => (
-        <Box key={navItem.label} alignSelf={"center"}>
+      {NAV_ITEMS.map((navItem) => (
+        <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-              <Button
-                as="a"
-                p={2}
-                href={navItem.href ?? "#"}
-                fontSize={{ base: "sm", sm: "sm", md: "lg" }}
-                fontWeight={500}
-                color={linkColor}
-                bgColor={"white"}
-                _hover={{
-                  bg: "gray.100",
-                }}
-              >
-                {navItem.label}
-              </Button>
+              <Link href={navItem.href ?? "#"}>
+                <Text
+                  p={2}
+                  fontSize={"sm"}
+                  fontWeight={500}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: "none",
+                    color: linkHoverColor,
+                  }}
+                >
+                  {navItem.label}
+                </Text>
+              </Link>
             </PopoverTrigger>
 
             {navItem.children && (
@@ -240,16 +159,8 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
-    <Box
-      as="a"
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
-    >
-      <Stack direction={"row"} align={"center"}>
+    <Link href={href ?? "#"}>
+      <Stack direction={"row"} align={"center"} role={"group"}>
         <Box>
           <Text
             transition={"all .3s ease"}
@@ -264,7 +175,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           transition={"all .3s ease"}
           transform={"translateX(-10px)"}
           opacity={0}
-          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
+          _groupHover={{ opacity: 1, transform: "translateX(0)" }}
           justify={"flex-end"}
           align={"center"}
           flex={1}
@@ -272,6 +183,96 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
-    </Box>
+    </Link>
   );
 };
+
+const MobileNav = () => {
+  return (
+    <Stack
+      bg={useColorModeValue("white", "gray.800")}
+      p={2}
+      display={{ md: "none" }}
+    >
+      {NAV_ITEMS.map((navItem) => (
+        <MobileNavItem key={navItem.label} {...navItem} />
+      ))}
+    </Stack>
+  );
+};
+
+const MobileNavItem = ({ label, children, href }: NavItem) => {
+  const { isOpen, onToggle } = useDisclosure();
+
+  return (
+    <Stack spacing={2} onClick={children && onToggle}>
+      <Link href={href ?? "#"}>
+        <Flex
+          py={1}
+          justify={"space-between"}
+          align={"center"}
+          _hover={{
+            textDecoration: "none",
+          }}
+        >
+          <Text
+            fontWeight={600}
+            color={useColorModeValue("gray.600", "gray.200")}
+            fontSize="sm"
+          >
+            {label}
+          </Text>
+          {children && (
+            <Icon
+              as={ChevronDownIcon}
+              transition={"all .25s ease-in-out"}
+              transform={isOpen ? "rotate(180deg)" : ""}
+              w={4}
+              h={4}
+            />
+          )}
+        </Flex>
+      </Link>
+
+      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
+        <Stack
+          mt={1}
+          pl={4}
+          borderLeft={1}
+          borderStyle={"solid"}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          align={"start"}
+        >
+          {children &&
+            children.map((child) => (
+              <Link key={child.label} href={child.href ?? "#"}>
+                <Text py={1} fontSize="sm">{child.label}</Text>
+              </Link>
+            ))}
+        </Stack>
+      </Collapse>
+    </Stack>
+  );
+};
+
+interface NavItem {
+  label: string;
+  subLabel?: string;
+  children?: Array<NavItem>;
+  href?: string;
+}
+
+const NAV_ITEMS: Array<NavItem> = [
+  {
+    label: "Docs",
+    href: "/docs",
+  },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
+    label: "About",
+    href: "https://github.com/ai-glimpse",
+  },
+];
