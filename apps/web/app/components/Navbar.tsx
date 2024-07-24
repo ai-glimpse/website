@@ -159,27 +159,27 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
   const navItems: Array<NavItem> = [
-    {
-      label: "Toys",
-      href: "#",
-      children: [
-        {
-          label: "ToyML",
-          subLabel: "Machine Learning Algorithms",
-          href: "/toyml",
-        },
-        {
-          label: "ToyDL",
-          subLabel: "Neural Networks in Deep Learning",
-          href: "/toydl",
-        },
-        {
-          label: "ToyStat",
-          subLabel: "Methods in Statistics",
-          href: "/toystat",
-        },
-      ],
-    },
+    // {
+    //   label: "Toys",
+    //   href: "#",
+    //   children: [
+    //     {
+    //       label: "ToyML",
+    //       subLabel: "Machine Learning Algorithms",
+    //       href: "/toys/toyml",
+    //     },
+    //     {
+    //       label: "ToyDL",
+    //       subLabel: "Neural Networks in Deep Learning",
+    //       href: "/toys/toydl",
+    //     },
+    //     {
+    //       label: "ToyStat",
+    //       subLabel: "Methods in Statistics",
+    //       href: "/toys/toystat",
+    //     },
+    //   ],
+    // },
     {
       label: "Docs",
       href: "/docs",

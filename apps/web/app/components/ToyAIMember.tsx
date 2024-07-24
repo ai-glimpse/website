@@ -80,21 +80,21 @@ export default function ToyAIMember() {
             heading={'(TODO)ToyStat'}
             icon={<Icon as={FcBearish} w={10} h={10} />}
             description={'Learning Statistics Method from scratch.'}
-            href={'/toystat'}
+            href={'/toys/toystat'}
             active={false}
           />
           <Card
             heading={'(WIP)ToyML'}
             icon={<Icon as={FcGenealogy} w={10} h={10} />}
             description={'Learning Machine learning from scratch.'}
-            href={'/toyml'}
+            href={'/toys/toyml'}
             active={true}
           />
           <Card
             heading={'(Coming)ToyDL'}
             icon={<Icon as={FcMindMap} w={10} h={10} />}
             description={'Learning Deep learning from scratch.'}
-            href={'/toydl'}
+            href={'/toys/toydl'}
             active={false}
           />
         </Flex>
