@@ -2,7 +2,7 @@
 
 import { Heading, Center } from "@chakra-ui/react";
 
-import KmeansPlaygroundDemo from "@/app/toyml/clustering/kmeans/playground";
+import KmeansPlaygroundDemo from "@/app/toys/toyml/clustering/kmeans/playground";
 import CodeEditor from "@/app/components/editor/CodeEditor";
 import { PythonProvider } from "react-py";
 
