@@ -11,7 +11,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { ReactElement } from 'react'
-import { FcBearish, FcGenealogy, FcMindMap } from "react-icons/fc";
+import { RiBarChartBoxLine, RiMindMap, RiBrainLine } from "react-icons/ri";
 import Link from "next/link";
 
 interface CardProps {
@@ -45,7 +45,7 @@ const Card = ({ heading, description, icon, href, active }: CardProps) => {
             h={16}
             align={'center'}
             justify={'center'}
-            color={'white'}
+            color={active ? 'white' : 'gray.600'}
             rounded={'full'}
             bg={active ? 'green.400' : 'gray.100'}>
             {icon}
@@ -87,21 +87,21 @@ export default function ToyAIMember() {
         <Flex flexWrap="wrap" gridGap={8} justify="center">
           <Card
             heading={'ToyStat'}
-            icon={<Icon as={FcBearish} w={10} h={10} />}
+            icon={<Icon as={RiBarChartBoxLine} w={8} h={8} />}
             description={'Master statistical methods from the ground up.'}
             href={'/toys/toystat'}
             active={false}
           />
           <Card
             heading={'ToyML'}
-            icon={<Icon as={FcGenealogy} w={10} h={10} />}
+            icon={<Icon as={RiMindMap} w={8} h={8} />}
             description={'Explore machine learning algorithms hands-on.'}
             href={'/toys/toyml'}
             active={true}
           />
           <Card
             heading={'ToyDL'}
-            icon={<Icon as={FcMindMap} w={10} h={10} />}
+            icon={<Icon as={RiBrainLine} w={8} h={8} />}
             description={'Unravel the mysteries of deep learning.'}
             href={'/toys/toydl'}
             active={false}
