@@ -17,7 +17,7 @@ const Logo = (props: any) => {
   return (
     <Avatar
       size="lg"
-      name="ToyAI"
+      name="AI Glimpse"
       src="https://avatars.githubusercontent.com/u/154221423"
     />
   );
@@ -47,31 +47,48 @@ export default function LargeWithLogoCentered() {
       <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
       <Container as={Stack} py={20} centerContent>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={50}>
-          <Stack align={"flex-start"}>
-            <ListHeader>Github</ListHeader>
-            <Box as="a" href={"https://github.com/ai-glimpse"}>
-              Organization
-            </Box>
-            <Box as="a" href={"https://github.com/ai-glimpse/website"}>
-              Website
-            </Box>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              {/*<Box as="a" href={'https://github.com/toy-ai/website/discussions'}>*/}
-              {/*  Discussion*/}
-              {/*</Box>*/}
-              {/*<Tag*/}
-              {/*  size={'sm'}*/}
-              {/*  bg={useColorModeValue('gray.300', 'gray.800')}*/}
-              {/*  ml={2}*/}
-              {/*  color={'white'}>*/}
-              {/*  Coming*/}
-              {/*</Tag>*/}
-            </Stack>
+          {/*<Stack align={"flex-start"}>*/}
+          {/*  <ListHeader>Github</ListHeader>*/}
+          {/*  <Box as="a" href={"https://github.com/ai-glimpse"}>*/}
+          {/*    Organization*/}
+          {/*  </Box>*/}
+          {/*  <Box as="a" href={"https://github.com/ai-glimpse/website"}>*/}
+          {/*    Website*/}
+          {/*  </Box>*/}
+          {/*  <Stack direction={"row"} align={"center"} spacing={-1}>*/}
+          {/*    /!*<Box as="a" href={'https://github.com/toy-ai/website/discussions'}>*!/*/}
+          {/*    /!*  Discussion*!/*/}
+          {/*    /!*</Box>*!/*/}
+          {/*    /!*<Tag*!/*/}
+          {/*    /!*  size={'sm'}*!/*/}
+          {/*    /!*  bg={useColorModeValue('gray.300', 'gray.800')}*!/*/}
+          {/*    /!*  ml={2}*!/*/}
+          {/*    /!*  color={'white'}>*!/*/}
+          {/*    /!*  Coming*!/*/}
+          {/*    /!*</Tag>*!/*/}
+          {/*  </Stack>*/}
 
             {/*<Box as="a" href={'https://github.com/llm-literature/calvino/releases'}>*/}
             {/*  Releases*/}
             {/*</Box>*/}
+          {/*</Stack>*/}
+
+            <Stack align={"flex-start"}>
+            <ListHeader>Resources</ListHeader>
+            <Box as="a" href={"https://ai-glimpse.github.io/toyml"}>
+              ToyML
+            </Box>
+            <Box as="a" href={"https://ai-glimpse.github.io/toydl"}>
+              ToyDL
+            </Box>
+            <Box as="a" href={"https://ai-glimpse.github.io/toyllm"}>
+              ToyLLM
+            </Box>
+            <Box as="a" href={"https://ai-glimpse.github.io/toystat/"}>
+              ToyStat
+            </Box>
           </Stack>
+
           <Stack align={"flex-start"}>
             <ListHeader>Project</ListHeader>
             <Stack direction={"row"} align={"center"} spacing={-1}>
@@ -87,19 +104,21 @@ export default function LargeWithLogoCentered() {
                 Hot
               </Tag>
             </Stack>
-
-            <Box as="a" href={"https://datahonor.com/pysesd/"}>
+            <Box as="a" href={"https://shenxiangzhuang.github.io/pysesd/"}>
               [Py]S-ESD
             </Box>
-            {/*<Box as="a" href={'https://datahonor.com/python-package-template/'}>*/}
-            {/*  MPPT*/}
+            <Box as="a" href={'https://shenxiangzhuang.github.io/mppt/'}>
+              MPPT
+            </Box>
+            <Box as="a" href={'https://shenxiangzhuang.github.io/bleuscore/'}>
+              BleuScore
+            </Box>
+            {/*<Box as="a" href={"https://datahonor.com/toyml/"}>*/}
+            {/*  ToyML*/}
             {/*</Box>*/}
-            <Box as="a" href={"https://datahonor.com/toyml/"}>
-              ToyML
-            </Box>
-            <Box as="a" href={"https://datahonor.com/toydl/"}>
-              ToyDL
-            </Box>
+            {/*<Box as="a" href={"https://datahonor.com/toydl/"}>*/}
+            {/*  ToyDL*/}
+            {/*</Box>*/}
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Odyssey</ListHeader>
@@ -128,9 +147,9 @@ export default function LargeWithLogoCentered() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Contact</ListHeader>
-            <Box as="a" href={"https://datahonor.com"}>
-              Website
-            </Box>
+            {/*<Box as="a" href={"https://datahonor.com"}>*/}
+            {/*  Blog*/}
+            {/*</Box>*/}
             <Box as="a" href={"https://github.com/shenxiangzhuang"}>
               Github
             </Box>
