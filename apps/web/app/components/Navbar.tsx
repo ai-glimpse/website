@@ -6,7 +6,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -17,7 +16,7 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronRightIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
@@ -29,9 +28,9 @@ export default function Navbar() {
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
+        minH={"50px"}
+        py={{ base: 1 }}
+        px={{ base: 2, md: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.900")}
@@ -44,9 +43,10 @@ export default function Navbar() {
         >
           <IconButton
             onClick={onToggle}
-            icon={isOpen ? <ChevronDownIcon w={3} h={3} /> : <ChevronRightIcon w={5} h={5} />}
+            icon={<HamburgerIcon w={5} h={5} />}
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
+            size="sm"
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }} align={"center"}>
@@ -55,7 +55,7 @@ export default function Navbar() {
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
             fontWeight="bold"
-            fontSize={"xl"}
+            fontSize={{ base: "md", md: "xl" }}
           >
             <Link href="/">AI Glimpse</Link>
           </Text>
@@ -69,7 +69,7 @@ export default function Navbar() {
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
-          spacing={6}
+          spacing={{ base: 2, md: 6 }}
         >
           <IconButton
             as="a"
@@ -78,6 +78,7 @@ export default function Navbar() {
             icon={<FaTwitter />}
             variant="ghost"
             aria-label="Twitter"
+            size="sm"
           />
           <IconButton
             as="a"
@@ -86,6 +87,7 @@ export default function Navbar() {
             icon={<FaGithub />}
             variant="ghost"
             aria-label="GitHub"
+            size="sm"
           />
           <IconButton
             as="a"
@@ -93,6 +95,7 @@ export default function Navbar() {
             icon={<MdEmail />}
             variant="ghost"
             aria-label="Email"
+            size="sm"
           />
         </Stack>
       </Flex>
@@ -186,7 +189,11 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 
 const MobileNav = () => {
   return (
-    <Stack bg={useColorModeValue("white", "gray.800")} p={4} display={{ md: "none" }}>
+    <Stack
+      bg={useColorModeValue("white", "gray.800")}
+      p={2}
+      display={{ md: "none" }}
+    >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
@@ -198,17 +205,21 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
+    <Stack spacing={2} onClick={children && onToggle}>
       <Link href={href ?? "#"}>
         <Flex
-          py={2}
+          py={1}
           justify={"space-between"}
           align={"center"}
           _hover={{
             textDecoration: "none",
           }}
         >
-          <Text fontWeight={600} color={useColorModeValue("gray.600", "gray.200")}>
+          <Text
+            fontWeight={600}
+            color={useColorModeValue("gray.600", "gray.200")}
+            fontSize="sm"
+          >
             {label}
           </Text>
           {children && (
@@ -216,8 +227,8 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
               as={ChevronDownIcon}
               transition={"all .25s ease-in-out"}
               transform={isOpen ? "rotate(180deg)" : ""}
-              w={6}
-              h={6}
+              w={4}
+              h={4}
             />
           )}
         </Flex>
@@ -225,7 +236,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
-          mt={2}
+          mt={1}
           pl={4}
           borderLeft={1}
           borderStyle={"solid"}
@@ -235,7 +246,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           {children &&
             children.map((child) => (
               <Link key={child.label} href={child.href ?? "#"}>
-                <Text py={2}>{child.label}</Text>
+                <Text py={1} fontSize="sm">{child.label}</Text>
               </Link>
             ))}
         </Stack>
