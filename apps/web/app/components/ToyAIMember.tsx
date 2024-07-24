@@ -102,7 +102,7 @@ export default function ToyAIMember() {
           <Card
             heading={'ToyDL'}
             icon={<Icon as={RiBrainLine} w={8} h={8} />}
-            description={'Unravel the mysteries of deep learning.'}
+            description={'Unravel the mysteries of deep learning from scratch.'}
             href={'/toys/toydl'}
             active={false}
           />
