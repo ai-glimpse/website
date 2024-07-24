@@ -26,15 +26,15 @@ export default function Page({
     <>
       <div
         className="container rounded-xl border py-12 md:px-8"
-style={{
-  backgroundColor: 'white',
-  backgroundImage: [
-    'linear-gradient(140deg, hsla(330, 100%, 90%, 0.8), transparent 50%)',
-    'linear-gradient(to left top, hsla(300, 100%, 85%, 0.6), transparent 50%)',
-    'radial-gradient(circle at 100% 100%, hsla(0, 100%, 93%, 1), hsla(0, 80%, 80%, 1) 17%, hsla(0, 80%, 80%, 0.5) 20%, transparent)',
-  ].join(', '),
-  backgroundBlendMode: 'multiply, multiply, normal',
-}}
+        style={{
+          backgroundColor: 'white',
+          backgroundImage: [
+            'linear-gradient(140deg, hsla(330, 100%, 90%, 0.8), transparent 50%)',
+            'linear-gradient(to left top, hsla(300, 100%, 85%, 0.6), transparent 50%)',
+            'radial-gradient(circle at 100% 100%, hsla(0, 100%, 93%, 1), hsla(0, 80%, 80%, 1) 17%, hsla(0, 80%, 80%, 0.5) 20%, transparent)',
+          ].join(', '),
+          backgroundBlendMode: 'multiply, multiply, normal',
+        }}
       >
         <h1 className="mb-2 text-3xl font-bold text-black">
           {page.data.title}
