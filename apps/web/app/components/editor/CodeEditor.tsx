@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/theme-textmate";
-import "ace-builds/src-noconflict/theme-idle_fingers";
-import "ace-builds/src-noconflict/ext-language_tools";
+import React, { useEffect, useState } from 'react';
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/theme-xcode';
+import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/theme-idle_fingers';
+import 'ace-builds/src-noconflict/ext-language_tools';
 // import { useColorMode } from '@theme-ui/color-modes';
 
-import Controls from "./Controls";
-import Loader from "./Loader";
-import Input from "./Input";
-import { ArrowPathIcon, PlayIcon, StopIcon } from "@heroicons/react/24/solid";
-import { usePython } from "react-py";
+import Controls from './Controls';
+import Loader from './Loader';
+import Input from './Input';
+import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
+import { usePython } from 'react-py';
 
 const editorOptions = {
   enableBasicAutocompletion: true,
@@ -57,7 +58,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
     sendInput,
     prompt,
   } = usePython({ packages });
-  const promptName: string = prompt !== undefined ? prompt : "";
+  const promptName: string = prompt !== undefined ? prompt : '';
 
   function run() {
     runPython(input);
@@ -81,20 +82,20 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           <Controls
             items={[
               {
-                label: "Run",
+                label: 'Run',
                 icon: PlayIcon,
                 onClick: run,
                 disabled: isLoading || isRunning,
                 hidden: isRunning,
               },
               {
-                label: "Stop",
+                label: 'Stop',
                 icon: StopIcon,
                 onClick: stop,
                 hidden: !isRunning,
               },
               {
-                label: "Reset",
+                label: 'Reset',
                 icon: ArrowPathIcon,
                 onClick: reset,
                 disabled: isRunning,
@@ -111,7 +112,8 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
             name="CodeBlock"
             fontSize="0.9rem"
             className="min-h-[7rem] overflow-clip rounded shadow-md"
-            theme={"textmate"}
+            theme={'xcode'}
+            // theme={'github'}
             onChange={(newValue) => setInput(newValue)}
             width="100%"
             maxLines={Infinity}
