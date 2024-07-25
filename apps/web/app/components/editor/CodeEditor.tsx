@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-xcode';
-import 'ace-builds/src-noconflict/theme';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/theme-idle_fingers';
 import 'ace-builds/src-noconflict/ext-language_tools';
