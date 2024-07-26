@@ -152,7 +152,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           //height: 100vh;
         }
         .code-editor-container {
-          width: 90%; /* Adjust the width as needed */
+          width: 100%; /* Adjust the width as needed */
           /* Add any other styling you want */
         }
       `}</style>
