@@ -146,7 +146,8 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
       <style jsx>{`
         .code-editor-wrapper {
           display: flex;
-          justify-content: center;
+          justify-content: left;
+          padding: 0;
           //align-items: center;
           //height: 100vh;
         }
