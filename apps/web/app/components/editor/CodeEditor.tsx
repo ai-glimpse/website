@@ -6,13 +6,14 @@ import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/theme-idle_fingers';
 import 'ace-builds/src-noconflict/ext-language_tools';
 // import { useColorMode } from '@theme-ui/color-modes';
+import { CodeBlock } from 'fumadocs-ui/components/codeblock';
+// import { Code } from '@chakra-ui/react';
 
 import Controls from './Controls';
 import Loader from './Loader';
 import Input from './Input';
 import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 import { usePython } from 'react-py';
-import { Code } from '@chakra-ui/react';
 
 const editorOptions = {
   enableBasicAutocompletion: true,
@@ -129,13 +130,11 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           {showOutput && (
             <div className="mt-4 text-left">
               <pre className="p-0">
-                <Code w="100%">{stdout}</Code>
+                <CodeBlock title="Output(stdout)">{stdout}</CodeBlock>
               </pre>
               {stderr && (
                 <pre>
-                  <Code w="100%" colorScheme="red">
-                    {stderr}
-                  </Code>
+                  <CodeBlock title="Error(stderr)">{stderr}</CodeBlock>
                 </pre>
               )}
             </div>
