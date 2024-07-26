@@ -12,6 +12,7 @@ import Loader from './Loader';
 import Input from './Input';
 import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 import { usePython } from 'react-py';
+import { Code } from '@chakra-ui/react';
 
 const editorOptions = {
   enableBasicAutocompletion: true,
@@ -126,10 +127,18 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           )}
 
           {showOutput && (
-            <pre className="mt-4 text-left">
-              <code>{stdout}</code>
-              <code className="text-red-500">{stderr}</code>
-            </pre>
+            <div className="mt-4 text-left">
+              <pre className="p-0">
+                <Code w="100%">{stdout}</Code>
+              </pre>
+              {stderr && (
+                <pre>
+                  <Code w="100%" colorScheme="red">
+                    {stderr}
+                  </Code>
+                </pre>
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -137,12 +146,13 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
       <style jsx>{`
         .code-editor-wrapper {
           display: flex;
-          justify-content: center;
+          justify-content: left;
+          padding: 0;
           //align-items: center;
           //height: 100vh;
         }
         .code-editor-container {
-          width: 90%; /* Adjust the width as needed */
+          width: 100%; /* Adjust the width as needed */
           /* Add any other styling you want */
         }
       `}</style>
