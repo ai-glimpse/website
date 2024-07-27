@@ -1,5 +1,11 @@
 /* eslint-disable import/no-relative-packages -- required */
-import { LayoutIcon, LibraryIcon, type LucideIcon } from 'lucide-react';
+import {
+  BrainCircuit,
+  Network,
+  CandlestickChart,
+  BotMessageSquareIcon,
+  type LucideIcon,
+} from 'lucide-react';
 
 export interface Mode {
   param: string;
@@ -17,7 +23,7 @@ export const modes: Mode[] = [
     package: 'tyoml',
     description: 'Machine Learning',
     version: 'tbd',
-    icon: LibraryIcon,
+    icon: BrainCircuit,
   },
   {
     param: 'dl',
@@ -25,6 +31,22 @@ export const modes: Mode[] = [
     package: 'toydl',
     description: 'Deep Learning',
     version: 'tbd',
-    icon: LayoutIcon,
+    icon: Network,
+  },
+  {
+    param: 'stat',
+    name: 'Stat',
+    package: 'toystat',
+    description: 'Statistics',
+    version: 'tbd',
+    icon: CandlestickChart,
+  },
+  {
+    param: 'llm',
+    name: 'LLM',
+    package: 'toyllm',
+    description: 'Large Language Model',
+    version: 'tbd',
+    icon: BotMessageSquareIcon,
   },
 ];
