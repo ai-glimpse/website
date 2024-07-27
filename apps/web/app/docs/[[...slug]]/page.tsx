@@ -2,6 +2,8 @@ import { getPage, getPages } from '@/app/source';
 import type { Metadata } from 'next';
 import { DocsPage, DocsBody } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
+import { getGithubLastEdit } from 'fumadocs-core/server'
+import { resolve } from 'url';
 
 export default async function Page({
   params,
@@ -16,8 +18,19 @@ export default async function Page({
 
   const MDX = page.data.exports.default;
 
+  const lastEditDate = await getGithubLastEdit({
+    owner: 'ai-glimpse',
+    repo: 'website',
+    // example: "content/docs/index.mdx"
+    path: resolve('apps/web/content/docs/', page.file.path),
+    token: `Bearer ${process.env.GIT_TOKEN}`
+  });
+
   return (
-    <DocsPage toc={page.data.exports.toc} full={page.data.full}>
+    <DocsPage
+      {...(lastEditDate ? { lastUpdate: new Date(lastEditDate) } : {})}
+      toc={page.data.exports.toc}
+      full={page.data.full}>
       <DocsBody>
         <h1>{page.data.title}</h1>
         <MDX />
