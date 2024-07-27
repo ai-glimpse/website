@@ -7,7 +7,14 @@ import { loader } from 'fumadocs-core/source';
 export const { getPage, getPages, pageTree } = loader({
   baseUrl: '/docs',
   rootDir: 'docs',
-  source: createMDXSource(map),
+  source: createMDXSource(map, {
+    schema: {
+      frontmatter: defaultSchemas.frontmatter.extend({
+        preview: z.string().optional(),
+        index: z.boolean().default(false),
+      }),
+    },
+  }),
 });
 
 export const blogLoader = loader({
@@ -23,9 +30,8 @@ export const blogLoader = loader({
   }),
 });
 
-
 export const {
   getPage: getBlogPage,
   getPages: getBlogPages,
-  pageTree: blogPageTree
+  pageTree: blogPageTree,
 } = blogLoader;
