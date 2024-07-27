@@ -5,16 +5,16 @@ import { modes } from '@/app/utils/modes';
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
-  nav: {
-    title: 'AI Glimpse',
-  },
-  links: [
-    {
-      text: 'Blog',
-      url: '/blog',
-      active: 'nested-url',
-    },
-  ],
+  // nav: {
+  //   title: 'AI Glimpse',
+  // },
+  // links: [
+  //   {
+  //     text: 'Blog',
+  //     url: '/blog',
+  //     active: 'nested-url',
+  //   },
+  // ],
 };
 
 // docs layout configuration
@@ -22,8 +22,8 @@ export const docsOptions: DocsLayoutProps = {
   ...baseOptions,
   tree: pageTree,
   nav: {
-    ...baseOptions.nav,
-    transparentMode: 'none',
+    // ...baseOptions.nav,
+    // transparentMode: 'none',
   },
   sidebar: {
     defaultOpenLevel: 0,
