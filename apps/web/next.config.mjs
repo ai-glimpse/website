@@ -12,7 +12,7 @@ const withMDX = createMDX({
         rehypeCitation,
         {
           bibliography: 'references/ref.bib',
-          csl: 'chicago-fullnote-bibliography.csl',
+          csl: 'references/chicago-fullnote-bibliography.csl',
         },
       ],
       ...v,
