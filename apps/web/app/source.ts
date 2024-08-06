@@ -3,8 +3,11 @@ import { z } from 'zod';
 
 import { createMDXSource, defaultSchemas } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
+import { languages } from '@/i18n';
+
 
 export const { getPage, getPages, pageTree } = loader({
+  languages,
   baseUrl: '/docs',
   rootDir: 'docs',
   source: createMDXSource(map, {
@@ -18,6 +21,7 @@ export const { getPage, getPages, pageTree } = loader({
 });
 
 export const blogLoader = loader({
+  languages,
   baseUrl: '/blog',
   rootDir: 'blog',
   source: createMDXSource(map, {
