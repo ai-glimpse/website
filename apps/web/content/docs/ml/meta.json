@@ -1,5 +1,14 @@
 {
   "title": "ML",
   "root": true,
-  "defaultOpen": true
+  "defaultOpen": true,
+  "pages": [
+    "---Guide---",
+    "index",
+    "---Clustering---",
+    "kmeans",
+    "---Classification---",
+    "knn",
+    "naive_bayes"
+  ]
 }
