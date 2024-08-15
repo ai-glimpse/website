@@ -3,6 +3,8 @@ import { z } from 'zod';
 
 import { createMDXSource, defaultSchemas } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
+import { icons } from 'lucide-react';
+import { createElement } from 'react';
 
 export const { getPage, getPages, pageTree } = loader({
   baseUrl: '/docs',
@@ -15,6 +17,14 @@ export const { getPage, getPages, pageTree } = loader({
       }),
     },
   }),
+    icon(icon) {
+    if (!icon) {
+      // You may set a default icon
+      return;
+    }
+
+    if (icon in icons) return createElement(icons[icon as keyof typeof icons]);
+  },
 });
 
 export const blogLoader = loader({
@@ -35,3 +45,4 @@ export const {
   getPages: getBlogPages,
   pageTree: blogPageTree,
 } = blogLoader;
+
