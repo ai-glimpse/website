@@ -7,6 +7,7 @@ import { resolve } from 'url';
 import { cn } from '@/app/utils/cn';
 import { buttonVariants } from '@/app/components/blog/button';
 import { Edit } from 'lucide-react';
+import Comments from '@/app/components/comments';
 
 export default async function Page({
   params,
@@ -62,6 +63,7 @@ export default async function Page({
         <h1>{page.data.title}</h1>
         <MDX />
       </DocsBody>
+      <Comments />
     </DocsPage>
   );
 }

@@ -6,6 +6,7 @@ import { blogLoader as blog } from '@/app/source';
 import { createMetadata } from '@/app/utils/metadata';
 import { buttonVariants } from '@/app/components/blog/button';
 import { Control } from '@/app/blog/[slug]/page.client';
+import Comments from '@/app/components/comments';
 
 interface Param {
   slug: string;
@@ -64,7 +65,10 @@ export default function Page({
             </p>
           </div>
           <Control url={page.url} />
+          <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
+          <Comments />
         </div>
+      {/* <Comments /> */}
       </article>
     </>
   );
