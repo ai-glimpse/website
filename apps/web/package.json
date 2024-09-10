@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.8.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@giscus/react": "^3.0.0",
     "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
     "@radix-ui/react-tooltip": "^1.1.2",
