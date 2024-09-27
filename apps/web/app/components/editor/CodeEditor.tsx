@@ -128,7 +128,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           )}
 
           {showOutput && (
-            <div className="mt-4 text-left">
+            <div className="mt-1 text-left">
               <pre className="p-0">
                 <CodeBlock title="Output(stdout)">{stdout}</CodeBlock>
               </pre>
