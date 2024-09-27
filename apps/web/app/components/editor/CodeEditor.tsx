@@ -80,7 +80,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
   return (
     <div className="code-editor-wrapper">
       <div className="code-editor-container">
-        <div className="relative mb-10 flex flex-col">
+        <div className="relative mb-4 flex flex-col">
           <Controls
             items={[
               {
@@ -128,14 +128,16 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           )}
 
           {showOutput && (
-            <div className="mt-4 text-left">
-              <pre className="p-0">
-                <CodeBlock title="Output(stdout)">{stdout}</CodeBlock>
-              </pre>
+            <div className="mt-2 text-left space-y-2">
+              <div className="output-block">
+                <div className="output-title">Output (stdout)</div>
+                <pre className="output-content">{stdout}</pre>
+              </div>
               {stderr && (
-                <pre>
-                  <CodeBlock title="Error(stderr)">{stderr}</CodeBlock>
-                </pre>
+                <div className="output-block error">
+                  <div className="output-title">Error (stderr)</div>
+                  <pre className="output-content">{stderr}</pre>
+                </div>
               )}
             </div>
           )}
@@ -147,12 +149,32 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           display: flex;
           justify-content: left;
           padding: 0;
-          //align-items: center;
-          //height: 100vh;
         }
         .code-editor-container {
-          width: 100%; /* Adjust the width as needed */
-          /* Add any other styling you want */
+          width: 100%;
+        }
+        .output-block {
+          background-color: #f5f5f5;
+          border-radius: 4px;
+          overflow: hidden;
+        }
+        .output-block.error {
+          background-color: #fff5f5;
+        }
+        .output-title {
+          background-color: #e0e0e0;
+          padding: 4px 8px;
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+        .output-content {
+          padding: 8px;
+          margin: 0;
+          white-space: pre-wrap;
+          word-wrap: break-word;
+          font-size: 0.9rem;
+          max-height: 200px;
+          overflow-y: auto;
         }
       `}</style>
     </div>
