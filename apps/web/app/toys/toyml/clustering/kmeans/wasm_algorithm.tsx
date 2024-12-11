@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { Scatter } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import 'chart.js/auto';
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -72,7 +73,7 @@ const KmeansWasmDemo: React.FC = () => {
 
   const runKmeans = async () => {
     await init();
-    console.log("ToymlRS initialized");
+    console.log("Toyml in Rust(toymlrs): WASM initialized");
 
     const options = {
       k: kValue,
@@ -97,50 +98,101 @@ const KmeansWasmDemo: React.FC = () => {
     datasets: results
       .reduce((acc, { point, label }) => {
         acc[label] = acc[label] || {
-          label: `Cluster ${label}`,
+          label: `Cluster ${label + 1}`,
           data: [],
-          backgroundColor: `hsla(${(label * 360) / kValue}, 70%, 60%, 0.8)`, // More refined color palette
-          borderColor: `hsla(${(label * 360) / kValue}, 70%, 50%, 1)`,
-          borderWidth: 1,
+          backgroundColor: `hsla(${(label * 360) / kValue}, 65%, 65%, 0.7)`,
+          borderColor: `hsla(${(label * 360) / kValue}, 65%, 50%, 1)`,
+          borderWidth: 2,
         };
         acc[label].data.push({ x: point[0], y: point[1] });
         return acc;
       }, [] as any)
-      .filter((d) => d), // Filter out empty slots
+      .filter((d: any) => d),
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => {
+            const { x, y } = context.raw;
+            return `(${x.toFixed(2)}, ${y.toFixed(2)})`;
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: 'K-means Clustering Visualization',
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'X-coordinate',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Y-coordinate',
+        },
+      },
+    },
   };
 
   return (
-    <Box p={5}>
-      <VStack spacing={4} align="flex-start">
-        <SimpleGrid columns={2} spacing={4} width="100%">
+    <Box p={5} bg="gray.50" maxW="800px" mx="auto" borderRadius="md" boxShadow="lg">
+      <VStack spacing={6} align="flex-start" width="100%">
+        <SimpleGrid columns={2} spacing={6} width="100%">
           <FormControl>
-            <FormLabel>Number of Clusters (k)</FormLabel>
+            <FormLabel color="teal.800">Number of Clusters (k)</FormLabel>
             <NumberInput
               value={kValue}
               min={1}
               onChange={(valueString) => setKValue(Number(valueString))}
+              focusBorderColor="teal.400"
+              borderColor="teal.300"
             >
-              <NumberInputField />
+              <NumberInputField borderRadius="md" boxShadow="sm" />
             </NumberInput>
           </FormControl>
           <FormControl>
-            <FormLabel>Number of Points</FormLabel>
+            <FormLabel color="teal.800">Number of Points</FormLabel>
             <NumberInput
               value={numPoints}
               min={1}
               onChange={(valueString) => setNumPoints(Number(valueString))}
+              focusBorderColor="teal.400"
+              borderColor="teal.300"
             >
-              <NumberInputField />
+              <NumberInputField borderRadius="md" boxShadow="sm" />
             </NumberInput>
           </FormControl>
         </SimpleGrid>
-        <Button colorScheme="teal" onClick={runKmeans}>
+        <Button
+          colorScheme="teal"
+          variant="solid"
+          size="lg"
+          width="100%"
+          borderRadius="full"
+          _hover={{ boxShadow: 'md', transform: 'scale(1.05)' }}
+          onClick={runKmeans}
+        >
           Run K-means
         </Button>
 
         {results.length > 0 && (
-          <Box w="100%" h={400}>
-            <Scatter data={chartData} options={{ responsive: true }} />
+          <Box w="100%" h={500}>
+            <Scatter data={chartData} options={chartOptions} />
           </Box>
         )}
       </VStack>
