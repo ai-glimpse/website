@@ -1,5 +1,6 @@
 {
   "title": "ML",
+  "icon": "Pencil",
   "root": true,
   "defaultOpen": true,
   "pages": [
