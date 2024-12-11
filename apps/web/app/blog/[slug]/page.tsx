@@ -2,23 +2,17 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-import { blogLoader as blog } from '@/app/source';
+import { blog } from '@/lib/source';
 import { createMetadata } from '@/app/utils/metadata';
 import { buttonVariants } from '@/app/components/blog/button';
 import { Control } from '@/app/blog/[slug]/page.client';
 import Comments from '@/app/components/comments';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
 
-interface Param {
-  slug: string;
-}
-
-export const dynamicParams = false;
-
-export default function Page({
-  params,
-}: {
-  params: Param;
-}): React.ReactElement {
+export default async function Page(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<React.ReactElement> {
+  const params = await props.params;
   const page = blog.getPage([params.slug]);
 
   if (!page) notFound();
@@ -50,8 +44,8 @@ export default function Page({
       </div>
       <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
         <div className="prose p-4">
-          <InlineTOC items={page.data.exports.toc} />
-          <page.data.exports.default />
+          <InlineTOC items={page.data.toc} />
+          <page.data.body components={defaultMdxComponents}/>
         </div>
         <div className="flex flex-col gap-4 border-l p-4 text-sm">
           <div>
@@ -74,7 +68,10 @@ export default function Page({
   );
 }
 
-export function generateMetadata({ params }: { params: Param }): Metadata {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const params = await props.params;
   const page = blog.getPage([params.slug]);
 
   if (!page) notFound();
@@ -86,8 +83,8 @@ export function generateMetadata({ params }: { params: Param }): Metadata {
   });
 }
 
-export function generateStaticParams(): Param[] {
-  return blog.getPages().map<Param>((page) => ({
+export function generateStaticParams(): { slug: string }[] {
+  return blog.getPages().map((page) => ({
     slug: page.slugs[0],
   }));
 }
