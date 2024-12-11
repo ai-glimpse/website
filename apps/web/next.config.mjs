@@ -1,24 +1,6 @@
-import createMDX from 'fumadocs-mdx/config';
-import rehpypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import rehypeCitation from 'rehype-citation';
+import { createMDX } from 'fumadocs-mdx/next';
 
-const withMDX = createMDX({
-  mdxOptions: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: (v) => [
-      rehpypeKatex,
-      [
-        rehypeCitation,
-        {
-          bibliography: 'references/ref.bib',
-          csl: 'references/chicago-fullnote-bibliography.csl',
-        },
-      ],
-      ...v,
-    ],
-  },
-});
+const withMDX = createMDX();
 
 /** @type {import('next').NextConfig} */
 const config = {

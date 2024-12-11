@@ -1,24 +1,26 @@
-import { getPage, getPages } from '@/app/source';
-import type { Metadata } from 'next';
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+import { source } from '@/lib/source';
+import {
+  DocsPage,
+  DocsBody,
+  DocsDescription,
+  DocsTitle,
+} from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
-import { getGithubLastEdit } from 'fumadocs-core/server';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { getGithubLastEdit } from 'fumadocs-core/server'
 import { resolve } from 'url';
+import Comments from '@/app/components/comments';
 import { cn } from '@/app/utils/cn';
 import { buttonVariants } from '@/app/components/blog/button';
 import { Edit } from 'lucide-react';
-import Comments from '@/app/components/comments';
 
-export default async function Page({
-  params,
-}: {
-  params: { slug?: string[] };
+
+export default async function Page(props: {
+  params: Promise<{ slug?: string[] }>;
 }) {
-  const page = getPage(params.slug);
-
-  if (page == null) {
-    notFound();
-  }
+  const params = await props.params;
+  const page = source.getPage(params.slug);
+  if (!page) notFound();
 
   const path = `apps/web/content/docs/${page.file.path}`;
   const footer = (
@@ -39,29 +41,31 @@ export default async function Page({
     </a>
   );
 
-  const MDX = page.data.exports.default;
+
+  const MDX = page.data.body;
 
   const lastEditDate = await getGithubLastEdit({
     owner: 'ai-glimpse',
     repo: 'website',
     // example: "content/docs/index.mdx"
     path: resolve('apps/web/content/docs/', page.file.path),
-    token: `Bearer ${process.env.GIT_TOKEN}`,
+    token: `Bearer ${process.env.GIT_TOKEN}`
   });
 
   return (
     <DocsPage
       {...(lastEditDate ? { lastUpdate: new Date(lastEditDate) } : {})}
-      toc={page.data.exports.toc}
+      toc={page.data.toc}
       full={page.data.full}
       tableOfContent={{
         footer,
       }}
       tableOfContentPopover={{ footer }}
     >
+      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <h1>{page.data.title}</h1>
-        <MDX />
+        <MDX components={{ ...defaultMdxComponents }} />
       </DocsBody>
       <Comments />
     </DocsPage>
@@ -69,18 +73,18 @@ export default async function Page({
 }
 
 export async function generateStaticParams() {
-  return getPages().map((page) => ({
-    slug: page.slugs,
-  }));
+  return source.generateParams();
 }
 
-export function generateMetadata({ params }: { params: { slug?: string[] } }) {
-  const page = getPage(params.slug);
-
-  if (page == null) notFound();
+export async function generateMetadata(props: {
+  params: Promise<{ slug?: string[] }>;
+}) {
+  const params = await props.params;
+  const page = source.getPage(params.slug);
+  if (!page) notFound();
 
   return {
     title: page.data.title,
     description: page.data.description,
-  } satisfies Metadata;
+  };
 }
