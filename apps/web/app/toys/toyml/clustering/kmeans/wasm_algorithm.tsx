@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from "react";
-import init, { greet, Kmeans } from "toymlrs";
+import init, { Kmeans } from "toymlrs";
 import {
   Box,
   Button,
@@ -9,20 +9,18 @@ import {
   FormControl,
   FormLabel,
   VStack,
-  Text,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
 } from "@chakra-ui/react";
+import { Scatter } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
+
+// Register Chart.js components
+Chart.register(...registerables);
 
 // Utility function to generate random numbers from a Gaussian distribution
 const randomGaussian = (mean: number, stddev: number) => {
   let u = 0,
     v = 0;
-  while (u === 0) u = Math.random(); // Convert [0,1) to (0,1)
+  while (u === 0) u = Math.random();
   while (v === 0) v = Math.random();
   return (
     mean +
@@ -34,7 +32,7 @@ const randomGaussian = (mean: number, stddev: number) => {
 
 const KmeansWasmDemo: React.FC = () => {
   const [kValue, setKValue] = useState<number>(2);
-  const [numPoints, setNumPoints] = useState<number>(10);
+  const [numPoints, setNumPoints] = useState<number>(50);
   const [results, setResults] = useState<{ point: number[]; label: number }[]>(
     []
   );
@@ -50,7 +48,7 @@ const KmeansWasmDemo: React.FC = () => {
     for (const center of clusterCenters) {
       for (let i = 0; i < pointsPerCluster; i++) {
         const point = [
-          randomGaussian(center[0], 5), // standard deviation is 5 for spread
+          randomGaussian(center[0], 5),
           randomGaussian(center[1], 5),
         ];
         points.push(point);
@@ -92,6 +90,21 @@ const KmeansWasmDemo: React.FC = () => {
     setResults(resultPoints);
   };
 
+  const chartData = {
+    datasets: results
+      .reduce((acc, { point, label }) => {
+        acc[label] = acc[label] || {
+          label: `Cluster ${label}`,
+          data: [],
+          backgroundColor: `hsla(${(label * 360) / kValue}, 100%, 50%, 0.75)`, // Unique color per cluster
+        };
+        acc[label].data.push({ x: point[0], y: point[1] });
+        return acc;
+      }, [] as any)
+      .filter((d: any) => d),
+
+  };
+
   return (
     <Box p={5}>
       <VStack spacing={4} align="flex-start">
@@ -120,27 +133,9 @@ const KmeansWasmDemo: React.FC = () => {
         </Button>
 
         {results.length > 0 && (
-          <Box w="100%">
-            <Text fontSize="xl" mb={2}>
-              Cluster Results
-            </Text>
-            <Table variant="simple">
-              <Thead>
-                <Tr>
-                  <Th>Point</Th>
-                  <Th>Cluster Label</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {results.map((result, index) => (
-                  <Tr key={index}>
-                    <Td>{`(${result.point[0].toFixed(2)}, ${result.point[1].toFixed(2)})`}</Td>
-                    <Td>{result.label}</Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </Box>
+            <Box w="100%" h={400}>
+              <Scatter data={chartData} options={{ responsive: true }} />
+            </Box>
         )}
       </VStack>
     </Box>
