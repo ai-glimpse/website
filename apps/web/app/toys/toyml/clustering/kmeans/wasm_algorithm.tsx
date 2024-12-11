@@ -1,6 +1,7 @@
 'use client';
-import React, { useState } from "react";
-import init, { Kmeans } from "toymlrs";
+
+import React, { useState } from 'react';
+import init, { Kmeans } from 'toymlrs';
 import {
   Box,
   Button,
@@ -9,9 +10,10 @@ import {
   FormControl,
   FormLabel,
   VStack,
-} from "@chakra-ui/react";
-import { Scatter } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js";
+  SimpleGrid,
+} from '@chakra-ui/react';
+import { Scatter } from 'react-chartjs-2';
+import { Chart, registerables } from 'chart.js';
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -70,6 +72,7 @@ const KmeansWasmDemo: React.FC = () => {
 
   const runKmeans = async () => {
     await init();
+    console.log("ToymlRS initialized");
 
     const options = {
       k: kValue,
@@ -96,46 +99,49 @@ const KmeansWasmDemo: React.FC = () => {
         acc[label] = acc[label] || {
           label: `Cluster ${label}`,
           data: [],
-          backgroundColor: `hsla(${(label * 360) / kValue}, 100%, 50%, 0.75)`, // Unique color per cluster
+          backgroundColor: `hsla(${(label * 360) / kValue}, 70%, 60%, 0.8)`, // More refined color palette
+          borderColor: `hsla(${(label * 360) / kValue}, 70%, 50%, 1)`,
+          borderWidth: 1,
         };
         acc[label].data.push({ x: point[0], y: point[1] });
         return acc;
       }, [] as any)
-      .filter((d: any) => d),
-
+      .filter((d) => d), // Filter out empty slots
   };
 
   return (
     <Box p={5}>
       <VStack spacing={4} align="flex-start">
-        <FormControl>
-          <FormLabel>Number of Clusters (k)</FormLabel>
-          <NumberInput
-            value={kValue}
-            min={1}
-            onChange={(valueString) => setKValue(Number(valueString))}
-          >
-            <NumberInputField />
-          </NumberInput>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Number of Points</FormLabel>
-          <NumberInput
-            value={numPoints}
-            min={1}
-            onChange={(valueString) => setNumPoints(Number(valueString))}
-          >
-            <NumberInputField />
-          </NumberInput>
-        </FormControl>
+        <SimpleGrid columns={2} spacing={4} width="100%">
+          <FormControl>
+            <FormLabel>Number of Clusters (k)</FormLabel>
+            <NumberInput
+              value={kValue}
+              min={1}
+              onChange={(valueString) => setKValue(Number(valueString))}
+            >
+              <NumberInputField />
+            </NumberInput>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Number of Points</FormLabel>
+            <NumberInput
+              value={numPoints}
+              min={1}
+              onChange={(valueString) => setNumPoints(Number(valueString))}
+            >
+              <NumberInputField />
+            </NumberInput>
+          </FormControl>
+        </SimpleGrid>
         <Button colorScheme="teal" onClick={runKmeans}>
           Run K-means
         </Button>
 
         {results.length > 0 && (
-            <Box w="100%" h={400}>
-              <Scatter data={chartData} options={{ responsive: true }} />
-            </Box>
+          <Box w="100%" h={400}>
+            <Scatter data={chartData} options={{ responsive: true }} />
+          </Box>
         )}
       </VStack>
     </Box>
