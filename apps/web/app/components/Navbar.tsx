@@ -9,22 +9,24 @@ import {
   Stack,
   Collapsible,
   Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+
+import {
+  PopoverContent,
+  PopoverRoot,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   HamburgerIcon,
 } from "@chakra-ui/icons";
 import { FaGithub, FaTwitter } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
 
   return (
     <Box asChild>
@@ -76,11 +78,10 @@ export default function Navbar() {
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
-          spacing={{ base: 2, md: 6 }}
         >
           <IconButton
             as="a"
-            href="https://twitter.com/MathewShen42"
+            // href="https://twitter.com/MathewShen42"
             target="_blank"
             icon={<FaTwitter />}
             variant="ghost"
@@ -89,7 +90,7 @@ export default function Navbar() {
           />
           <IconButton
             as="a"
-            href="https://github.com/ai-glimpse"
+            // href="https://github.com/ai-glimpse"
             target="_blank"
             icon={<FaGithub />}
             variant="ghost"
@@ -107,7 +108,7 @@ export default function Navbar() {
         </Stack>
       </Flex>
 
-      <Collapsible.Root open={isOpen}>
+      <Collapsible.Root open={open}>
         <MobileNav />
       </Collapsible.Root>
     </Box>
@@ -120,11 +121,11 @@ const DesktopNav = () => {
   const popoverContentBgColor = "white";
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} >
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
+          <PopoverRoot >
+            <PopoverTrigger >
               <Link href={navItem.href ?? "#"}>
                 <Text
                   p={2}
@@ -157,7 +158,7 @@ const DesktopNav = () => {
                 </Stack>
               </PopoverContent>
             )}
-          </Popover>
+          </PopoverRoot>
         </Box>
       ))}
     </Stack>
@@ -205,10 +206,10 @@ const MobileNav = () => {
 };
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { open, onToggle } = useDisclosure();
 
   return (
-    <Stack spacing={2} onClick={children && onToggle}>
+    <Stack onClick={children && onToggle}>
       <Link href={href ?? "#"}>
         <Flex
           py={1}
@@ -225,7 +226,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
             <Icon
               as={ChevronDownIcon}
               transition={"all .25s ease-in-out"}
-              transform={isOpen ? "rotate(180deg)" : ""}
+              transform={open ? "rotate(180deg)" : ""}
               w={4}
               h={4}
             />
@@ -234,8 +235,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
       </Link>
 
       <Collapsible.Root
-        open={isOpen}
-        animateOpacity
+        open={open}
         style={{ marginTop: "0!important" }}
       >
         <Stack

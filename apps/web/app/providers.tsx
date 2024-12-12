@@ -4,7 +4,8 @@ import { RootProvider } from "fumadocs-ui/provider";
 import { PythonProvider } from "react-py";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { Provider as ChakraProvider } from "@/components/ui/provider"
+
 import React from "react";
 
 const inject = `
@@ -24,7 +25,7 @@ if (item === 'true') {
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ChakraProvider value={defaultSystem}>
+    <ChakraProvider>
       <RootProvider>
         <PythonProvider>
           <TooltipProvider>

@@ -1,117 +1,153 @@
-'use client';
+"use client";
 
-import React from 'react';
 import {
   Box,
   Container,
-  Heading,
-  Text,
-  VStack,
-  Icon,
   SimpleGrid,
-  Button,
-} from '@chakra-ui/react';
-import { LightbulbIcon, UsersIcon, RocketIcon, HeartHandshakeIcon } from 'lucide-react';
-import Link from 'next/link';
+  Stack,
+  Text,
+  Flex,
+  Link,  // Import Link from Chakra UI
+} from "@chakra-ui/react";
+import { ReactNode } from "react";
+import { Avatar } from "@/components/ui/avatar"
+import { Tag } from "@/components/ui/tag"
 
-interface FeatureProps {
-  title: string;
-  text: string;
-  iconName: 'LightbulbIcon' | 'UsersIcon' | 'RocketIcon' | 'HeartHandshakeIcon';
-}
-
-const Feature = ({ title, text, iconName }: FeatureProps): React.ReactElement => {
-  const IconComponent =
-    iconName === 'LightbulbIcon' ? LightbulbIcon :
-    iconName === 'UsersIcon' ? UsersIcon :
-    iconName === 'RocketIcon' ? RocketIcon :
-    HeartHandshakeIcon;
-
+const Logo = (props: any) => {
   return (
-    <VStack
-      bg="white"
-      p={6}
-      borderRadius="lg"
-      boxShadow="md"
-      transition="all 0.3s"
-      _hover={{ transform: 'translateY(-5px)', boxShadow: 'lg' }}
-    >
-      <Icon as={IconComponent} boxSize={12} color="pink.400" mb={4} />
-      <Text fontWeight={700} fontSize="xl" mb={2} color="gray.700">{title}</Text>
-      <Text color="gray.600" textAlign="center">{text}</Text>
-    </VStack>
+    <Avatar
+      size="lg"
+      name="AI Glimpse"
+      src="https://avatars.githubusercontent.com/u/154221423"
+    />
   );
 };
 
-export default function Page(): React.ReactElement {
+const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <Box bg="pink.50" py={20}>
-      <Container maxW="6xl">
-        <VStack spacing={16}>
-          <VStack spacing={4} as={Container} maxW="3xl" textAlign="center">
-            <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} fontWeight="bold" color="pink.600">
-              Empowering AI Education
-            </Heading>
-            <Text color="gray.700" fontSize={{ base: 'lg', md: 'xl' }}>
-              We're on a mission to democratize AI education, making it accessible,
-              engaging, and practical for learners of all levels.
-            </Text>
-          </VStack>
+    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+      {children}
+    </Text>
+  );
+};
 
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10} width="full">
-            <Feature
-              iconName="LightbulbIcon"
-              title="Innovative Learning"
-              text="Our unique 'toy' approach breaks down complex AI concepts into digestible, interactive modules."
-            />
-            <Feature
-              iconName="UsersIcon"
-              title="Community-Driven"
-              text="Foster collaboration and growth in our vibrant learning community."
-            />
-            <Feature
-              iconName="RocketIcon"
-              title="Future-Ready Skills"
-              text="Equip yourself with the skills needed for the AI-driven future."
-            />
-            <Feature
-              iconName="HeartHandshakeIcon"
-              title="Open Contribution"
-              text="Join us in shaping the future of AI education through open collaboration."
-            />
-          </SimpleGrid>
+function getCurrentYear(): number {
+  const currentDate = new Date();
+  return currentDate.getFullYear();
+}
 
-          <Box
-            bg="pink.100"
-            p={8}
-            borderRadius="xl"
-            textAlign="center"
-            boxShadow="xl"
-            maxW="3xl"
-            width="full"
-          >
-            <Heading as="h3" size="lg" mb={4} color="pink.700">
-              Your Journey in AI Starts Here
-            </Heading>
-            <Text fontSize="lg" mb={6} color="gray.700">
-              Whether you're taking your first steps in AI or looking to deepen your expertise,
-              our platform offers the tools and community to support your growth. Dive in,
-              experiment with our 'toys', and don't hesitate to share your insights or contribute to our project.
-            </Text>
-            <Button
-              as={Link}
-              href="/docs"
-              bg="pink.500"
-              color="white"
-              size="lg"
-              fontWeight="bold"
-              _hover={{ bg: 'pink.600' }}
-            >
-              Start Learning
-            </Button>
-          </Box>
-        </VStack>
+export default function LargeWithLogoCentered() {
+  const currentYear = getCurrentYear();
+
+  return (
+    <Box asChild>
+      <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
+      <Container as={Stack} py={20} centerContent>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }}>
+          <Stack align={"flex-start"}>
+            <ListHeader>Resources</ListHeader>
+            <Link href={"https://ai-glimpse.github.io/toyml"}>
+              ToyML
+            </Link>
+            <Link href={"https://ai-glimpse.github.io/toydl"}>
+              ToyDL
+            </Link>
+            <Link href={"https://ai-glimpse.github.io/toyllm"}>
+              ToyLLM
+            </Link>
+            <Link href={"https://ai-glimpse.github.io/toystat/"}>
+              ToyStat
+            </Link>
+          </Stack>
+
+          <Stack align={"flex-start"}>
+            <ListHeader>Project</ListHeader>
+            <Stack direction="row" align="center">
+              <Link href={"https://datahonor.com/beer/"}>
+                Beer
+              </Link>
+              <Tag
+                size={"sm"}
+                bg={"red.300"}
+                ml={2}
+                color={"white"}
+              >
+                Hot
+              </Tag>
+            </Stack>
+            <Link href={"https://shenxiangzhuang.github.io/pysesd/"}>
+              [Py]S-ESD
+            </Link>
+            <Link href={'https://shenxiangzhuang.github.io/mppt/'}>
+              MPPT
+            </Link>
+            <Link href={'https://shenxiangzhuang.github.io/bleuscore/'}>
+              BleuScore
+            </Link>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <ListHeader>Odyssey</ListHeader>
+            <Link href={"https://datahonor.com/odyssey/aiops/"}>
+              AIOps
+            </Link>
+            <Link href={"https://datahonor.com/odyssey/mlsys/"}>
+              MlSys
+            </Link>
+            <Link href={"https://datahonor.com/odyssey/chc/"}>
+              Crowdsourcing
+            </Link>
+            <Stack direction={"row"} align={"center"}>
+              <Link href={"https://datahonor.com/odyssey/llm/"}>
+                LLM
+              </Link>
+              <Tag
+                size={"sm"}
+                bg={"green.300"}
+                ml={2}
+                color={"white"}
+              >
+                New
+              </Tag>
+            </Stack>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <ListHeader>Contact</ListHeader>
+            <Link href={"https://github.com/shenxiangzhuang"}>
+              Github
+            </Link>
+            <Link href={"https://twitter.com/MathewShen42"}>
+              Twitter
+            </Link>
+            <Link href={"https://linkedin.com/in/mathewshen"}>
+              LinkedIn
+            </Link>
+          </Stack>
+        </SimpleGrid>
       </Container>
+      <Box py={10}>
+        <Flex
+          align={"center"}
+          _before={{
+            content: '""',
+            borderBottom: "1px solid",
+            borderColor: "gray.200",
+            flexGrow: 1,
+            mr: 8,
+          }}
+          _after={{
+            content: '""',
+            borderBottom: "1px solid",
+            borderColor: "gray.200",
+            flexGrow: 1,
+            ml: 8,
+          }}
+        >
+          <Logo />
+        </Flex>
+        <Text pt={6} fontSize={"sm"} textAlign={"center"}>
+          © 2023~{currentYear} Mathew Shen. All rights reserved
+        </Text>
+      </Box>
     </Box>
   );
 }

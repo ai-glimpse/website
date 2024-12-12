@@ -1,16 +1,17 @@
 "use client";
 
 import {
-  Avatar,
   Box,
   Container,
   SimpleGrid,
   Stack,
   Text,
   Flex,
-  Tag,
+  Link,  // Import Link from Chakra UI
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { Avatar } from "@/components/ui/avatar";
+import { Tag } from "@/components/ui/tag"
 
 const Logo = (props: any) => {
   return (
@@ -42,29 +43,29 @@ export default function LargeWithLogoCentered() {
     <Box asChild>
       <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
       <Container as={Stack} py={20} centerContent>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={50}>
-            <Stack align={"flex-start"}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }}>
+          <Stack align={"flex-start"}>
             <ListHeader>Resources</ListHeader>
-            <Box as="a" href={"https://ai-glimpse.github.io/toyml"}>
+            <Link href={"https://ai-glimpse.github.io/toyml"}>
               ToyML
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toydl"}>
+            </Link>
+            <Link href={"https://ai-glimpse.github.io/toydl"}>
               ToyDL
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toyllm"}>
+            </Link>
+            <Link href={"https://ai-glimpse.github.io/toyllm"}>
               ToyLLM
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toystat/"}>
+            </Link>
+            <Link href={"https://ai-glimpse.github.io/toystat/"}>
               ToyStat
-            </Box>
+            </Link>
           </Stack>
 
           <Stack align={"flex-start"}>
             <ListHeader>Project</ListHeader>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              <Box as="a" href={"https://datahonor.com/beer/"}>
+            <Stack direction={"row"} align={"center"}>
+              <Link href={"https://datahonor.com/beer/"}>
                 Beer
-              </Box>
+              </Link>
               <Tag
                 size={"sm"}
                 bg={"red.300"}
@@ -74,37 +75,31 @@ export default function LargeWithLogoCentered() {
                 Hot
               </Tag>
             </Stack>
-            <Box as="a" href={"https://shenxiangzhuang.github.io/pysesd/"}>
+            <Link href={"https://shenxiangzhuang.github.io/pysesd/"}>
               [Py]S-ESD
-            </Box>
-            <Box as="a" href={'https://shenxiangzhuang.github.io/mppt/'}>
+            </Link>
+            <Link href={'https://shenxiangzhuang.github.io/mppt/'}>
               MPPT
-            </Box>
-            <Box as="a" href={'https://shenxiangzhuang.github.io/bleuscore/'}>
+            </Link>
+            <Link href={'https://shenxiangzhuang.github.io/bleuscore/'}>
               BleuScore
-            </Box>
-            {/*<Box as="a" href={"https://datahonor.com/toyml/"}>*/}
-            {/*  ToyML*/}
-            {/*</Box>*/}
-            {/*<Box as="a" href={"https://datahonor.com/toydl/"}>*/}
-            {/*  ToyDL*/}
-            {/*</Box>*/}
+            </Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Odyssey</ListHeader>
-            <Box as="a" href={"https://datahonor.com/odyssey/aiops/"}>
+            <Link href={"https://datahonor.com/odyssey/aiops/"}>
               AIOps
-            </Box>
-            <Box as="a" href={"https://datahonor.com/odyssey/mlsys/"}>
+            </Link>
+            <Link href={"https://datahonor.com/odyssey/mlsys/"}>
               MlSys
-            </Box>
-            <Box as="a" href={"https://datahonor.com/odyssey/chc/"}>
+            </Link>
+            <Link href={"https://datahonor.com/odyssey/chc/"}>
               Crowdsourcing
-            </Box>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              <Box as="a" href={"https://datahonor.com/odyssey/llm/"}>
+            </Link>
+            <Stack direction={"row"} align={"center"}>
+              <Link href={"https://datahonor.com/odyssey/llm/"}>
                 LLM
-              </Box>
+              </Link>
               <Tag
                 size={"sm"}
                 bg={"green.300"}
@@ -117,18 +112,15 @@ export default function LargeWithLogoCentered() {
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Contact</ListHeader>
-            {/*<Box as="a" href={"https://datahonor.com"}>*/}
-            {/*  Blog*/}
-            {/*</Box>*/}
-            <Box as="a" href={"https://github.com/shenxiangzhuang"}>
+            <Link href={"https://github.com/shenxiangzhuang"}>
               Github
-            </Box>
-            <Box as="a" href={"https://twitter.com/MathewShen42"}>
+            </Link>
+            <Link href={"https://twitter.com/MathewShen42"}>
               Twitter
-            </Box>
-            <Box as="a" href={"https://linkedin.com/in/mathewshen"}>
+            </Link>
+            <Link href={"https://linkedin.com/in/mathewshen"}>
               LinkedIn
-            </Box>
+            </Link>
           </Stack>
         </SimpleGrid>
       </Container>
