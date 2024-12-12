@@ -9,7 +9,6 @@ import {
   Text,
   Flex,
   Tag,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
@@ -40,39 +39,10 @@ export default function LargeWithLogoCentered() {
   const currentYear = getCurrentYear();
 
   return (
-    <Box
-    //   bg={useColorModeValue('gray.50', 'gray.900')}
-    //   color={useColorModeValue('gray.700', 'gray.200')}
-    >
+    <Box asChild
       <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
       <Container as={Stack} py={20} centerContent>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={50}>
-          {/*<Stack align={"flex-start"}>*/}
-          {/*  <ListHeader>Github</ListHeader>*/}
-          {/*  <Box as="a" href={"https://github.com/ai-glimpse"}>*/}
-          {/*    Organization*/}
-          {/*  </Box>*/}
-          {/*  <Box as="a" href={"https://github.com/ai-glimpse/website"}>*/}
-          {/*    Website*/}
-          {/*  </Box>*/}
-          {/*  <Stack direction={"row"} align={"center"} spacing={-1}>*/}
-          {/*    /!*<Box as="a" href={'https://github.com/toy-ai/website/discussions'}>*!/*/}
-          {/*    /!*  Discussion*!/*/}
-          {/*    /!*</Box>*!/*/}
-          {/*    /!*<Tag*!/*/}
-          {/*    /!*  size={'sm'}*!/*/}
-          {/*    /!*  bg={useColorModeValue('gray.300', 'gray.800')}*!/*/}
-          {/*    /!*  ml={2}*!/*/}
-          {/*    /!*  color={'white'}>*!/*/}
-          {/*    /!*  Coming*!/*/}
-          {/*    /!*</Tag>*!/*/}
-          {/*  </Stack>*/}
-
-            {/*<Box as="a" href={'https://github.com/llm-literature/calvino/releases'}>*/}
-            {/*  Releases*/}
-            {/*</Box>*/}
-          {/*</Stack>*/}
-
             <Stack align={"flex-start"}>
             <ListHeader>Resources</ListHeader>
             <Box as="a" href={"https://ai-glimpse.github.io/toyml"}>
@@ -97,7 +67,7 @@ export default function LargeWithLogoCentered() {
               </Box>
               <Tag
                 size={"sm"}
-                bg={useColorModeValue("red.300", "red.800")}
+                bg={"red.300"}
                 ml={2}
                 color={"white"}
               >
@@ -137,7 +107,7 @@ export default function LargeWithLogoCentered() {
               </Box>
               <Tag
                 size={"sm"}
-                bg={useColorModeValue("green.300", "green.800")}
+                bg={"green.300"}
                 ml={2}
                 color={"white"}
               >
@@ -168,14 +138,14 @@ export default function LargeWithLogoCentered() {
           _before={{
             content: '""',
             borderBottom: "1px solid",
-            borderColor: useColorModeValue("gray.200", "gray.700"),
+            borderColor: "gray.200",
             flexGrow: 1,
             mr: 8,
           }}
           _after={{
             content: '""',
             borderBottom: "1px solid",
-            borderColor: useColorModeValue("gray.200", "gray.700"),
+            borderColor: "gray.200",
             flexGrow: 1,
             ml: 8,
           }}
