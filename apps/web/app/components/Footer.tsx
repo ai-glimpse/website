@@ -39,7 +39,7 @@ export default function LargeWithLogoCentered() {
   const currentYear = getCurrentYear();
 
   return (
-    <Box asChild
+    <Box asChild>
       <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
       <Container as={Stack} py={20} centerContent>
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={50}>

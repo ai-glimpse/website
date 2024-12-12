@@ -27,7 +27,7 @@ export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box asChild>
       <Flex
         bg={"white"}
         color={"gray.600"}
@@ -107,7 +107,7 @@ export default function Navbar() {
         </Stack>
       </Flex>
 
-      <Collapsible.Root open={isOpen} animateOpacity>
+      <Collapsible.Root open={isOpen}>
         <MobileNav />
       </Collapsible.Root>
     </Box>
