@@ -200,16 +200,45 @@ const KmeansWasmDemo: React.FC = () => {
               <MenuButton
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
+                bg="white" // Matches the input fields
+                border="1px"
                 borderColor="teal.300"
+                paddingX={4} // Matches the padding of inputs
+                paddingY={2.5} // Ensure vertical padding consistency
+                height="40px" // Matches the height of NumberInput
+                fontSize="md" // Font size consistency with inputs
+                borderRadius="md" // Match input field border radius
+                _hover={{
+                  backgroundColor: "teal.50", // Subtle hover effect
+                  borderColor: "teal.400",
+                }}
+                _expanded={{
+                  backgroundColor: "teal.100",
+                  borderColor: "teal.400",
+                }}
+                _focus={{
+                  boxShadow: "outline",
+                }}
+                width="100%" // Ensures it's as wide as other inputs
+                textAlign="left" // Align text similarly to inputs
               >
                 {centroidsInitMethodValue || 'Select Initialization Method'}
               </MenuButton>
-              <MenuList>
-                <MenuItem onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}>
+              <MenuList
+                borderColor="teal.300" // Matches the button's border
+                boxShadow="md"
+              >
+                <MenuItem
+                  onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}
+                  _hover={{ backgroundColor: "teal.50" }}
+                  _focus={{ backgroundColor: "teal.100" }}
+                >
                   Random
                 </MenuItem>
                 <MenuItem
                   onClick={() => setCentroidsInitMethodValue('kmeans++' as CentroidsInitMethod)}
+                  _hover={{ backgroundColor: "teal.50" }}
+                  _focus={{ backgroundColor: "teal.100" }}
                 >
                   Kmeans++
                 </MenuItem>
