@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import init, { Kmeans } from 'toymlrs';
+import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
 import {
   Box,
   Button,
@@ -11,7 +11,12 @@ import {
   FormLabel,
   VStack,
   SimpleGrid,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Scatter } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import 'chart.js/auto';
@@ -36,6 +41,8 @@ const randomGaussian = (mean: number, stddev: number) => {
 const KmeansWasmDemo: React.FC = () => {
   const [kValue, setKValue] = useState<number>(2);
   const [numPoints, setNumPoints] = useState<number>(50);
+  const [centroidsInitMethodValue, setCentroidsInitMethodValue] =
+    useState<CentroidsInitMethod>('kmeans++' as CentroidsInitMethod);
   const [results, setResults] = useState<{ point: number[]; label: number }[]>(
     []
   );
@@ -73,13 +80,15 @@ const KmeansWasmDemo: React.FC = () => {
 
   const runKmeans = async () => {
     await init();
-    console.log("Toyml in Rust(toymlrs): WASM initialized");
+    console.log('Toyml in Rust(toymlrs): WASM initialized');
 
     const options = {
       k: kValue,
+      centroidsInitMethod: centroidsInitMethodValue,
       maxIter: 100,
       randomSeed: 42,
     };
+    console.log('Options', options);
 
     const kmeans = new Kmeans(options);
 
@@ -150,9 +159,16 @@ const KmeansWasmDemo: React.FC = () => {
   };
 
   return (
-    <Box p={5} bg="gray.50" maxW="800px" mx="auto" borderRadius="md" boxShadow="lg">
+    <Box
+      p={5}
+      bg="gray.50"
+      maxW="800px"
+      mx="auto"
+      borderRadius="md"
+      boxShadow="lg"
+    >
       <VStack spacing={6} align="flex-start" width="100%">
-        <SimpleGrid columns={2} spacing={6} width="100%">
+        <SimpleGrid columns={3} spacing={6} width="100%">
           <FormControl>
             <FormLabel color="teal.800">Number of Clusters (k)</FormLabel>
             <NumberInput
@@ -176,6 +192,29 @@ const KmeansWasmDemo: React.FC = () => {
             >
               <NumberInputField borderRadius="md" boxShadow="sm" />
             </NumberInput>
+          </FormControl>
+
+          <FormControl>
+            <FormLabel color="teal.800">Initialization Centroids</FormLabel>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                borderColor="teal.300"
+              >
+                {centroidsInitMethodValue || 'Select Initialization Method'}
+              </MenuButton>
+              <MenuList>
+                <MenuItem onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}>
+                  Random
+                </MenuItem>
+                <MenuItem
+                  onClick={() => setCentroidsInitMethodValue('kmeans++' as CentroidsInitMethod)}
+                >
+                  Kmeans++
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </FormControl>
         </SimpleGrid>
         <Button
