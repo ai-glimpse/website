@@ -23,9 +23,9 @@ interface FeatureProps {
 const Feature = ({ title, text, iconName }: FeatureProps): React.ReactElement => {
   const IconComponent =
     iconName === 'LightbulbIcon' ? LightbulbIcon :
-    iconName === 'UsersIcon' ? UsersIcon :
-    iconName === 'RocketIcon' ? RocketIcon :
-    HeartHandshakeIcon;
+      iconName === 'UsersIcon' ? UsersIcon :
+        iconName === 'RocketIcon' ? RocketIcon :
+          HeartHandshakeIcon;
 
   return (
     <VStack
@@ -36,7 +36,7 @@ const Feature = ({ title, text, iconName }: FeatureProps): React.ReactElement =>
       transition="all 0.3s"
       _hover={{ transform: 'translateY(-5px)', boxShadow: 'lg' }}
     >
-      <Icon as={IconComponent} boxSize={12} color="pink.400" mb={4} />
+      <Icon as={IconComponent} boxSize={12} color="gray.400" mb={4} />
       <Text fontWeight={700} fontSize="xl" mb={2} color="gray.700">{title}</Text>
       <Text color="gray.600" textAlign="center">{text}</Text>
     </VStack>
@@ -45,11 +45,11 @@ const Feature = ({ title, text, iconName }: FeatureProps): React.ReactElement =>
 
 export default function Page(): React.ReactElement {
   return (
-    <Box bg="pink.50" py={20}>
+    <Box bg="white" py={20}>
       <Container maxW="6xl">
         <VStack spacing={16}>
           <VStack spacing={4} as={Container} maxW="3xl" textAlign="center">
-            <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} fontWeight="bold" color="pink.600">
+            <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} fontWeight="bold" color="gray.700">
               Empowering AI Education
             </Heading>
             <Text color="gray.700" fontSize={{ base: 'lg', md: 'xl' }}>
@@ -82,7 +82,7 @@ export default function Page(): React.ReactElement {
           </SimpleGrid>
 
           <Box
-            bg="pink.100"
+            bg="gray.50"
             p={8}
             borderRadius="xl"
             textAlign="center"
@@ -90,7 +90,7 @@ export default function Page(): React.ReactElement {
             maxW="3xl"
             width="full"
           >
-            <Heading as="h3" size="lg" mb={4} color="pink.700">
+            <Heading as="h3" size="lg" mb={4} color="gray.700">
               Your Journey in AI Starts Here
             </Heading>
             <Text fontSize="lg" mb={6} color="gray.700">
@@ -101,11 +101,11 @@ export default function Page(): React.ReactElement {
             <Button
               as={Link}
               href="/docs"
-              bg="pink.500"
+              bg="gray.500"
               color="white"
               size="lg"
               fontWeight="bold"
-              _hover={{ bg: 'pink.600' }}
+              _hover={{ bg: 'green.600' }}
             >
               Start Learning
             </Button>
