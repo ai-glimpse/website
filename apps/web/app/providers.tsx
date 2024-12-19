@@ -25,7 +25,6 @@ if (item === 'true') {
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <CacheProvider>
       <ChakraProvider>
         <RootProvider
           theme={{
@@ -43,6 +42,5 @@ export function Providers({ children }: { children: React.ReactNode }) {
           </PythonProvider>
         </RootProvider>
       </ChakraProvider>
-    </CacheProvider>
   );
 }
