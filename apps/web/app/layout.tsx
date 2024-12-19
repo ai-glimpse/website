@@ -22,13 +22,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>
-          <Navbar />
-          {children}
-          <LargeWithLogoCentered />
-        </Providers>
-      </body>
+    <head>
+      <title>AI Glimpse</title>
+      <link rel="icon" href="/apps/web/favicon.ico" sizes="any"/>
+    </head>
+    <body>
+    <Providers>
+      <Navbar/>
+      {children}
+      <LargeWithLogoCentered/>
+    </Providers>
+    </body>
     </html>
   );
 }
