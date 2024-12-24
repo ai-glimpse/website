@@ -33,7 +33,7 @@
     "fumadocs-mdx": "11.1.2",
     "fumadocs-ui": "14.6.3",
     "install": "^0.13.0",
-    "katex": "^0.16.11",
+    "katex": "^0.16.18",
     "micromatch": ">=4.0.8",
     "next": "15.1.1",
     "npm": "^11.0.0",
