@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import Image from "next/image";
 import ToyAIMember from "@/app/components/ToyAIMember";
+import Typewriter from "@/app/components/text/typewriter";
 
 
 export default function LandingPage() {
@@ -27,17 +28,30 @@ export default function LandingPage() {
           fontWeight={600}
           fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
           lineHeight={'110%'}>
-          Learning <strong className="underline decoration-pink-300/[.99]">A</strong>rtificial <strong className="underline decoration-pink-300/[.99]">I</strong>ntelligence <br />
-          <Text as={'span'} color={'pink.300'}>
-           from scratch
+          Learning <br />
+          <Typewriter
+            text={[
+              "Statistics",
+              "Machine Learning",
+              "Deep Learning",
+              "Large Language Model",
+            ]}
+            speed={70}
+            className="text-green-500"
+            waitTime={1500}
+            deleteSpeed={40}
+            cursorChar={"_"}
+          />
+          <Text as={'span'} color={'gray.500'}>
+            <br /> from scratch
           </Text>
         </Heading>
-        <Text color={'gray.500'} maxW={'3xl'}>
-          Learning statistics, machine learning and deep learning from scratch!
-        </Text>
+        {/*<Text color={'gray.500'} maxW={'3xl'}>*/}
+        {/*  Learning statistics, machine learning and deep learning from scratch!*/}
+        {/*</Text>*/}
       </Stack>
     </Container>
-    <ToyAIMember />
+      <ToyAIMember/>
     </>
   )
 }
