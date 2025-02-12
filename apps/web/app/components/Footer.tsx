@@ -183,7 +183,7 @@ export default function LargeWithLogoCentered() {
           <Logo />
         </Flex>
         <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-          © {currentYear} Mathew Shen. All rights reserved
+          © 2023 ~{currentYear} Mathew Shen. All rights reserved
         </Text>
       </Box>
     </Box>
