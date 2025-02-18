@@ -59,7 +59,7 @@ const TestimonialHeading = (props: Props) => {
   const { children } = props
 
   return (
-    <Heading as={'h3'} fontSize={'xl'}>
+    <Heading as={'h3'} fontSize={{ base: 'xl', md: '2xl' }}>
       {children}
     </Heading>
   )
@@ -72,7 +72,7 @@ const TestimonialText = (props: Props) => {
     <Text
       textAlign={'center'}
       color={useColorModeValue('gray.600', 'gray.400')}
-      fontSize={'sm'}>
+      fontSize={{ base: 'sm', md: 'md' }}>
       {children}
     </Text>
   )
@@ -105,19 +105,64 @@ export default function WithSpeechBubbles() {
     <Box 
     // bg={useColorModeValue('gray.100', 'gray.700')}
     >
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12} centerContent>
-        <Stack spacing={0} align={'center'}>
-          <Heading>他/她们说</Heading>
-          <Text>让世界听见你的声音</Text>
+      <Container maxW={'7xl'} py={8} as={Stack} spacing={4} centerContent>
+        <Stack spacing={1} align={'center'}>
+          <Heading>Standing on the shoulders of giants</Heading>
+          {/* <Text>What they are saying</Text> */}
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
           spacing={{ base: 10, md: 4, lg: 10 }}>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>一直读下去</TestimonialHeading>
+              <TestimonialHeading>Understand by Create</TestimonialHeading>
               <TestimonialText>
-                我可能永远读不懂卡尔维诺，我可能不会停止读卡尔维诺。
+                What I cannot create I do not understand.
+              </TestimonialText>
+            </TestimonialContent>
+            <TestimonialAvatar
+              src={
+                `${cosBase}/Richard_Feynman_Nobel.jpg`
+              }
+              name={'Richard Feynman'}
+              title={'Theoretical physicist'}
+            />
+          </Testimonial>
+          <Testimonial>
+            <TestimonialContent>
+              <TestimonialHeading>Explain it simply</TestimonialHeading>
+              <TestimonialText>
+                If you can't explain it simply, you don't understand it well enough.
+              </TestimonialText>
+            </TestimonialContent>
+            <TestimonialAvatar
+              src={
+                `${cosBase}/Albert_Einstein.jpeg`
+              }
+              name={'Albert Einstein'}
+              title={'Computer programmer'}
+            />
+          </Testimonial>
+          <Testimonial>
+            <TestimonialContent>
+              <TestimonialHeading>You just don't know it</TestimonialHeading>
+              <TestimonialText>
+              Not knowing something doesn't mean you're dumb — it just means you don't know it.
+              </TestimonialText>
+            </TestimonialContent>
+            <TestimonialAvatar
+              src={
+                `${cosBase}/Jamie_Zawinski.png`
+              }
+              name={'Jamie Zawinski'}
+              title={'Computer programmer'}
+            />
+          </Testimonial>
+          {/* <Testimonial>
+            <TestimonialContent>
+              <TestimonialHeading>终身学习</TestimonialHeading>
+              <TestimonialText>
+                学习，创造，分享，学习，…
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
@@ -125,24 +170,9 @@ export default function WithSpeechBubbles() {
                 'https://avatars.githubusercontent.com/u/17157965?v=4'
               }
               name={'Mathew Shen'}
-              title={'小小白'}
+              title={'Machine Learning Engineer'}
             />
-          </Testimonial>
-          <Testimonial>
-            <TestimonialContent>
-              <TestimonialHeading>喜欢卡尔维诺</TestimonialHeading>
-              <TestimonialText>
-                我不是奉承意大利人啊，我比较喜欢卡尔维诺。喜欢卡尔维诺。
-              </TestimonialText>
-            </TestimonialContent>
-            <TestimonialAvatar
-              src={
-                `${cosBase}/xiaobo.jpg`
-              }
-              name={'王小波'}
-              title={'作家'}
-            />
-          </Testimonial>
+          </Testimonial> */}
         </Stack>
       </Container>
     </Box>

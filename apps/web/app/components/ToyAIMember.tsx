@@ -83,7 +83,7 @@ const Card = ({ heading, description, icon, href, active }: CardProps) => {
 
 export default function ToyAIMember() {
   return (
-    <Box py={16} borderTop="1px" borderBottom="1px" borderColor="gray.200">
+    <Box py={8} borderTop="1px" borderBottom="1px" borderColor="gray.200">
       <Container maxW={'6xl'}>
         <VStack
           spacing={8}
@@ -99,10 +99,10 @@ export default function ToyAIMember() {
           >
             Explore Our AI Learning Toys
           </Heading>
-          <Text color={'gray.600'} fontSize={{ base: 'sm', sm: 'lg' }}>
+          {/* <Text color={'gray.600'} fontSize={{ base: 'sm', sm: 'lg' }}>
             Dive into the world of AI with our interactive learning paths. From
             statistics to deep learning, we've got you covered.
-          </Text>
+          </Text> */}
         </VStack>
         <Stack
           spacing={8}
