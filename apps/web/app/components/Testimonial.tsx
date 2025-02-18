@@ -9,9 +9,17 @@ import {
   Container,
   Avatar,
   useColorModeValue,
+  keyframes,
 } from '@chakra-ui/react'
 
 import {cosBase} from "@/app/components/Util";
+
+// Subtle floating animation
+const float = keyframes`
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+`
 
 interface Props {
   children: React.ReactNode
@@ -20,7 +28,17 @@ interface Props {
 const Testimonial = (props: Props) => {
   const { children } = props
 
-  return <Box width="100%">{children}</Box>
+  return (
+    <Box 
+      width="100%"
+      transition="all 0.3s ease"
+      _hover={{
+        transform: 'translateY(-5px)'
+      }}
+    >
+      {children}
+    </Box>
+  )
 }
 
 const TestimonialContent = (props: Props) => {
@@ -29,14 +47,24 @@ const TestimonialContent = (props: Props) => {
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
-      boxShadow={'lg'}
-      p={8}
-      rounded={'xl'}
+      boxShadow={'xl'}
+      p={6} // Reduced padding
+      rounded={'2xl'}
       align={'center'}
       pos={'relative'}
-      height="250px" // Fixed height for all cards
+      height="200px" // Reduced height
       width="100%"
-      justifyContent="center" // Center content vertically
+      justifyContent="center"
+      transition="all 0.3s ease"
+      background={useColorModeValue(
+        'linear-gradient(to bottom right, white, #f7fafc)',
+        'linear-gradient(to bottom right, gray.800, gray.900)'
+      )}
+      borderWidth="1px"
+      borderColor={useColorModeValue('gray.200', 'gray.700')}
+      _hover={{
+        boxShadow: '2xl',
+      }}
       _after={{
         content: `""`,
         w: 0,
@@ -47,7 +75,7 @@ const TestimonialContent = (props: Props) => {
         borderRightWidth: 16,
         borderTop: 'solid',
         borderTopWidth: 16,
-        borderTopColor: useColorModeValue('white', 'gray.800'),
+        borderTopColor: useColorModeValue('#f7fafc', 'gray.900'),
         pos: 'absolute',
         bottom: '-16px',
         left: '50%',
@@ -64,9 +92,12 @@ const TestimonialHeading = (props: Props) => {
   return (
     <Heading 
       as={'h3'} 
-      fontSize={{ base: 'xl', md: '2xl' }}
-      mb={4} // Consistent spacing below heading
+      fontSize={{ base: 'lg', md: 'xl' }} // Slightly reduced font size
+      mb={2} // Reduced margin
       textAlign="center"
+      bgGradient="linear(to-r, blue.400, purple.500)"
+      bgClip="text"
+      fontWeight="bold"
     >
       {children}
     </Heading>
@@ -80,11 +111,13 @@ const TestimonialText = (props: Props) => {
     <Text
       textAlign={'center'}
       color={useColorModeValue('gray.600', 'gray.400')}
-      fontSize={{ base: 'sm', md: 'md' }}
-      height="80px" // Fixed height for text content
+      fontSize={{ base: 'sm', md: 'md' }} // Slightly reduced font size
+      height="60px" // Reduced height
       display="flex"
       alignItems="center"
       justifyContent="center"
+      fontStyle="italic"
+      px={4}
     >
       {children}
     </Text>
@@ -101,11 +134,34 @@ const TestimonialAvatar = ({
   title: string
 }) => {
   return (
-    <Flex align={'center'} mt={8} direction={'column'}>
-      <Avatar src={src} mb={2} size="lg" /> {/* Consistent avatar size */}
-      <Stack spacing={1} align={'center'}>
-        <Text fontWeight={600}>{name}</Text>
-        <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
+    <Flex 
+      align={'center'} 
+      mt={6} // Reduced margin
+      direction={'column'}
+      animation={`${float} 6s ease-in-out infinite`}
+    >
+      <Avatar 
+        src={src} 
+        mb={2} 
+        size="lg" // Slightly reduced size
+        boxShadow="lg"
+        border="4px solid"
+        borderColor={useColorModeValue('white', 'gray.800')}
+      />
+      <Stack spacing={0} align={'center'}>
+        <Text 
+          fontWeight={700}
+          fontSize="md" // Reduced font size
+          bgGradient="linear(to-r, blue.400, purple.500)"
+          bgClip="text"
+        >
+          {name}
+        </Text>
+        <Text 
+          fontSize={'sm'} // Reduced font size
+          color={useColorModeValue('gray.600', 'gray.400')}
+          fontWeight="medium"
+        >
           {title}
         </Text>
       </Stack>
@@ -116,15 +172,31 @@ const TestimonialAvatar = ({
 export default function WithSpeechBubbles() {
   return (
     <Box>
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
+      <Container maxW={'7xl'} py={12} as={Stack} spacing={8}> {/* Reduced padding */}
         <Stack spacing={4} align={'center'}>
-          <Heading>Standing on the shoulders of giants</Heading>
+          <Heading
+            fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} // Reduced font sizes
+            bgGradient="linear(to-r, blue.400, purple.500)"
+            bgClip="text"
+            fontWeight="bold"
+            textAlign="center"
+            mb={2} // Reduced margin
+          >
+            Standing on the shoulders of giants
+          </Heading>
+          <Box 
+            w={16} 
+            h={1} 
+            bgGradient="linear(to-r, blue.400, purple.500)" 
+            rounded="full"
+          />
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 10, md: 4, lg: 10 }}
-          align="stretch" // Ensure equal height
-          justify="center" // Center the cards
+          spacing={{ base: 8, md: 4, lg: 8 }} // Adjusted spacing
+          align="stretch"
+          justify="center"
+          px={{ base: 4, md: 6 }}
         >
           <Testimonial>
             <TestimonialContent>
