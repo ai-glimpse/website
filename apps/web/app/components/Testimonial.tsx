@@ -20,7 +20,7 @@ interface Props {
 const Testimonial = (props: Props) => {
   const { children } = props
 
-  return <Box>{children}</Box>
+  return <Box width="100%">{children}</Box>
 }
 
 const TestimonialContent = (props: Props) => {
@@ -34,6 +34,9 @@ const TestimonialContent = (props: Props) => {
       rounded={'xl'}
       align={'center'}
       pos={'relative'}
+      height="250px" // Fixed height for all cards
+      width="100%"
+      justifyContent="center" // Center content vertically
       _after={{
         content: `""`,
         w: 0,
@@ -59,7 +62,12 @@ const TestimonialHeading = (props: Props) => {
   const { children } = props
 
   return (
-    <Heading as={'h3'} fontSize={{ base: 'xl', md: '2xl' }}>
+    <Heading 
+      as={'h3'} 
+      fontSize={{ base: 'xl', md: '2xl' }}
+      mb={4} // Consistent spacing below heading
+      textAlign="center"
+    >
       {children}
     </Heading>
   )
@@ -72,7 +80,12 @@ const TestimonialText = (props: Props) => {
     <Text
       textAlign={'center'}
       color={useColorModeValue('gray.600', 'gray.400')}
-      fontSize={{ base: 'sm', md: 'md' }}>
+      fontSize={{ base: 'sm', md: 'md' }}
+      height="80px" // Fixed height for text content
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
       {children}
     </Text>
   )
@@ -89,8 +102,8 @@ const TestimonialAvatar = ({
 }) => {
   return (
     <Flex align={'center'} mt={8} direction={'column'}>
-      <Avatar src={src} mb={2} />
-      <Stack spacing={-1} align={'center'}>
+      <Avatar src={src} mb={2} size="lg" /> {/* Consistent avatar size */}
+      <Stack spacing={1} align={'center'}>
         <Text fontWeight={600}>{name}</Text>
         <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
           {title}
@@ -102,17 +115,17 @@ const TestimonialAvatar = ({
 
 export default function WithSpeechBubbles() {
   return (
-    <Box 
-    // bg={useColorModeValue('gray.100', 'gray.700')}
-    >
-      <Container maxW={'7xl'} py={8} as={Stack} spacing={4} centerContent>
-        <Stack spacing={1} align={'center'}>
+    <Box>
+      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
+        <Stack spacing={4} align={'center'}>
           <Heading>Standing on the shoulders of giants</Heading>
-          {/* <Text>What they are saying</Text> */}
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 10, md: 4, lg: 10 }}>
+          spacing={{ base: 10, md: 4, lg: 10 }}
+          align="stretch" // Ensure equal height
+          justify="center" // Center the cards
+        >
           <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>Understand by Create</TestimonialHeading>
@@ -121,9 +134,7 @@ export default function WithSpeechBubbles() {
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                `${cosBase}/Richard_Feynman_Nobel.jpg`
-              }
+              src={`${cosBase}/Richard_Feynman_Nobel.jpg`}
               name={'Richard Feynman'}
               title={'Theoretical physicist'}
             />
@@ -136,43 +147,25 @@ export default function WithSpeechBubbles() {
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                `${cosBase}/Albert_Einstein.jpeg`
-              }
+              src={`${cosBase}/Albert_Einstein.jpeg`}
               name={'Albert Einstein'}
-              title={'Computer programmer'}
+              title={'Theoretical physicist'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>You just don't know it</TestimonialHeading>
               <TestimonialText>
-              Not knowing something doesn't mean you're dumb — it just means you don't know it.
+                Not knowing something doesn't mean you're dumb
+                — it just means you don't know it.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                `${cosBase}/Jamie_Zawinski.png`
-              }
+              src={`${cosBase}/Jamie_Zawinski.png`}
               name={'Jamie Zawinski'}
               title={'Computer programmer'}
             />
           </Testimonial>
-          {/* <Testimonial>
-            <TestimonialContent>
-              <TestimonialHeading>终身学习</TestimonialHeading>
-              <TestimonialText>
-                学习，创造，分享，学习，…
-              </TestimonialText>
-            </TestimonialContent>
-            <TestimonialAvatar
-              src={
-                'https://avatars.githubusercontent.com/u/17157965?v=4'
-              }
-              name={'Mathew Shen'}
-              title={'Machine Learning Engineer'}
-            />
-          </Testimonial> */}
         </Stack>
       </Container>
     </Box>
