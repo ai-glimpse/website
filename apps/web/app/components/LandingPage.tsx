@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import ToyAIMember from "@/app/components/ToyAIMember";
 import Typewriter from "@/app/components/text/typewriter";
+import WithSpeechBubbles from './Testimonial';
 
 
 export default function LandingPage() {
@@ -46,12 +47,10 @@ export default function LandingPage() {
             <br /> from scratch
           </Text>
         </Heading>
-        {/*<Text color={'gray.500'} maxW={'3xl'}>*/}
-        {/*  Learning statistics, machine learning and deep learning from scratch!*/}
-        {/*</Text>*/}
       </Stack>
     </Container>
-      <ToyAIMember/>
+    <WithSpeechBubbles/>
+    <ToyAIMember/>
     </>
   )
 }
