@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import ToyAIMember from "@/app/components/ToyAIMember";
 import Typewriter from "@/app/components/text/typewriter";
-
+import WithSpeechBubbles from './Testimonial';
 
 export default function LandingPage() {
   return (
@@ -22,8 +22,8 @@ export default function LandingPage() {
       <Stack
         textAlign={'center'}
         align={'center'}
-        spacing={{ base: 8, md: 10 }}
-        py={{ base: 20, md: 28 }}>
+        spacing={{ base: 3, md: 4 }}
+        py={{ base: 6, md: 8 }}>
         <Heading
           fontWeight={600}
           fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
@@ -42,16 +42,14 @@ export default function LandingPage() {
             deleteSpeed={40}
             cursorChar={"_"}
           />
-          <Text as={'span'} color={'gray.500'}>
+          <Text as={'span'} color={'gray.500'} fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}>
             <br /> from scratch
           </Text>
         </Heading>
-        {/*<Text color={'gray.500'} maxW={'3xl'}>*/}
-        {/*  Learning statistics, machine learning and deep learning from scratch!*/}
-        {/*</Text>*/}
       </Stack>
     </Container>
-      <ToyAIMember/>
+    <ToyAIMember/>
+    <WithSpeechBubbles/>
     </>
   )
 }
