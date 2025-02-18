@@ -42,7 +42,7 @@ export default function LandingPage() {
             deleteSpeed={40}
             cursorChar={"_"}
           />
-          <Text as={'span'} color={'gray.500'} fontSize={{ base: 'xl', sm: '2xl', md: '3xl' }}>
+          <Text as={'span'} color={'gray.500'} fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}>
             <br /> from scratch
           </Text>
         </Heading>

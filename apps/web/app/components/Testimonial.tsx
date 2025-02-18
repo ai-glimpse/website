@@ -14,7 +14,6 @@ import {
 
 import {cosBase} from "@/app/components/Util";
 
-// Subtle floating animation
 const float = keyframes`
   0% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -43,25 +42,26 @@ const Testimonial = (props: Props) => {
 
 const TestimonialContent = (props: Props) => {
   const { children } = props
+  const gradientBg = useColorModeValue(
+    'linear-gradient(to bottom right, white, #f8f9fa)',
+    'linear-gradient(to bottom right, gray.800, gray.900)'
+  )
 
   return (
     <Stack
       bg={useColorModeValue('white', 'gray.800')}
       boxShadow={'xl'}
-      p={6} // Reduced padding
+      p={6}
       rounded={'2xl'}
       align={'center'}
       pos={'relative'}
-      height="200px" // Reduced height
+      height="200px"
       width="100%"
       justifyContent="center"
       transition="all 0.3s ease"
-      background={useColorModeValue(
-        'linear-gradient(to bottom right, white, #f7fafc)',
-        'linear-gradient(to bottom right, gray.800, gray.900)'
-      )}
+      background={gradientBg}
       borderWidth="1px"
-      borderColor={useColorModeValue('gray.200', 'gray.700')}
+      borderColor={useColorModeValue('gray.100', 'gray.700')}
       _hover={{
         boxShadow: '2xl',
       }}
@@ -75,7 +75,7 @@ const TestimonialContent = (props: Props) => {
         borderRightWidth: 16,
         borderTop: 'solid',
         borderTopWidth: 16,
-        borderTopColor: useColorModeValue('#f7fafc', 'gray.900'),
+        borderTopColor: useColorModeValue('#f8f9fa', 'gray.900'),
         pos: 'absolute',
         bottom: '-16px',
         left: '50%',
@@ -88,14 +88,18 @@ const TestimonialContent = (props: Props) => {
 
 const TestimonialHeading = (props: Props) => {
   const { children } = props
+  const gradientColor = useColorModeValue(
+    'linear(to-r, teal.600, cyan.600)',
+    'linear(to-r, teal.200, cyan.200)'
+  )
 
   return (
     <Heading 
       as={'h3'} 
-      fontSize={{ base: 'lg', md: 'xl' }} // Slightly reduced font size
-      mb={2} // Reduced margin
+      fontSize={{ base: 'lg', md: 'xl' }}
+      mb={2}
       textAlign="center"
-      bgGradient="linear(to-r, blue.400, purple.500)"
+      bgGradient={gradientColor}
       bgClip="text"
       fontWeight="bold"
     >
@@ -111,8 +115,8 @@ const TestimonialText = (props: Props) => {
     <Text
       textAlign={'center'}
       color={useColorModeValue('gray.600', 'gray.400')}
-      fontSize={{ base: 'sm', md: 'md' }} // Slightly reduced font size
-      height="60px" // Reduced height
+      fontSize={{ base: 'sm', md: 'md' }}
+      height="60px"
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -133,17 +137,22 @@ const TestimonialAvatar = ({
   name: string
   title: string
 }) => {
+  const gradientColor = useColorModeValue(
+    'linear(to-r, teal.600, cyan.600)',
+    'linear(to-r, teal.200, cyan.200)'
+  )
+
   return (
     <Flex 
       align={'center'} 
-      mt={6} // Reduced margin
+      mt={6}
       direction={'column'}
       animation={`${float} 6s ease-in-out infinite`}
     >
       <Avatar 
         src={src} 
         mb={2} 
-        size="lg" // Slightly reduced size
+        size="lg"
         boxShadow="lg"
         border="4px solid"
         borderColor={useColorModeValue('white', 'gray.800')}
@@ -151,14 +160,14 @@ const TestimonialAvatar = ({
       <Stack spacing={0} align={'center'}>
         <Text 
           fontWeight={700}
-          fontSize="md" // Reduced font size
-          bgGradient="linear(to-r, blue.400, purple.500)"
+          fontSize="md"
+          bgGradient={gradientColor}
           bgClip="text"
         >
           {name}
         </Text>
         <Text 
-          fontSize={'sm'} // Reduced font size
+          fontSize={'sm'}
           color={useColorModeValue('gray.600', 'gray.400')}
           fontWeight="medium"
         >
@@ -170,30 +179,36 @@ const TestimonialAvatar = ({
 }
 
 export default function WithSpeechBubbles() {
+  const gradientColor = useColorModeValue(
+    'linear(to-r, teal.600, cyan.600)',
+    'linear(to-r, teal.200, cyan.200)'
+  )
+
   return (
     <Box>
-      <Container maxW={'7xl'} py={12} as={Stack} spacing={8}> {/* Reduced padding */}
+      <Container maxW={'7xl'} py={12} as={Stack} spacing={8}>
         <Stack spacing={4} align={'center'}>
           <Heading
-            fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} // Reduced font sizes
-            bgGradient="linear(to-r, blue.400, purple.500)"
+            fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}
+            bgGradient={gradientColor}
             bgClip="text"
             fontWeight="bold"
             textAlign="center"
-            mb={2} // Reduced margin
+            mb={2}
           >
             Standing on the shoulders of giants
           </Heading>
           <Box 
             w={16} 
             h={1} 
-            bgGradient="linear(to-r, blue.400, purple.500)" 
+            bgGradient={gradientColor}
             rounded="full"
+            opacity={0.8}
           />
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: 8, md: 4, lg: 8 }} // Adjusted spacing
+          spacing={{ base: 8, md: 4, lg: 8 }}
           align="stretch"
           justify="center"
           px={{ base: 4, md: 6 }}
