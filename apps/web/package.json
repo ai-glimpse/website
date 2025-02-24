@@ -23,7 +23,7 @@
     "@types/node": "20.4.5",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
-    "ace-builds": "^1.37.5",
+    "ace-builds": "^1.39.0",
     "autoprefixer": "10.4.20",
     "chart.js": "^4.4.7",
     "clsx": "^2.0.0",
