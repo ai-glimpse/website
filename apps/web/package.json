@@ -32,7 +32,7 @@
     "fumadocs-mdx": "11.5.7",
     "fumadocs-ui": "14.7.6",
     "install": "^0.13.0",
-    "katex": "^0.16.21",
+    "katex": "^0.16.22",
     "micromatch": ">=4.0.8",
     "motion": "^12.5.0",
     "next": "15.2.4",
