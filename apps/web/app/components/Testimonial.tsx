@@ -72,9 +72,20 @@ const TestimonialAvatar = ({
     <div 
       className={`mt-6 flex flex-col items-center ${floatAnimation}`}
     >
-      <Avatar className="mb-2 h-12 w-12 border-4 border-white shadow-lg dark:border-gray-800">
-        <AvatarImage src={src} alt={name} />
-        <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+      <Avatar className="mb-2 h-14 w-14 border-4 border-white shadow-lg dark:border-gray-800">
+        <AvatarImage 
+          src={src} 
+          alt={name} 
+          className="object-cover object-center"
+          onError={(e) => {
+            // Handle image load error
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+          }}
+        />
+        <AvatarFallback className="bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-bold text-lg">
+          {name.charAt(0)}{name.split(' ')[1]?.charAt(0) || ''}
+        </AvatarFallback>
       </Avatar>
       <div className="flex flex-col items-center space-y-0">
         <span 
@@ -142,9 +153,9 @@ export default function WithSpeechBubbles() {
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={`${cosBase}/Carmack.jpeg`}
-              name={'John Carmack'}
-              title={'Computer scientist'}
+              src={`${cosBase}/Jamie_Zawinski.png`}
+              name={'Jamie Zawinski'}
+              title={'Computer programmer'}
             />
           </Testimonial>
         </div>
