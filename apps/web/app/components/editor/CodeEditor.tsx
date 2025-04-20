@@ -7,7 +7,6 @@ import 'ace-builds/src-noconflict/theme-idle_fingers';
 import 'ace-builds/src-noconflict/ext-language_tools';
 // import { useColorMode } from '@theme-ui/color-modes';
 import { CodeBlock } from 'fumadocs-ui/components/codeblock';
-// import { Code } from '@chakra-ui/react';
 
 import Controls from './Controls';
 import Loader from './Loader';

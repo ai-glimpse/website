@@ -1,15 +1,5 @@
 'use client'
 
-import {
-  Flex,
-  Container,
-  Heading,
-  Stack,
-  Text,
-  Button,
-  Icon,
-  IconProps,
-} from '@chakra-ui/react'
 import Image from "next/image";
 import ToyAIMember from "@/app/components/ToyAIMember";
 import Typewriter from "@/app/components/text/typewriter";
@@ -18,16 +8,9 @@ import WithSpeechBubbles from './Testimonial';
 export default function LandingPage() {
   return (
     <>
-    <Container maxW={'5xl'}>
-      <Stack
-        textAlign={'center'}
-        align={'center'}
-        spacing={{ base: 3, md: 4 }}
-        py={{ base: 6, md: 8 }}>
-        <Heading
-          fontWeight={600}
-          fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
-          lineHeight={'110%'}>
+    <div className="container mx-auto max-w-5xl">
+      <div className="flex flex-col items-center space-y-3 py-6 text-center md:space-y-4 md:py-8">
+        <h1 className="font-semibold text-3xl leading-tight sm:text-4xl md:text-6xl">
           Learning <br />
           <Typewriter
             text={[
@@ -42,12 +25,12 @@ export default function LandingPage() {
             deleteSpeed={40}
             cursorChar={"_"}
           />
-          <Text as={'span'} color={'gray.500'} fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}>
-            <br /> from scratch
-          </Text>
-        </Heading>
-      </Stack>
-    </Container>
+          <span className="block text-gray-500 text-3xl sm:text-4xl md:text-6xl">
+            from scratch
+          </span>
+        </h1>
+      </div>
+    </div>
     <ToyAIMember/>
     <WithSpeechBubbles/>
     </>

@@ -1,17 +1,6 @@
 'use client';
 
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Icon,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
 import { ReactElement } from 'react';
-// import { RiBarChartBoxLine, RiMindMap, RiBrainLine } from 'react-icons/ri';
 import {
   BrainCircuit,
   Network,
@@ -20,6 +9,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import Link from 'next/link';
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface CardProps {
   heading: string;
@@ -29,133 +20,83 @@ interface CardProps {
   active: boolean;
 }
 
-const Card = ({ heading, description, icon, href, active }: CardProps) => {
+const FeatureCard = ({ heading, description, icon, href, active }: CardProps) => {
   return (
     <Link href={href}>
-      <Box
-        maxW={{ base: 'full', md: '275px', lg: '320px' }}
-        w={'full'}
-        borderWidth="1px"
-        borderRadius="xl"
-        overflow="hidden"
-        bg={active ? 'green.50' : 'white'}
-        boxShadow={'md'}
-        _hover={{
-          transform: 'translateY(-5px)',
-          transition: 'all 0.3s ease',
-          boxShadow: 'lg',
-        }}
-        p={6}
+      <Card 
+        className={`w-full overflow-hidden rounded-xl p-6 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:max-w-[275px] lg:max-w-[320px] ${active ? 'bg-green-50' : 'bg-white'}`}
       >
-        <VStack spacing={4} align={'center'}>
-          <Flex
-            w={16}
-            h={16}
-            align={'center'}
-            justify={'center'}
-            color={active ? 'white' : 'gray.600'}
-            rounded={'full'}
-            bg={active ? 'green.400' : 'gray.100'}
+        <CardContent className="flex flex-col items-center space-y-4 p-0">
+          <div
+            className={`flex h-16 w-16 items-center justify-center rounded-full ${
+              active ? 'bg-green-400 text-white' : 'bg-gray-100 text-gray-600'
+            }`}
           >
             {icon}
-          </Flex>
-          <VStack spacing={2} align={'center'} textAlign={'center'}>
-            <Heading size="md" color={active ? 'green.600' : 'gray.700'}>
+          </div>
+          <div className="flex flex-col items-center space-y-2 text-center">
+            <h3 className={`text-md font-bold ${active ? 'text-green-600' : 'text-gray-700'}`}>
               {heading}
-            </Heading>
-            <Text fontSize={'sm'} color={'gray.500'}>
+            </h3>
+            <p className="text-sm text-gray-500">
               {description}
-            </Text>
-          </VStack>
-          <Text
-            fontSize={'xs'}
-            fontWeight={'bold'}
-            color={active ? 'green.500' : 'gray.400'}
-            textTransform={'uppercase'}
-          >
+            </p>
+          </div>
+          <Badge variant={active ? "default" : "secondary"} className={`text-xs font-bold uppercase ${active ? 'bg-green-500' : 'bg-gray-200 text-gray-600'}`}>
             {active ? 'Active' : 'Coming Soon'}
-          </Text>
-        </VStack>
-      </Box>
+          </Badge>
+        </CardContent>
+      </Card>
     </Link>
   );
 };
 
 export default function ToyAIMember() {
   return (
-    <Box py={8} borderTop="1px" borderBottom="1px" borderColor="gray.200">
-      <Container maxW={'6xl'}>
-        <VStack
-          spacing={8}
-          as={Container}
-          maxW={'3xl'}
-          textAlign={'center'}
-          mb={12}
-        >
-          <Heading
-            fontSize={{ base: '3xl', sm: '4xl' }}
-            fontWeight={'bold'}
-            color={'gray.800'}
-          >
+    <div className="border-y border-gray-200 py-8">
+      <div className="container mx-auto max-w-6xl">
+        <div className="mb-12 flex flex-col items-center space-y-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-800 sm:text-4xl">
             Explore Our AI Learning Toys
-          </Heading>
-          {/* <Text color={'gray.600'} fontSize={{ base: 'sm', sm: 'lg' }}>
-            Dive into the world of AI with our interactive learning paths. From
-            statistics to deep learning, we've got you covered.
-          </Text> */}
-        </VStack>
-        <Stack
-          spacing={8}
-          direction={{ base: 'column', lg: 'row' }}
-          justify="center"
-          align="stretch"
-        >
-          <Stack
-            spacing={8}
-            direction={{ base: 'column', md: 'row' }}
-            justify="center"
-            align="stretch"
-          >
-            <Card
+          </h2>
+        </div>
+        <div className="flex flex-col items-stretch justify-center space-y-8 lg:flex-row lg:space-x-8 lg:space-y-0">
+          <div className="flex flex-col items-stretch justify-center space-y-8 md:flex-row md:space-x-8 md:space-y-0">
+            <FeatureCard
               heading={'ToyStat'}
-              icon={<Icon as={CandlestickChart} w={8} h={8} />}
+              icon={<CandlestickChart className="h-8 w-8" />}
               description={'Master statistical methods from the ground up.'}
               href={'/docs/stat'}
               active={false}
             />
-            <Card
+            <FeatureCard
               heading={'ToyML'}
-              icon={<Icon as={BrainCircuit} w={8} h={8} />}
+              icon={<BrainCircuit className="h-8 w-8" />}
               description={'Explore machine learning algorithms hands-on.'}
               href={'/docs/ml'}
               active={true}
             />
-          </Stack>
-          <Stack
-            spacing={8}
-            direction={{ base: 'column', md: 'row' }}
-            justify="center"
-            align="stretch"
-          >
-            <Card
+          </div>
+          <div className="flex flex-col items-stretch justify-center space-y-8 md:flex-row md:space-x-8 md:space-y-0">
+            <FeatureCard
               heading={'ToyDL'}
-              icon={<Icon as={Network} w={8} h={8} />}
+              icon={<Network className="h-8 w-8" />}
               description={
                 'Unravel the mysteries of deep learning from scratch.'
               }
               href={'/docs/dl'}
               active={false}
             />
-            <Card
+            <FeatureCard
               heading={'ToyLLM'}
-              icon={<Icon as={BotMessageSquareIcon} w={8} h={8} />}
+              icon={<BotMessageSquareIcon className="h-8 w-8" />}
               description={'Unravel the mysteries of LLM from scratch.'}
               href={'/docs/llm'}
               active={false}
             />
-          </Stack>
-        </Stack>
-      </Container>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
