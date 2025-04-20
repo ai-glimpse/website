@@ -2,24 +2,21 @@
 
 import React, { useState } from 'react';
 import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
-import {
-  Box,
-  Button,
-  NumberInput,
-  NumberInputField,
-  FormControl,
-  FormLabel,
-  VStack,
-  SimpleGrid,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-} from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Scatter } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import 'chart.js/auto';
+import { ChevronDown } from 'lucide-react';
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -159,112 +156,76 @@ const KmeansWasmDemo: React.FC = () => {
   };
 
   return (
-    <Box
-      p={5}
-      bg="gray.50"
-      maxW="800px"
-      mx="auto"
-      borderRadius="md"
-      boxShadow="lg"
-    >
-      <VStack spacing={6} align="flex-start" width="100%">
-        <SimpleGrid columns={3} spacing={6} width="100%">
-          <FormControl>
-            <FormLabel color="teal.800">Number of Clusters (k)</FormLabel>
-            <NumberInput
+    <Card className="mx-auto max-w-[800px] rounded-md bg-gray-50 p-5 shadow-lg">
+      <div className="flex w-full flex-col space-y-6">
+        <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="flex flex-col space-y-2">
+            <Label className="text-teal-800">Number of Clusters (k)</Label>
+            <Input
+              type="number"
               value={kValue}
               min={1}
-              onChange={(valueString) => setKValue(Number(valueString))}
-              focusBorderColor="teal.400"
-              borderColor="teal.300"
-            >
-              <NumberInputField borderRadius="md" boxShadow="sm" />
-            </NumberInput>
-          </FormControl>
-          <FormControl>
-            <FormLabel color="teal.800">Number of Points</FormLabel>
-            <NumberInput
+              onChange={(e) => setKValue(Number(e.target.value))}
+              className="rounded-md border-teal-300 shadow-sm focus:border-teal-400 focus:ring-teal-400"
+            />
+          </div>
+          <div className="flex flex-col space-y-2">
+            <Label className="text-teal-800">Number of Points</Label>
+            <Input
+              type="number"
               value={numPoints}
               min={1}
-              onChange={(valueString) => setNumPoints(Number(valueString))}
-              focusBorderColor="teal.400"
-              borderColor="teal.300"
-            >
-              <NumberInputField borderRadius="md" boxShadow="sm" />
-            </NumberInput>
-          </FormControl>
+              onChange={(e) => setNumPoints(Number(e.target.value))}
+              className="rounded-md border-teal-300 shadow-sm focus:border-teal-400 focus:ring-teal-400"
+            />
+          </div>
 
-          <FormControl>
-            <FormLabel color="teal.800">Initialization Centroids</FormLabel>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rightIcon={<ChevronDownIcon />}
-                bg="white" // Matches the input fields
-                border="1px"
-                borderColor="teal.300"
-                paddingX={4} // Matches the padding of inputs
-                paddingY={2.5} // Ensure vertical padding consistency
-                height="40px" // Matches the height of NumberInput
-                fontSize="md" // Font size consistency with inputs
-                borderRadius="md" // Match input field border radius
-                _hover={{
-                  backgroundColor: "teal.50", // Subtle hover effect
-                  borderColor: "teal.400",
-                }}
-                _expanded={{
-                  backgroundColor: "teal.100",
-                  borderColor: "teal.400",
-                }}
-                _focus={{
-                  boxShadow: "outline",
-                }}
-                width="100%" // Ensures it's as wide as other inputs
-                textAlign="left" // Align text similarly to inputs
-              >
-                {centroidsInitMethodValue || 'Select Initialization Method'}
-              </MenuButton>
-              <MenuList
-                borderColor="teal.300" // Matches the button's border
-                boxShadow="md"
-              >
-                <MenuItem
+          <div className="flex flex-col space-y-2">
+            <Label className="text-teal-800">Initialization Centroids</Label>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="flex w-full justify-between rounded-md border-teal-300 bg-white text-left font-normal hover:bg-teal-50 hover:border-teal-400"
+                >
+                  {centroidsInitMethodValue || 'Select Initialization Method'}
+                  <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="border-teal-300 shadow-md">
+                <DropdownMenuItem
                   onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}
-                  _hover={{ backgroundColor: "teal.50" }}
-                  _focus={{ backgroundColor: "teal.100" }}
+                  className="hover:bg-teal-50 focus:bg-teal-100"
                 >
                   Random
-                </MenuItem>
-                <MenuItem
+                </DropdownMenuItem>
+                <DropdownMenuItem
                   onClick={() => setCentroidsInitMethodValue('kmeans++' as CentroidsInitMethod)}
-                  _hover={{ backgroundColor: "teal.50" }}
-                  _focus={{ backgroundColor: "teal.100" }}
+                  className="hover:bg-teal-50 focus:bg-teal-100"
                 >
                   Kmeans++
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </FormControl>
-        </SimpleGrid>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
         <Button
-          colorScheme="teal"
-          variant="solid"
-          size="lg"
-          width="100%"
-          borderRadius="full"
-          _hover={{ boxShadow: 'md', transform: 'scale(1.05)' }}
           onClick={runKmeans}
+          className="w-full rounded-md bg-teal-500 py-2 text-white hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
         >
           Run K-means
         </Button>
-
-        {results.length > 0 && (
-          <Box w="100%" h={500}>
+        <div className="h-[400px] w-full rounded-md border border-teal-200 bg-white p-4 shadow-inner">
+          {results.length > 0 ? (
             <Scatter data={chartData} options={chartOptions} />
-          </Box>
-        )}
-      </VStack>
-    </Box>
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-gray-500">
+              Click "Run K-means" to generate a visualization
+            </div>
+          )}
+        </div>
+      </div>
+    </Card>
   );
 };
 

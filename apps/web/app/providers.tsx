@@ -3,9 +3,6 @@
 import { RootProvider } from 'fumadocs-ui/provider';
 import { PythonProvider } from 'react-py';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-
-import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 
 const inject = `
@@ -25,24 +22,20 @@ if (item === 'true') {
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <CacheProvider>
-      <ChakraProvider>
-        <RootProvider
-          theme={{
-            enabled: false,
-          }}
-        >
-          <PythonProvider>
-            <TooltipProvider>
-              <script
-                suppressHydrationWarning
-                dangerouslySetInnerHTML={{ __html: inject }}
-              />
-              {children}
-            </TooltipProvider>
-          </PythonProvider>
-        </RootProvider>
-      </ChakraProvider>
-    </CacheProvider>
+    <RootProvider
+      theme={{
+        enabled: false,
+      }}
+    >
+      <PythonProvider>
+        <TooltipProvider>
+          <script
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{ __html: inject }}
+          />
+          {children}
+        </TooltipProvider>
+      </PythonProvider>
+    </RootProvider>
   );
 }

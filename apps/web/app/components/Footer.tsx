@@ -1,33 +1,24 @@
 "use client";
 
-import {
-  Avatar,
-  Box,
-  Container,
-  SimpleGrid,
-  Stack,
-  Text,
-  Flex,
-  Tag,
-  useColorModeValue,
-} from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 const Logo = (props: any) => {
   return (
-    <Avatar
-      size="lg"
-      name="AI Glimpse"
-      src="https://avatars.githubusercontent.com/u/154221423"
-    />
+    <Avatar className="h-12 w-12">
+      <AvatarImage src="https://avatars.githubusercontent.com/u/154221423" alt="AI Glimpse" />
+      <AvatarFallback>AI</AvatarFallback>
+    </Avatar>
   );
 };
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+    <h4 className="mb-2 text-lg font-medium">
       {children}
-    </Text>
+    </h4>
   );
 };
 
@@ -40,152 +31,93 @@ export default function LargeWithLogoCentered() {
   const currentYear = getCurrentYear();
 
   return (
-    <Box
-    //   bg={useColorModeValue('gray.50', 'gray.900')}
-    //   color={useColorModeValue('gray.700', 'gray.200')}
-    >
-      <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
-      <Container as={Stack} py={20} centerContent>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={50}>
-          {/*<Stack align={"flex-start"}>*/}
-          {/*  <ListHeader>Github</ListHeader>*/}
-          {/*  <Box as="a" href={"https://github.com/ai-glimpse"}>*/}
-          {/*    Organization*/}
-          {/*  </Box>*/}
-          {/*  <Box as="a" href={"https://github.com/ai-glimpse/website"}>*/}
-          {/*    Website*/}
-          {/*  </Box>*/}
-          {/*  <Stack direction={"row"} align={"center"} spacing={-1}>*/}
-          {/*    /!*<Box as="a" href={'https://github.com/toy-ai/website/discussions'}>*!/*/}
-          {/*    /!*  Discussion*!/*/}
-          {/*    /!*</Box>*!/*/}
-          {/*    /!*<Tag*!/*/}
-          {/*    /!*  size={'sm'}*!/*/}
-          {/*    /!*  bg={useColorModeValue('gray.300', 'gray.800')}*!/*/}
-          {/*    /!*  ml={2}*!/*/}
-          {/*    /!*  color={'white'}>*!/*/}
-          {/*    /!*  Coming*!/*/}
-          {/*    /!*</Tag>*!/*/}
-          {/*  </Stack>*/}
-
-            {/*<Box as="a" href={'https://github.com/llm-literature/calvino/releases'}>*/}
-            {/*  Releases*/}
-            {/*</Box>*/}
-          {/*</Stack>*/}
-
-            <Stack align={"flex-start"}>
+    <div>
+      <div className="border-b border-gray-200"></div>
+      <div className="container mx-auto py-20">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
+          <div className="flex flex-col items-start">
             <ListHeader>Resources</ListHeader>
-            <Box as="a" href={"https://ai-glimpse.github.io/toyml"}>
+            <a href="https://ai-glimpse.github.io/toyml" className="py-1">
               ToyML
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toydl"}>
+            </a>
+            <a href="https://ai-glimpse.github.io/toydl" className="py-1">
               ToyDL
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toyllm"}>
+            </a>
+            <a href="https://ai-glimpse.github.io/toyllm" className="py-1">
               ToyLLM
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toystat/"}>
+            </a>
+            <a href="https://ai-glimpse.github.io/toystat/" className="py-1">
               ToyStat
-            </Box>
-          </Stack>
+            </a>
+          </div>
 
-          <Stack align={"flex-start"}>
+          <div className="flex flex-col items-start">
             <ListHeader>Project</ListHeader>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              <Box as="a" href={"https://datahonor.com/beer/"}>
+            <div className="flex items-center py-1">
+              <a href="https://datahonor.com/beer/">
                 Beer
-              </Box>
-              <Tag
-                size={"sm"}
-                bg={useColorModeValue("red.300", "red.800")}
-                ml={2}
-                color={"white"}
-              >
+              </a>
+              <Badge className="ml-2 bg-red-400 dark:bg-red-800">
                 Hot
-              </Tag>
-            </Stack>
-            <Box as="a" href={"https://shenxiangzhuang.github.io/pysesd/"}>
+              </Badge>
+            </div>
+            <a href="https://shenxiangzhuang.github.io/pysesd/" className="py-1">
               [Py]S-ESD
-            </Box>
-            <Box as="a" href={'https://shenxiangzhuang.github.io/mppt/'}>
+            </a>
+            <a href="https://shenxiangzhuang.github.io/mppt/" className="py-1">
               MPPT
-            </Box>
-            <Box as="a" href={'https://shenxiangzhuang.github.io/bleuscore/'}>
+            </a>
+            <a href="https://shenxiangzhuang.github.io/bleuscore/" className="py-1">
               BleuScore
-            </Box>
-            {/*<Box as="a" href={"https://datahonor.com/toyml/"}>*/}
-            {/*  ToyML*/}
-            {/*</Box>*/}
-            {/*<Box as="a" href={"https://datahonor.com/toydl/"}>*/}
-            {/*  ToyDL*/}
-            {/*</Box>*/}
-          </Stack>
-          <Stack align={"flex-start"}>
+            </a>
+          </div>
+          
+          <div className="flex flex-col items-start">
             <ListHeader>Odyssey</ListHeader>
-            <Box as="a" href={"https://datahonor.com/odyssey/aiops/"}>
+            <a href="https://datahonor.com/odyssey/aiops/" className="py-1">
               AIOps
-            </Box>
-            <Box as="a" href={"https://datahonor.com/odyssey/mlsys/"}>
+            </a>
+            <a href="https://datahonor.com/odyssey/mlsys/" className="py-1">
               MlSys
-            </Box>
-            <Box as="a" href={"https://datahonor.com/odyssey/chc/"}>
+            </a>
+            <a href="https://datahonor.com/odyssey/chc/" className="py-1">
               Crowdsourcing
-            </Box>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              <Box as="a" href={"https://datahonor.com/odyssey/llm/"}>
+            </a>
+            <div className="flex items-center py-1">
+              <a href="https://datahonor.com/odyssey/llm/">
                 LLM
-              </Box>
-              <Tag
-                size={"sm"}
-                bg={useColorModeValue("green.300", "green.800")}
-                ml={2}
-                color={"white"}
-              >
+              </a>
+              <Badge className="ml-2 bg-green-400 dark:bg-green-800">
                 New
-              </Tag>
-            </Stack>
-          </Stack>
-          <Stack align={"flex-start"}>
+              </Badge>
+            </div>
+          </div>
+          
+          <div className="flex flex-col items-start">
             <ListHeader>Contact</ListHeader>
-            {/*<Box as="a" href={"https://datahonor.com"}>*/}
-            {/*  Blog*/}
-            {/*</Box>*/}
-            <Box as="a" href={"https://github.com/shenxiangzhuang"}>
+            <a href="https://github.com/shenxiangzhuang" className="py-1">
               Github
-            </Box>
-            <Box as="a" href={"https://twitter.com/MathewShen42"}>
+            </a>
+            <a href="https://twitter.com/MathewShen42" className="py-1">
               Twitter
-            </Box>
-            <Box as="a" href={"https://linkedin.com/in/mathewshen"}>
+            </a>
+            <a href="https://linkedin.com/in/mathewshen" className="py-1">
               LinkedIn
-            </Box>
-          </Stack>
-        </SimpleGrid>
-      </Container>
-      <Box py={10}>
-        <Flex
-          align={"center"}
-          _before={{
-            content: '""',
-            borderBottom: "1px solid",
-            borderColor: useColorModeValue("gray.200", "gray.700"),
-            flexGrow: 1,
-            mr: 8,
-          }}
-          _after={{
-            content: '""',
-            borderBottom: "1px solid",
-            borderColor: useColorModeValue("gray.200", "gray.700"),
-            flexGrow: 1,
-            ml: 8,
-          }}
-        >
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div className="py-10">
+        <div className="flex items-center">
+          <Separator className="mr-8 flex-grow" />
           <Logo />
-        </Flex>
-        <Text pt={6} fontSize={"sm"} textAlign={"center"}>
+          <Separator className="ml-8 flex-grow" />
+        </div>
+        <p className="pt-6 text-center text-sm">
           © 2023 ~{currentYear} Mathew Shen. All rights reserved
-        </Text>
-      </Box>
-    </Box>
+        </p>
+      </div>
+    </div>
   );
 }
