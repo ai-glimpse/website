@@ -26,7 +26,7 @@ export default function LandingPage() {
             cursorChar={"_"}
           />
           <span className="block text-gray-500 text-3xl sm:text-4xl md:text-6xl">
-            <br /> from scratch
+            from scratch
           </span>
         </h1>
       </div>
