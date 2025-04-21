@@ -35,7 +35,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.0.0",
     "eslint-config-next": "15.1.5",
-    "framer-motion": "^12.4.11",
+    "framer-motion": "^12.7.4",
     "fumadocs-mdx": "11.5.7",
     "fumadocs-ui": "14.7.6",
     "install": "^0.13.0",
