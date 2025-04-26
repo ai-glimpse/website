@@ -32,7 +32,7 @@ export default function LargeWithLogoCentered() {
   const currentYear = getCurrentYear();
 
   return (
-    <footer className="mt-16 w-full bg-gray-50 dark:bg-gray-900">
+    <footer className="w-full bg-gray-50 dark:bg-gray-900">
       <div className="border-t border-gray-200 dark:border-gray-800"></div>
       <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 lg:py-16">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4">

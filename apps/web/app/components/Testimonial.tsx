@@ -111,7 +111,7 @@ const TestimonialAvatar = ({
 
 export default function WithSpeechBubbles() {
   return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-900">
+    <section className="py-16 md:py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto max-w-7xl px-4 py-8 md:py-12 space-y-12">
         <motion.div 
           className="flex flex-col items-center space-y-4"

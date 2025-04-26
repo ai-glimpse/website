@@ -22,8 +22,8 @@ export default function LandingPage() {
   }
 
   return (
-    <>
-      <section className="relative overflow-hidden py-12 md:py-20">
+    <div className="flex flex-col w-full">
+      <section className="relative overflow-hidden py-16 md:py-24 bg-white dark:bg-gray-900">
         {/* Background decoration */}
         <div className="absolute left-0 right-0 top-0 -z-10 h-[500px] w-full bg-gradient-to-b from-green-50/80 to-transparent dark:from-green-950/20"></div>
         
@@ -89,6 +89,6 @@ export default function LandingPage() {
       
       <ToyAIMember/>
       <WithSpeechBubbles/>
-    </>
+    </div>
   )
 }

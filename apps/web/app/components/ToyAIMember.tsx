@@ -110,7 +110,7 @@ export default function ToyAIMember() {
   }, []);
   
   return (
-    <section className="border-y border-gray-200 dark:border-gray-800 py-12 md:py-16 bg-white dark:bg-gray-900">
+    <section className="border-t-0 border-b-0 py-16 md:py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
         <motion.div 
           className="mb-12 flex flex-col items-center space-y-4 text-center"

@@ -33,6 +33,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Smooth color transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -140,7 +147,7 @@ html {
 
 @layer base {
   * {
-    @apply border-neutral-200;
+    @apply border-neutral-200 dark:border-neutral-800;
   }
   body {
     @apply bg-background text-foreground antialiased;
@@ -150,4 +157,9 @@ html {
   img {
     @apply max-w-full h-auto;
   }
+}
+
+/* Consistent section styling */
+section {
+  @apply relative overflow-hidden;
 }
