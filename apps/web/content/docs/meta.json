@@ -1,3 +1,3 @@
 {
-  "pages": ["stat", "ml", "dl", "llm"]
+  "pages": ["stat", "ml", "dl", "nlp", "llm", "rl"]
 }

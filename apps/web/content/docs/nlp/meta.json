@@ -1,0 +1,15 @@
+{
+  "title": "NLP",
+  "icon": "MessageSquare",
+  "root": true,
+  "defaultOpen": true,
+  "pages": [
+    "---Guide---",
+    "index",
+    "---Text Processing---",
+    "tokenization",
+    "---Language Models---",
+    "word_embeddings",
+    "n_gram_models"
+  ]
+} 

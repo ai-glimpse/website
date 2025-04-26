@@ -1,0 +1,82 @@
+---
+title: Tokenization
+description: Breaking text into meaningful units
+icon: SplitSquareVertical
+---
+
+# Tokenization
+
+Tokenization is the process of breaking down text into smaller units called tokens, which can be words, characters, or subwords. It's a fundamental preprocessing step in natural language processing.
+
+## Why Tokenization Matters
+
+Before any text analysis can be performed, we need to break the text into manageable pieces:
+
+- Words are the most intuitive tokens for English and many other languages
+- Characters might be more appropriate for languages without clear word boundaries
+- Subword tokenization provides a balance between word and character tokenization
+
+## Types of Tokenization
+
+### Word Tokenization
+
+Word tokenization splits text at word boundaries, usually indicated by whitespace and punctuation.
+
+```python
+def simple_word_tokenize(text):
+    """A simple word tokenizer that splits on whitespace and removes punctuation."""
+    # Remove punctuation and split by whitespace
+    text = text.lower()
+    for punct in ",.!?;:()[]{}\"'":
+        text = text.replace(punct, " ")
+    return text.split()
+
+text = "Hello, world! This is a simple example."
+tokens = simple_word_tokenize(text)
+print(tokens)  # ['hello', 'world', 'this', 'is', 'a', 'simple', 'example']
+```
+
+### Character Tokenization
+
+Character tokenization breaks text into individual characters.
+
+```python
+def char_tokenize(text):
+    """Tokenize text into characters."""
+    return list(text)
+
+text = "Hello!"
+tokens = char_tokenize(text)
+print(tokens)  # ['H', 'e', 'l', 'l', 'o', '!']
+```
+
+### Subword Tokenization
+
+Subword tokenization algorithms like BPE (Byte Pair Encoding), WordPiece, and SentencePiece break words into smaller units based on frequency.
+
+## Challenges in Tokenization
+
+- Handling punctuation and special characters
+- Dealing with contractions (e.g., "don't" → "do" + "n't")
+- Language-specific issues (e.g., compound words in German)
+- Social media text with hashtags, emojis, and unconventional spellings
+
+## Implementation
+
+A more robust tokenizer would use regular expressions:
+
+```python
+import re
+
+def better_word_tokenize(text):
+    """A better word tokenizer using regular expressions."""
+    # Define a pattern for words
+    pattern = r'\b\w+\b'
+    return re.findall(pattern, text.lower())
+
+text = "Hello, world! This is a better example."
+tokens = better_word_tokenize(text)
+print(tokens)  # ['hello', 'world', 'this', 'is', 'a', 'better', 'example']
+```
+
+In the next section, we'll explore how to use these tokens to build language models and analyze text. 

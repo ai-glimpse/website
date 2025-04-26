@@ -1,0 +1,125 @@
+---
+title: N-gram Models
+description: Statistical language modeling with n-grams
+icon: Layers
+---
+
+# N-gram Language Models
+
+N-gram models are a type of probabilistic language model for predicting the next word in a sequence. They are based on the Markov assumption that the probability of a word depends only on the previous n-1 words.
+
+## What are N-grams?
+
+An n-gram is a contiguous sequence of n items from a given text:
+- Unigrams (1-grams): Single words (e.g., "cat")
+- Bigrams (2-grams): Two consecutive words (e.g., "the cat")
+- Trigrams (3-grams): Three consecutive words (e.g., "feed the cat")
+- And so on for higher-order n-grams
+
+## How N-gram Models Work
+
+N-gram models predict the next word in a sequence by calculating the probability of a word given its history (previous n-1 words). This probability is estimated using the relative frequency of n-grams in a training corpus.
+
+For a bigram model (n=2), the probability of a word given the previous word is:
+
+$$P(w_i | w_{i-1}) = \frac{C(w_{i-1}, w_i)}{C(w_{i-1})}$$
+
+Where $C(w_{i-1}, w_i)$ is the count of the bigram $(w_{i-1}, w_i)$ and $C(w_{i-1})$ is the count of the word $w_{i-1}$.
+
+## Implementing an N-gram Model
+
+Here's a simple implementation of a bigram model:
+
+```python
+import re
+from collections import defaultdict, Counter
+
+def tokenize(text):
+    """Tokenize text into words."""
+    return re.findall(r'\b\w+\b', text.lower())
+
+def build_bigram_model(corpus):
+    """Build a bigram language model from a corpus."""
+    tokens = tokenize(corpus)
+    
+    # Count word frequencies
+    unigram_counts = Counter(tokens)
+    
+    # Count bigram frequencies
+    bigram_counts = defaultdict(Counter)
+    for i in range(len(tokens) - 1):
+        bigram_counts[tokens[i]][tokens[i+1]] += 1
+    
+    # Build probability model
+    model = {}
+    for w1 in bigram_counts:
+        total_count = sum(bigram_counts[w1].values())
+        model[w1] = {w2: count / total_count for w2, count in bigram_counts[w1].items()}
+    
+    return model
+
+def generate_text(model, start_word, length=10):
+    """Generate text using the bigram model."""
+    import random
+    
+    text = [start_word]
+    current_word = start_word
+    
+    for _ in range(length):
+        if current_word not in model:
+            # If the word is not in our model, we need to stop
+            break
+            
+        # Get probabilities for next words
+        next_word_probs = model[current_word]
+        
+        # Choose a random word based on probabilities
+        words = list(next_word_probs.keys())
+        probs = list(next_word_probs.values())
+        
+        next_word = random.choices(words, weights=probs)[0]
+        text.append(next_word)
+        current_word = next_word
+        
+    return ' '.join(text)
+
+# Example usage
+corpus = "the cat sat on the mat. the dog sat on the floor. the cat ate the food."
+model = build_bigram_model(corpus)
+generated_text = generate_text(model, "the", 8)
+print(generated_text)
+```
+
+## Challenges with N-gram Models
+
+### Sparse Data Problem
+
+As n increases, the number of possible n-grams grows exponentially, leading to a sparsity problem where many n-grams in test data might not appear in training data.
+
+### Smoothing Techniques
+
+To address the sparsity problem, various smoothing techniques are used:
+
+1. **Add-One (Laplace) Smoothing**: Add 1 to all counts
+2. **Add-k Smoothing**: Add a small constant k to all counts
+3. **Good-Turing Smoothing**: Estimates the probability of unseen n-grams
+4. **Kneser-Ney Smoothing**: More sophisticated method that handles both seen and unseen n-grams
+
+## Applications of N-gram Models
+
+N-gram models have been used in various NLP applications:
+- Predictive text input
+- Spelling correction
+- Speech recognition
+- Machine translation (older statistical models)
+- Text generation
+
+## Limitations
+
+N-gram models have several limitations:
+- Limited context window (only look at n-1 previous words)
+- No semantic understanding
+- Poor handling of long-distance dependencies
+- Need large amounts of data for higher-order n-grams
+
+Modern language models based on neural networks (like RNNs, LSTMs, and Transformers) address many of these limitations, but n-gram models remain valuable for their simplicity and interpretability. 
