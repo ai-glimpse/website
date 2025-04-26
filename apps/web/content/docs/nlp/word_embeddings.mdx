@@ -1,0 +1,102 @@
+---
+title: Word Embeddings
+description: Representing words as vectors
+icon: Network
+---
+
+# Word Embeddings
+
+Word embeddings are dense vector representations of words in a continuous vector space, where semantically similar words are mapped to nearby points. They capture semantic and syntactic relationships between words.
+
+## Introduction to Word Vectors
+
+Traditional approaches to representing words use one-hot encoding, which creates sparse vectors with a 1 in the position corresponding to the word's index in a vocabulary and 0s elsewhere. This approach has several limitations:
+
+- No notion of similarity between words
+- High dimensionality (vocabulary size)
+- No semantic information
+
+Word embeddings solve these problems by learning dense, low-dimensional vectors where:
+- Similar words have similar vectors
+- Vector arithmetic captures meaningful relationships (e.g., king - man + woman ≈ queen)
+- The dimensionality is much smaller (typically 50-300)
+
+## Common Word Embedding Techniques
+
+### Word2Vec
+
+Word2Vec, developed by Google, uses two main architectures:
+
+1. **Skip-gram**: Predicts context words given a target word
+2. **Continuous Bag of Words (CBOW)**: Predicts a target word given its context words
+
+```python
+# Example of loading and using pre-trained Word2Vec embeddings
+from gensim.models import KeyedVectors
+
+# Load pre-trained word vectors
+word_vectors = KeyedVectors.load_word2vec_format('path/to/vectors.bin', binary=True)
+
+# Find similar words
+similar_words = word_vectors.most_similar('computer')
+print(similar_words)
+
+# Vector arithmetic
+result = word_vectors.most_similar(positive=['king', 'woman'], negative=['man'])
+print(result)  # Should include 'queen'
+```
+
+### GloVe (Global Vectors for Word Representation)
+
+GloVe, developed by Stanford, combines global matrix factorization and local context window methods.
+
+### FastText
+
+FastText, developed by Facebook, extends Word2Vec by treating each word as a bag of character n-grams, which helps handle out-of-vocabulary words and morphologically rich languages.
+
+## Benefits of Word Embeddings
+
+- **Dimensionality Reduction**: Reduces the dimensionality of word representations
+- **Generalization**: Similar words have similar representations
+- **Feature Learning**: Automatically learns useful features from text
+- **Transfer Learning**: Pre-trained embeddings can be used in various NLP tasks
+
+## Visualizing Word Embeddings
+
+To visualize high-dimensional word embeddings, techniques like t-SNE or PCA are commonly used to reduce them to 2 or 3 dimensions.
+
+```python
+import numpy as np
+from sklearn.manifold import TSNE
+import matplotlib.pyplot as plt
+
+# Get vector data for visualization
+word_vectors_list = []
+words = []
+for word in some_common_words:
+    if word in word_vectors:
+        words.append(word)
+        word_vectors_list.append(word_vectors[word])
+
+# Apply t-SNE
+tsne = TSNE(n_components=2, random_state=0)
+word_vectors_2d = tsne.fit_transform(word_vectors_list)
+
+# Plot the result
+plt.figure(figsize=(12, 12))
+for i, word in enumerate(words):
+    plt.scatter(word_vectors_2d[i, 0], word_vectors_2d[i, 1])
+    plt.annotate(word, (word_vectors_2d[i, 0], word_vectors_2d[i, 1]))
+plt.show()
+```
+
+## Applications of Word Embeddings
+
+Word embeddings serve as the foundation for many NLP tasks:
+- Text classification
+- Named entity recognition
+- Machine translation
+- Sentiment analysis
+- Question answering
+
+In the next section, we'll explore how to build language models using these word representations. 

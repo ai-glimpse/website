@@ -1,0 +1,225 @@
+---
+title: Q-Learning
+description: Model-free reinforcement learning algorithm
+icon: Table
+---
+
+# Q-Learning
+
+Q-Learning is a foundational model-free reinforcement learning algorithm that learns the value of taking specific actions in specific states. It's a form of temporal-difference learning that directly estimates the optimal action-value function $Q^*(s, a)$ without requiring a model of the environment.
+
+## Introduction to Q-Learning
+
+Q-Learning works by maintaining a table (Q-table) that estimates the expected utility (Q-value) of taking a given action in a given state. The algorithm updates these estimates based on the rewards it receives and the estimated values of future states.
+
+The key advantage of Q-Learning is that it can learn optimal policies directly from interactions with the environment, without needing a model of the environment's dynamics.
+
+## The Q-Learning Algorithm
+
+The core of Q-Learning is the update rule:
+
+```math
+Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \cdot \left[r_{t+1} + \gamma \cdot \max_{a} Q(s_{t+1}, a) - Q(s_t, a_t)\right]
+```
+
+Where:
+- $Q(s_t, a_t)$ is the current estimate of the action-value
+- $\alpha$ is the learning rate (0 < $\alpha$ ≤ 1)
+- $r_{t+1}$ is the reward received after taking action $a_t$ in state $s_t$
+- $\gamma$ is the discount factor (0 ≤ $\gamma$ ≤ 1)
+- $\max_{a} Q(s_{t+1}, a)$ is the maximum expected future reward in state $s_{t+1}$
+- The term in brackets is the temporal difference (TD) error
+
+## Exploration vs. Exploitation
+
+A key challenge in Q-Learning is balancing exploration (trying new actions to discover their values) and exploitation (selecting the best known action based on current knowledge).
+
+Common strategies include:
+
+### ε-greedy Policy
+
+- With probability $\varepsilon$, choose a random action (exploration)
+- With probability $1-\varepsilon$, choose the action with the highest Q-value (exploitation)
+- Typically, $\varepsilon$ is reduced over time as the agent learns more about the environment
+
+### Softmax Policy
+
+- Choose actions with probabilities proportional to their estimated values
+- For a state $s$, the probability of selecting action $a$ is:
+  ```math
+  P(a|s) = \frac{e^{Q(s,a)/\tau}}{\sum_{a'} e^{Q(s,a')/\tau}}
+  ```
+- $\tau$ is a "temperature" parameter that controls the exploration-exploitation trade-off
+
+## Q-Learning Implementation
+
+Here's a simple implementation of Q-Learning for a grid world environment:
+
+```python
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+
+class GridWorld:
+    def __init__(self, grid_size=4):
+        self.grid_size = grid_size
+        self.state = (0, 0)  # Starting position
+        self.goal = (grid_size-1, grid_size-1)  # Goal position
+        
+        # Define obstacles (optional)
+        self.obstacles = [(1, 1), (2, 2)]
+        
+        # Define possible actions: 0=up, 1=right, 2=down, 3=left
+        self.actions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+        self.num_actions = len(self.actions)
+        
+    def reset(self):
+        self.state = (0, 0)
+        return self.state
+    
+    def step(self, action):
+        action_vec = self.actions[action]
+        next_state = (self.state[0] + action_vec[0], self.state[1] + action_vec[1])
+        
+        # Check boundaries
+        if next_state[0] < 0 or next_state[0] >= self.grid_size or \
+           next_state[1] < 0 or next_state[1] >= self.grid_size or \
+           next_state in self.obstacles:
+            next_state = self.state  # Stay in the same place
+        
+        # Calculate reward
+        if next_state == self.goal:
+            reward = 10  # Goal reached
+            done = True
+        else:
+            reward = -1  # Step penalty
+            done = False
+        
+        self.state = next_state
+        return next_state, reward, done
+
+def q_learning(env, episodes=1000, alpha=0.1, gamma=0.99, epsilon=0.1, epsilon_decay=0.995):
+    # Initialize Q-table
+    q_table = np.zeros((env.grid_size, env.grid_size, env.num_actions))
+    
+    # Lists to store metrics for plotting
+    rewards_per_episode = []
+    
+    for episode in range(episodes):
+        state = env.reset()
+        done = False
+        total_reward = 0
+        
+        while not done:
+            # Epsilon-greedy action selection
+            if random.random() < epsilon:
+                action = random.randint(0, env.num_actions - 1)  # Explore
+            else:
+                action = np.argmax(q_table[state[0], state[1]])  # Exploit
+            
+            # Take the action
+            next_state, reward, done = env.step(action)
+            total_reward += reward
+            
+            # Q-learning update
+            old_value = q_table[state[0], state[1], action]
+            next_max = np.max(q_table[next_state[0], next_state[1]])
+            
+            new_value = old_value + alpha * (reward + gamma * next_max - old_value)
+            q_table[state[0], state[1], action] = new_value
+            
+            state = next_state
+        
+        # Decay epsilon
+        epsilon = max(0.01, epsilon * epsilon_decay)
+        
+        # Record metrics
+        rewards_per_episode.append(total_reward)
+        
+        if episode % 100 == 0:
+            print(f"Episode {episode}: Total reward = {total_reward}, Epsilon = {epsilon:.3f}")
+    
+    plt.figure(figsize=(10, 5))
+    plt.plot(rewards_per_episode)
+    plt.xlabel('Episode')
+    plt.ylabel('Total Reward')
+    plt.title('Q-Learning Progress')
+    plt.show()
+    
+    return q_table
+
+# Run Q-learning
+env = GridWorld()
+q_table = q_learning(env)
+
+# Print the learned policy
+def print_policy(q_table, env):
+    arrows = ['↑', '→', '↓', '←']
+    policy = np.empty((env.grid_size, env.grid_size), dtype=str)
+    
+    for i in range(env.grid_size):
+        for j in range(env.grid_size):
+            if (i, j) == env.goal:
+                policy[i, j] = 'G'  # Goal
+            elif (i, j) in env.obstacles:
+                policy[i, j] = 'X'  # Obstacle
+            else:
+                best_action = np.argmax(q_table[i, j])
+                policy[i, j] = arrows[best_action]
+    
+    print("Learned Policy:")
+    print(policy)
+
+print_policy(q_table, env)
+```
+
+## Deep Q-Learning
+
+For large or continuous state spaces, traditional Q-tables become impractical. Deep Q-Learning (DQN) addresses this by using neural networks to approximate the Q-function:
+
+```python
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import Adam
+
+# A simple DQN implementation
+def build_dqn(state_size, action_size, learning_rate=0.001):
+    model = Sequential([
+        Dense(24, input_dim=state_size, activation='relu'),
+        Dense(24, activation='relu'),
+        Dense(action_size, activation='linear')
+    ])
+    model.compile(loss='mse', optimizer=Adam(lr=learning_rate))
+    return model
+```
+
+## Convergence Properties
+
+Q-Learning is guaranteed to converge to the optimal action-value function $Q^*$ under the following conditions:
+1. All state-action pairs are visited infinitely often
+2. The learning rate $\alpha$ decreases over time following specific schedules
+3. The environment is stationary (its dynamics don't change)
+
+## Advantages of Q-Learning
+
+- **Model-free**: Doesn't require a model of the environment
+- **Off-policy**: Can learn from actions not taken according to the current policy
+- **Simplicity**: Conceptually straightforward and easy to implement
+- **Effectiveness**: Works well in many practical problems
+
+## Limitations of Q-Learning
+
+- **Curse of dimensionality**: Basic Q-learning becomes impractical for large state spaces
+- **Slow convergence**: May require many iterations to converge in complex environments
+- **Discrete actions**: The standard algorithm works only with discrete action spaces
+- **Hyperparameter sensitivity**: Performance can be sensitive to learning rate, exploration strategy, etc.
+
+## Variations and Extensions
+
+- **Double Q-Learning**: Reduces overestimation bias by decoupling action selection and evaluation
+- **Prioritized Experience Replay**: Replays important transitions more frequently
+- **Dueling Q-Networks**: Separates state value and advantage functions
+- **Distributional Q-Learning**: Models the distribution of returns instead of just the mean
+
+In the next section, we'll explore Policy Gradient methods, which provide a different approach to reinforcement learning. 
