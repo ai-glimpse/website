@@ -37,17 +37,23 @@ export default function LargeWithLogoCentered() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
           <div className="flex flex-col items-start">
             <ListHeader>Resources</ListHeader>
+            <a href="https://ai-glimpse.github.io/toystat/" className="py-1 hover:text-green-500 transition-colors">
+              ToyStat
+            </a>
             <a href="https://ai-glimpse.github.io/toyml" className="py-1 hover:text-green-500 transition-colors">
               ToyML
             </a>
             <a href="https://ai-glimpse.github.io/toydl" className="py-1 hover:text-green-500 transition-colors">
               ToyDL
             </a>
+            <a href="https://ai-glimpse.github.io/toynlp" className="py-1 hover:text-green-500 transition-colors">
+              ToyNLP
+            </a>
             <a href="https://ai-glimpse.github.io/toyllm" className="py-1 hover:text-green-500 transition-colors">
               ToyLLM
             </a>
-            <a href="https://ai-glimpse.github.io/toystat/" className="py-1 hover:text-green-500 transition-colors">
-              ToyStat
+            <a href="https://ai-glimpse.github.io/toyrl" className="py-1 hover:text-green-500 transition-colors">
+              ToyRL
             </a>
           </div>
 

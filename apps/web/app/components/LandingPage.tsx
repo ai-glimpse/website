@@ -15,8 +15,10 @@ export default function LandingPage() {
           <Typewriter
             text={[
               "Statistics",
-              "Machine Learning",
+              "Statistical Machine Learning",
               "Deep Learning",
+              "Reinforcement Learning",
+              "Natural Language Processing",
               "Large Language Model",
             ]}
             speed={70}
