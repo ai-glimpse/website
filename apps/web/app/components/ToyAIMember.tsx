@@ -34,15 +34,22 @@ const FeatureCard = ({ heading, description, icon, href, active, index }: CardPr
         scale: 1.05,
         boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.1)" 
       }}
+      className="w-full sm:w-auto"
     >
-      <Link href={href}>
+      <Link href={href} className="block h-full">
         <Card 
-          className={`h-[280px] w-[280px] overflow-hidden rounded-xl p-6 shadow-md transition-all duration-300 ${active ? 'bg-green-50' : 'bg-white'}`}
+          className={`h-full min-h-[260px] w-full sm:w-[260px] md:w-[280px] overflow-hidden rounded-xl p-5 md:p-6 shadow-md transition-all duration-300 ${
+            active 
+              ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' 
+              : 'bg-white dark:bg-gray-800'
+          }`}
         >
           <CardContent className="flex h-full flex-col items-center justify-between space-y-4 p-0">
             <motion.div
-              className={`flex h-16 w-16 items-center justify-center rounded-full ${
-                active ? 'bg-green-400 text-white' : 'bg-gray-100 text-gray-600'
+              className={`flex h-14 w-14 items-center justify-center rounded-full ${
+                active 
+                  ? 'bg-green-500 text-white dark:bg-green-600' 
+                  : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
               }`}
               whileHover={{ rotate: 360 }}
               transition={{ duration: 0.7 }}
@@ -62,12 +69,16 @@ const FeatureCard = ({ heading, description, icon, href, active, index }: CardPr
             </motion.div>
             <div className="flex flex-col items-center space-y-2 text-center">
               <motion.h3 
-                className={`text-md font-bold ${active ? 'text-green-600' : 'text-gray-700'}`}
+                className={`text-lg font-bold ${
+                  active 
+                    ? 'text-green-600 dark:text-green-400' 
+                    : 'text-gray-800 dark:text-gray-200'
+                }`}
                 whileHover={{ scale: 1.05 }}
               >
                 {heading}
               </motion.h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 {description || ''}
               </p>
             </div>
@@ -75,7 +86,11 @@ const FeatureCard = ({ heading, description, icon, href, active, index }: CardPr
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Badge variant={active ? "default" : "secondary"} className={`text-xs font-bold uppercase ${active ? 'bg-green-500' : 'bg-gray-200 text-gray-600'}`}>
+              <Badge variant={active ? "default" : "secondary"} className={`text-xs font-bold uppercase ${
+                active 
+                  ? 'bg-green-500 dark:bg-green-600' 
+                  : 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
+              }`}>
                 {active ? 'Active' : 'Coming Soon'}
               </Badge>
             </motion.div>
@@ -95,23 +110,26 @@ export default function ToyAIMember() {
   }, []);
   
   return (
-    <div className="border-y border-gray-200 py-8">
-      <div className="container mx-auto max-w-6xl">
+    <section className="border-y border-gray-200 dark:border-gray-800 py-12 md:py-16 bg-white dark:bg-gray-900">
+      <div className="container mx-auto max-w-6xl px-4 md:px-6">
         <motion.div 
-          className="mb-12 flex flex-col items-center space-y-8 text-center"
+          className="mb-12 flex flex-col items-center space-y-4 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-gray-800 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white sm:text-4xl">
             Explore Our AI Learning Toys
           </h2>
+          <p className="max-w-2xl text-gray-600 dark:text-gray-400">
+            Interactive tools to help you understand AI concepts through hands-on experience
+          </p>
         </motion.div>
         
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
           <FeatureCard
             heading={'ToyStat'}
-            icon={<CandlestickChart className="h-8 w-8" />}
+            icon={<CandlestickChart className="h-7 w-7" />}
             description={'Master statistical concepts from fundamentals to advanced methods'}
             href={'/docs/stat'}
             active={false}
@@ -119,7 +137,7 @@ export default function ToyAIMember() {
           />
           <FeatureCard
             heading={'ToyML'}
-            icon={<BrainCircuit className="h-8 w-8" />}
+            icon={<BrainCircuit className="h-7 w-7" />}
             description={'Build machine learning algorithms from scratch'}
             href={'/docs/ml'}
             active={true}
@@ -127,7 +145,7 @@ export default function ToyAIMember() {
           />
           <FeatureCard
             heading={'ToyDL'}
-            icon={<Network className="h-8 w-8" />}
+            icon={<Network className="h-7 w-7" />}
             description={'Explore neural networks and deep learning principles'}
             href={'/docs/dl'}
             active={false}
@@ -135,7 +153,7 @@ export default function ToyAIMember() {
           />
           <FeatureCard
             heading={'ToyNLP'}
-            icon={<MessageSquare className="h-8 w-8" />}
+            icon={<MessageSquare className="h-7 w-7" />}
             description={'Learn natural language processing techniques'}
             href={'/docs/nlp'}
             active={false}
@@ -143,7 +161,7 @@ export default function ToyAIMember() {
           />
           <FeatureCard
             heading={'ToyLLM'}
-            icon={<Bot className="h-8 w-8" />}
+            icon={<Bot className="h-7 w-7" />}
             description={'Understand large language models and their applications'}
             href={'/docs/llm'}
             active={false}
@@ -151,7 +169,7 @@ export default function ToyAIMember() {
           />
           <FeatureCard
             heading={'ToyRL'}
-            icon={<Gamepad2 className="h-8 w-8" />}
+            icon={<Gamepad2 className="h-7 w-7" />}
             description={'Implement reinforcement learning algorithms'}
             href={'/docs/rl'}
             active={false}
@@ -159,6 +177,6 @@ export default function ToyAIMember() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
