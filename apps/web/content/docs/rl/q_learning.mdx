@@ -18,7 +18,9 @@ The key advantage of Q-Learning is that it can learn optimal policies directly f
 
 The core of Q-Learning is the update rule:
 
-$$Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \cdot \left[r_{t+1} + \gamma \cdot \max_{a} Q(s_{t+1}, a) - Q(s_t, a_t)\right]$$
+```math
+Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \cdot \left[r_{t+1} + \gamma \cdot \max_{a} Q(s_{t+1}, a) - Q(s_t, a_t)\right]
+```
 
 Where:
 - $Q(s_t, a_t)$ is the current estimate of the action-value
@@ -44,7 +46,9 @@ Common strategies include:
 
 - Choose actions with probabilities proportional to their estimated values
 - For a state $s$, the probability of selecting action $a$ is:
-  $$P(a|s) = \frac{e^{Q(s,a)/\tau}}{\sum_{a'} e^{Q(s,a')/\tau}}$$
+  ```math
+  P(a|s) = \frac{e^{Q(s,a)/\tau}}{\sum_{a'} e^{Q(s,a')/\tau}}
+  ```
 - $\tau$ is a "temperature" parameter that controls the exploration-exploitation trade-off
 
 ## Q-Learning Implementation

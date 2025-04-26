@@ -12,7 +12,9 @@ Markov Decision Processes (MDPs) provide the mathematical framework for modeling
 
 The Markov property states that the future depends only on the current state and not on the sequence of events that preceded it. Formally:
 
-$$P(S_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, \ldots, S_0, A_0) = P(S_{t+1} | S_t, A_t)$$
+```math
+P(S_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, \ldots, S_0, A_0) = P(S_{t+1} | S_t, A_t)
+```
 
 This means that the current state provides all the information needed to predict the future state, making the system "memoryless."
 
@@ -43,13 +45,17 @@ Value functions estimate how good it is for an agent to be in a given state or t
 
 The state-value function $V_\pi(s)$ is the expected return starting from state $s$ and following policy $\pi$:
 
-$$V_\pi(s) = E_\pi [G_t | S_t = s] = E_\pi [\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s]$$
+```math
+V_\pi(s) = E_\pi [G_t | S_t = s] = E_\pi [\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s]
+```
 
 ### Action-Value Function
 
 The action-value function $Q_\pi(s, a)$ is the expected return starting from state $s$, taking action $a$, and thereafter following policy $\pi$:
 
-$$Q_\pi(s, a) = E_\pi [G_t | S_t = s, A_t = a] = E_\pi [\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a]$$
+```math
+Q_\pi(s, a) = E_\pi [G_t | S_t = s, A_t = a] = E_\pi [\sum_{k=0}^{\infty} \gamma^k R_{t+k+1} | S_t = s, A_t = a]
+```
 
 ## Bellman Equations
 
@@ -57,31 +63,45 @@ The Bellman equations express the relationship between the value of a state and 
 
 ### Bellman Expectation Equation for $V_\pi$
 
-$$V_\pi(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma V_\pi(s')]$$
+```math
+V_\pi(s) = \sum_{a} \pi(a|s) \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma V_\pi(s')]
+```
 
 ### Bellman Expectation Equation for $Q_\pi$
 
-$$Q_\pi(s,a) = \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma \sum_{a'} \pi(a'|s') Q_\pi(s',a')]$$
+```math
+Q_\pi(s,a) = \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma \sum_{a'} \pi(a'|s') Q_\pi(s',a')]
+```
 
 ## Optimal Policies and Value Functions
 
 The goal in an MDP is to find an optimal policy $\pi_*$ that maximizes the expected return from any starting state:
 
-$$\pi_* = \arg\max_\pi V_\pi(s) \quad \forall s \in S$$
+```math
+\pi_* = \arg\max_\pi V_\pi(s) \quad \forall s \in S
+```
 
 The optimal value functions are:
 
-$$V_*(s) = \max_\pi V_\pi(s) = \max_a Q_*(s,a)$$
+```math
+V_*(s) = \max_\pi V_\pi(s) = \max_a Q_*(s,a)
+```
 
-$$Q_*(s,a) = \max_\pi Q_\pi(s,a) = \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma \max_{a'} Q_*(s',a')]$$
+```math
+Q_*(s,a) = \max_\pi Q_\pi(s,a) = \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma \max_{a'} Q_*(s',a')]
+```
 
 ## Bellman Optimality Equations
 
 The Bellman optimality equations characterize the optimal value functions:
 
-$$V_*(s) = \max_a \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma V_*(s')]$$
+```math
+V_*(s) = \max_a \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma V_*(s')]
+```
 
-$$Q_*(s,a) = \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma \max_{a'} Q_*(s',a')]$$
+```math
+Q_*(s,a) = \sum_{s'} P(s'|s,a) [R(s,a,s') + \gamma \max_{a'} Q_*(s',a')]
+```
 
 ## Simple MDP Example: Grid World
 

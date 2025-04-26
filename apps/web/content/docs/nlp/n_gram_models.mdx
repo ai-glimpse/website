@@ -22,7 +22,9 @@ N-gram models predict the next word in a sequence by calculating the probability
 
 For a bigram model (n=2), the probability of a word given the previous word is:
 
-$$P(w_i | w_{i-1}) = \frac{C(w_{i-1}, w_i)}{C(w_{i-1})}$$
+```math
+P(w_i | w_{i-1}) = \frac{C(w_{i-1}, w_i)}{C(w_{i-1})}
+```
 
 Where $C(w_{i-1}, w_i)$ is the count of the bigram $(w_{i-1}, w_i)$ and $C(w_{i-1})$ is the count of the word $w_{i-1}$.
 
