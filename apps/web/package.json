@@ -36,7 +36,7 @@
     "clsx": "^2.0.0",
     "eslint-config-next": "15.1.5",
     "framer-motion": "^12.7.4",
-    "fumadocs-mdx": "11.5.7",
+    "fumadocs-mdx": "11.6.6",
     "fumadocs-ui": "14.7.6",
     "install": "^0.13.0",
     "katex": "^0.16.22",
