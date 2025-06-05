@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -30,11 +31,17 @@ function getCurrentYear(): number {
 
 export default function LargeWithLogoCentered() {
   const currentYear = getCurrentYear();
+  const pathname = usePathname();
+  const [isDocsPage, setIsDocsPage] = useState(false);
+
+  useEffect(() => {
+    setIsDocsPage(pathname.startsWith('/docs'));
+  }, [pathname]);
 
   return (
     <footer className="w-full bg-gray-50 dark:bg-gray-900">
       <div className="border-t border-gray-200 dark:border-gray-800"></div>
-      <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 lg:py-16">
+      <div className={`container mx-auto max-w-6xl px-4 py-12 md:px-6 lg:py-16 ${isDocsPage ? 'lg:ml-[280px] lg:w-[calc(100vw-280px-2rem)] lg:max-w-none' : ''}`}>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="flex flex-col items-start space-y-2">
             <ListHeader>Resources</ListHeader>
@@ -81,7 +88,7 @@ export default function LargeWithLogoCentered() {
         </div>
       </div>
       
-      <div className="container mx-auto max-w-6xl px-4 pb-8 md:px-6">
+      <div className={`container mx-auto max-w-6xl px-4 pb-8 md:px-6 ${isDocsPage ? 'lg:ml-[280px] lg:w-[calc(100vw-280px-2rem)] lg:max-w-none' : ''}`}>
         <div className="flex flex-col items-center justify-center">
           <div className="mb-6 flex items-center justify-center">
             <Link href="/" aria-label="Home">
