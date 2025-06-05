@@ -100,15 +100,32 @@ const KmeansWasmDemo: React.FC = () => {
     setResults(resultPoints);
   };
 
+  // Define a clean color palette for clusters
+  const clusterColors = [
+    { bg: 'rgba(59, 130, 246, 0.7)', border: 'rgb(59, 130, 246)' }, // Blue
+    { bg: 'rgba(239, 68, 68, 0.7)', border: 'rgb(239, 68, 68)' },   // Red
+    { bg: 'rgba(34, 197, 94, 0.7)', border: 'rgb(34, 197, 94)' },   // Green
+    { bg: 'rgba(168, 85, 247, 0.7)', border: 'rgb(168, 85, 247)' }, // Purple
+    { bg: 'rgba(249, 115, 22, 0.7)', border: 'rgb(249, 115, 22)' }, // Orange
+    { bg: 'rgba(236, 72, 153, 0.7)', border: 'rgb(236, 72, 153)' }, // Pink
+    { bg: 'rgba(14, 165, 233, 0.7)', border: 'rgb(14, 165, 233)' }, // Sky
+    { bg: 'rgba(132, 204, 22, 0.7)', border: 'rgb(132, 204, 22)' }, // Lime
+  ];
+
   const chartData = {
     datasets: results
       .reduce((acc, { point, label }) => {
+        const colorIndex = label % clusterColors.length;
+        const colors = clusterColors[colorIndex];
+        
         acc[label] = acc[label] || {
           label: `Cluster ${label + 1}`,
           data: [],
-          backgroundColor: `hsla(${(label * 360) / kValue}, 65%, 65%, 0.7)`,
-          borderColor: `hsla(${(label * 360) / kValue}, 65%, 50%, 1)`,
+          backgroundColor: colors.bg,
+          borderColor: colors.border,
           borderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 6,
         };
         acc[label].data.push({ x: point[0], y: point[1] });
         return acc;
@@ -156,76 +173,77 @@ const KmeansWasmDemo: React.FC = () => {
   };
 
   return (
-    <Card className="mx-auto max-w-[800px] rounded-md bg-gray-50 p-5 shadow-lg">
-      <div className="flex w-full flex-col space-y-6">
-        <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="flex flex-col space-y-2">
-            <Label className="text-teal-800">Number of Clusters (k)</Label>
-            <Input
-              type="number"
-              value={kValue}
-              min={1}
-              onChange={(e) => setKValue(Number(e.target.value))}
-              className="rounded-md border-teal-300 shadow-sm focus:border-teal-400 focus:ring-teal-400"
-            />
-          </div>
-          <div className="flex flex-col space-y-2">
-            <Label className="text-teal-800">Number of Points</Label>
-            <Input
-              type="number"
-              value={numPoints}
-              min={1}
-              onChange={(e) => setNumPoints(Number(e.target.value))}
-              className="rounded-md border-teal-300 shadow-sm focus:border-teal-400 focus:ring-teal-400"
-            />
-          </div>
-
-          <div className="flex flex-col space-y-2">
-            <Label className="text-teal-800">Initialization Centroids</Label>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="flex w-full justify-between rounded-md border-teal-300 bg-white text-left font-normal hover:bg-teal-50 hover:border-teal-400"
-                >
-                  {centroidsInitMethodValue || 'Select Initialization Method'}
-                  <ChevronDown className="ml-2 h-4 w-4 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="border-teal-300 shadow-md">
-                <DropdownMenuItem
-                  onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}
-                  className="hover:bg-teal-50 focus:bg-teal-100"
-                >
-                  Random
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => setCentroidsInitMethodValue('kmeans++' as CentroidsInitMethod)}
-                  className="hover:bg-teal-50 focus:bg-teal-100"
-                >
-                  Kmeans++
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-        <Button
-          onClick={runKmeans}
-          className="w-full rounded-md bg-teal-500 py-2 text-white hover:bg-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-        >
-          Run K-means
-        </Button>
-        <div className="h-[400px] w-full rounded-md border border-teal-200 bg-white p-4 shadow-inner">
-          {results.length > 0 ? (
-            <Scatter data={chartData} options={chartOptions} />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-gray-500">
-              Click "Run K-means" to generate a visualization
+    <div className="not-prose my-6">
+      <Card className="p-6 border">
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="space-y-2">
+              <Label htmlFor="k-value">Number of Clusters (k)</Label>
+              <Input
+                id="k-value"
+                type="number"
+                value={kValue}
+                min={1}
+                onChange={(e) => setKValue(Number(e.target.value))}
+              />
             </div>
-          )}
+            <div className="space-y-2">
+              <Label htmlFor="num-points">Number of Points</Label>
+              <Input
+                id="num-points"
+                type="number"
+                value={numPoints}
+                min={1}
+                onChange={(e) => setNumPoints(Number(e.target.value))}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Initialization Method</Label>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-between"
+                  >
+                    {centroidsInitMethodValue}
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-full">
+                  <DropdownMenuItem
+                    onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}
+                  >
+                    Random
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => setCentroidsInitMethodValue('kmeans++' as CentroidsInitMethod)}
+                  >
+                    Kmeans++
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+          
+          <Button
+            onClick={runKmeans}
+            className="w-full"
+          >
+            Run K-means Algorithm
+          </Button>
+          
+          <div className="h-[400px] rounded-lg border bg-card p-4">
+            {results.length > 0 ? (
+              <Scatter data={chartData} options={chartOptions} />
+            ) : (
+              <div className="flex h-full items-center justify-center text-muted-foreground">
+                Click "Run K-means Algorithm" to generate visualization
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 
