@@ -1,33 +1,25 @@
 "use client";
 
-import {
-  Avatar,
-  Box,
-  Container,
-  SimpleGrid,
-  Stack,
-  Text,
-  Flex,
-  Tag,
-  useColorModeValue,
-} from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 const Logo = (props: any) => {
   return (
-    <Avatar
-      size="lg"
-      name="AI Glimpse"
-      src="https://avatars.githubusercontent.com/u/154221423"
-    />
+    <Avatar className="h-12 w-12 transition-transform hover:scale-110">
+      <AvatarImage src="https://avatars.githubusercontent.com/u/154221423" alt="AI Glimpse" />
+      <AvatarFallback>AI</AvatarFallback>
+    </Avatar>
   );
 };
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+    <h4 className="mb-3 text-lg font-semibold text-gray-800 dark:text-gray-200">
       {children}
-    </Text>
+    </h4>
   );
 };
 
@@ -40,152 +32,81 @@ export default function LargeWithLogoCentered() {
   const currentYear = getCurrentYear();
 
   return (
-    <Box
-    //   bg={useColorModeValue('gray.50', 'gray.900')}
-    //   color={useColorModeValue('gray.700', 'gray.200')}
-    >
-      <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
-      <Container as={Stack} py={20} centerContent>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={50}>
-          {/*<Stack align={"flex-start"}>*/}
-          {/*  <ListHeader>Github</ListHeader>*/}
-          {/*  <Box as="a" href={"https://github.com/ai-glimpse"}>*/}
-          {/*    Organization*/}
-          {/*  </Box>*/}
-          {/*  <Box as="a" href={"https://github.com/ai-glimpse/website"}>*/}
-          {/*    Website*/}
-          {/*  </Box>*/}
-          {/*  <Stack direction={"row"} align={"center"} spacing={-1}>*/}
-          {/*    /!*<Box as="a" href={'https://github.com/toy-ai/website/discussions'}>*!/*/}
-          {/*    /!*  Discussion*!/*/}
-          {/*    /!*</Box>*!/*/}
-          {/*    /!*<Tag*!/*/}
-          {/*    /!*  size={'sm'}*!/*/}
-          {/*    /!*  bg={useColorModeValue('gray.300', 'gray.800')}*!/*/}
-          {/*    /!*  ml={2}*!/*/}
-          {/*    /!*  color={'white'}>*!/*/}
-          {/*    /!*  Coming*!/*/}
-          {/*    /!*</Tag>*!/*/}
-          {/*  </Stack>*/}
-
-            {/*<Box as="a" href={'https://github.com/llm-literature/calvino/releases'}>*/}
-            {/*  Releases*/}
-            {/*</Box>*/}
-          {/*</Stack>*/}
-
-            <Stack align={"flex-start"}>
+    <footer className="w-full bg-gray-50 dark:bg-gray-900">
+      <div className="border-t border-gray-200 dark:border-gray-800"></div>
+      <div className="container mx-auto max-w-6xl px-4 py-12 md:px-6 lg:py-16">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4">
+          <div className="flex flex-col items-start space-y-2">
             <ListHeader>Resources</ListHeader>
-            <Box as="a" href={"https://ai-glimpse.github.io/toyml"}>
-              ToyML
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toydl"}>
-              ToyDL
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toyllm"}>
-              ToyLLM
-            </Box>
-            <Box as="a" href={"https://ai-glimpse.github.io/toystat/"}>
-              ToyStat
-            </Box>
-          </Stack>
+            <FooterLink href="https://ai-glimpse.github.io/toystat/">ToyStat</FooterLink>
+            <FooterLink href="https://ai-glimpse.github.io/toyml">ToyML</FooterLink>
+            <FooterLink href="https://ai-glimpse.github.io/toydl">ToyDL</FooterLink>
+            <FooterLink href="https://ai-glimpse.github.io/toynlp">ToyNLP</FooterLink>
+            <FooterLink href="https://ai-glimpse.github.io/toyllm">ToyLLM</FooterLink>
+            <FooterLink href="https://ai-glimpse.github.io/toyrl">ToyRL</FooterLink>
+          </div>
 
-          <Stack align={"flex-start"}>
+          <div className="flex flex-col items-start space-y-2">
             <ListHeader>Project</ListHeader>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              <Box as="a" href={"https://datahonor.com/beer/"}>
-                Beer
-              </Box>
-              <Tag
-                size={"sm"}
-                bg={useColorModeValue("red.300", "red.800")}
-                ml={2}
-                color={"white"}
-              >
+            <div className="flex items-center">
+              <FooterLink href="https://datahonor.com/beer/">Beer</FooterLink>
+              <Badge className="ml-2 bg-red-400 text-white dark:bg-red-600">
                 Hot
-              </Tag>
-            </Stack>
-            <Box as="a" href={"https://shenxiangzhuang.github.io/pysesd/"}>
-              [Py]S-ESD
-            </Box>
-            <Box as="a" href={'https://shenxiangzhuang.github.io/mppt/'}>
-              MPPT
-            </Box>
-            <Box as="a" href={'https://shenxiangzhuang.github.io/bleuscore/'}>
-              BleuScore
-            </Box>
-            {/*<Box as="a" href={"https://datahonor.com/toyml/"}>*/}
-            {/*  ToyML*/}
-            {/*</Box>*/}
-            {/*<Box as="a" href={"https://datahonor.com/toydl/"}>*/}
-            {/*  ToyDL*/}
-            {/*</Box>*/}
-          </Stack>
-          <Stack align={"flex-start"}>
+              </Badge>
+            </div>
+            <FooterLink href="https://shenxiangzhuang.github.io/pysesd/">[Py]S-ESD</FooterLink>
+            <FooterLink href="https://shenxiangzhuang.github.io/mppt/">MPPT</FooterLink>
+            <FooterLink href="https://shenxiangzhuang.github.io/bleuscore/">BleuScore</FooterLink>
+          </div>
+          
+          <div className="flex flex-col items-start space-y-2">
             <ListHeader>Odyssey</ListHeader>
-            <Box as="a" href={"https://datahonor.com/odyssey/aiops/"}>
-              AIOps
-            </Box>
-            <Box as="a" href={"https://datahonor.com/odyssey/mlsys/"}>
-              MlSys
-            </Box>
-            <Box as="a" href={"https://datahonor.com/odyssey/chc/"}>
-              Crowdsourcing
-            </Box>
-            <Stack direction={"row"} align={"center"} spacing={-1}>
-              <Box as="a" href={"https://datahonor.com/odyssey/llm/"}>
-                LLM
-              </Box>
-              <Tag
-                size={"sm"}
-                bg={useColorModeValue("green.300", "green.800")}
-                ml={2}
-                color={"white"}
-              >
+            <FooterLink href="https://datahonor.com/odyssey/aiops/">AIOps</FooterLink>
+            <FooterLink href="https://datahonor.com/odyssey/mlsys/">MlSys</FooterLink>
+            <FooterLink href="https://datahonor.com/odyssey/chc/">Crowdsourcing</FooterLink>
+            <div className="flex items-center">
+              <FooterLink href="https://datahonor.com/odyssey/llm/">LLM</FooterLink>
+              <Badge className="ml-2 bg-green-400 text-white dark:bg-green-600">
                 New
-              </Tag>
-            </Stack>
-          </Stack>
-          <Stack align={"flex-start"}>
+              </Badge>
+            </div>
+          </div>
+          
+          <div className="flex flex-col items-start space-y-2">
             <ListHeader>Contact</ListHeader>
-            {/*<Box as="a" href={"https://datahonor.com"}>*/}
-            {/*  Blog*/}
-            {/*</Box>*/}
-            <Box as="a" href={"https://github.com/shenxiangzhuang"}>
-              Github
-            </Box>
-            <Box as="a" href={"https://twitter.com/MathewShen42"}>
-              Twitter
-            </Box>
-            <Box as="a" href={"https://linkedin.com/in/mathewshen"}>
-              LinkedIn
-            </Box>
-          </Stack>
-        </SimpleGrid>
-      </Container>
-      <Box py={10}>
-        <Flex
-          align={"center"}
-          _before={{
-            content: '""',
-            borderBottom: "1px solid",
-            borderColor: useColorModeValue("gray.200", "gray.700"),
-            flexGrow: 1,
-            mr: 8,
-          }}
-          _after={{
-            content: '""',
-            borderBottom: "1px solid",
-            borderColor: useColorModeValue("gray.200", "gray.700"),
-            flexGrow: 1,
-            ml: 8,
-          }}
-        >
-          <Logo />
-        </Flex>
-        <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-          © 2023~{currentYear} Mathew Shen. All rights reserved
-        </Text>
-      </Box>
-    </Box>
+            <FooterLink href="https://github.com/shenxiangzhuang">Github</FooterLink>
+            <FooterLink href="https://twitter.com/MathewShen42">Twitter</FooterLink>
+            <FooterLink href="https://linkedin.com/in/mathewshen">LinkedIn</FooterLink>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto max-w-6xl px-4 pb-8 md:px-6">
+        <div className="flex flex-col items-center justify-center">
+          <div className="mb-6 flex items-center justify-center">
+            <Link href="/" aria-label="Home">
+              <Logo />
+            </Link>
+          </div>
+          <Separator className="w-full max-w-md dark:bg-gray-800" />
+          <p className="pt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+            © 2023 ~{currentYear} Mathew Shen. All rights reserved
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
+
+const FooterLink = ({ href, children }: { href: string; children: ReactNode }) => {
+  return (
+    <a 
+      href={href}
+      className="py-1 text-gray-600 transition-colors hover:text-green-600 dark:text-gray-400 dark:hover:text-green-400"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  );
+};

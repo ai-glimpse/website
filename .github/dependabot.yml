@@ -9,7 +9,7 @@ updates:
     directory: "/apps/web/" # Location of package manifests
     rebase-strategy: "disabled" # use dependabot-rebase-stale
     schedule:
-      interval: "daily"
+      interval: "weekly"
     commit-message:
       prefix: chore
       prefix-development: chore

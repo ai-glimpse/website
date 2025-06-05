@@ -8,6 +8,7 @@ import {
 import { rehypeCodeDefaultOptions } from "fumadocs-core/mdx-plugins";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeCitation from "rehype-citation";
 import { z } from "zod";
 var { docs, meta } = defineDocs({
   dir: "content/docs"
@@ -50,7 +51,17 @@ var source_config_default = defineConfig({
     remarkPlugins: [
       remarkMath
     ],
-    rehypePlugins: (v) => [rehypeKatex, ...v]
+    rehypePlugins: (v) => [
+      rehypeKatex,
+      [
+        rehypeCitation,
+        {
+          bibliography: "references/ref.bib",
+          csl: "references/chicago-fullnote-bibliography.csl"
+        }
+      ],
+      ...v
+    ]
   }
 });
 export {

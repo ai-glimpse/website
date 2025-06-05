@@ -1,7 +1,6 @@
-import { createPreset } from 'fumadocs-ui/tailwind-plugin';
-
 /** @type {import('tailwindcss').Config} */
 export default {
+  // Tailwind v4 uses automatic content detection, but we can still specify if needed
   content: [
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
@@ -9,5 +8,4 @@ export default {
     './mdx-components.{ts,tsx}',
     './node_modules/fumadocs-ui/dist/**/*.js',
   ],
-  presets: [createPreset()],
 };

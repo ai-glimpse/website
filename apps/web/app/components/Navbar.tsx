@@ -1,267 +1,234 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Stack,
-  Collapse,
-  Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-} from '@chakra-ui/react';
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-  HamburgerIcon,
-} from '@chakra-ui/icons';
+import { useState, useEffect } from 'react';
 import { FaGithub, FaTwitter } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import { ChevronDown, ChevronRight, Menu as MenuIcon } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    setMounted(true);
+    
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
-    <Box>
-      <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'50px'}
-        py={{ base: 1 }}
-        px={{ base: 2, md: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}
-      >
-        <Flex
-          flex={{ base: 1, md: 'auto' }}
-          ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}
-        >
-          <IconButton
-            onClick={onToggle}
-            icon={<HamburgerIcon w={5} h={5} />}
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-            size="sm"
-          />
-        </Flex>
-        <Flex
-          flex={{ base: 1 }}
-          justify={{ base: 'center', md: 'start' }}
-          align={'center'}
-        >
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}
-            fontWeight="bold"
-            fontSize={{ base: 'md', md: 'xl' }}
-          >
+    <div className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      isScrolled 
+        ? 'border-b border-gray-200 bg-white/80 backdrop-blur-md dark:bg-gray-900/80 dark:border-gray-800' 
+        : 'bg-white dark:bg-gray-900'
+    }`}>
+      <div className="flex min-h-[60px] items-center justify-between px-3 py-2 md:px-6">
+        <div className="flex md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="sm" className="rounded-full">
+                <MenuIcon className="h-5 w-5" />
+                <span className="sr-only">Toggle Navigation</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[280px] sm:w-[350px]">
+              <MobileNav />
+            </SheetContent>
+          </Sheet>
+        </div>
+
+        <div className="flex items-center">
+          <h1 className="text-center font-bold text-gray-800 transition-all duration-300 hover:text-green-600 md:text-left md:text-xl dark:text-white dark:hover:text-green-400">
             <Link href="/">AI Glimpse</Link>
-          </Text>
+          </h1>
 
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+          <div className="ml-10 hidden md:flex">
             <DesktopNav />
-          </Flex>
-        </Flex>
+          </div>
+        </div>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={{ base: 2, md: 6 }}
-        >
-          <IconButton
-            as="a"
-            href="https://twitter.com/MathewShen42"
-            target="_blank"
-            icon={<FaTwitter />}
+        <div className="flex justify-end space-x-1 md:space-x-4">
+          <Button
+            asChild
             variant="ghost"
-            aria-label="Twitter"
             size="sm"
-          />
-          <IconButton
-            as="a"
-            href="https://github.com/ai-glimpse"
-            target="_blank"
-            icon={<FaGithub />}
+            className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            <a
+              href="https://twitter.com/MathewShen42"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="flex h-9 w-9 items-center justify-center"
+            >
+              <FaTwitter className="h-4 w-4 md:h-5 md:w-5" />
+            </a>
+          </Button>
+          <Button
+            asChild
             variant="ghost"
-            aria-label="GitHub"
             size="sm"
-          />
-          <IconButton
-            as="a"
-            href="mailto:datahonor@gmail.com"
-            icon={<MdEmail />}
+            className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            <a
+              href="https://github.com/ai-glimpse"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex h-9 w-9 items-center justify-center"
+            >
+              <FaGithub className="h-4 w-4 md:h-5 md:w-5" />
+            </a>
+          </Button>
+          <Button
+            asChild
             variant="ghost"
-            aria-label="Email"
             size="sm"
-          />
-        </Stack>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
-    </Box>
+            className="rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            <a
+              href="mailto:datahonor@gmail.com"
+              aria-label="Email"
+              className="flex h-9 w-9 items-center justify-center"
+            >
+              <MdEmail className="h-4 w-4 md:h-5 md:w-5" />
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-
   return (
-    <Stack direction={'row'} spacing={4}>
+    <div className="flex space-x-1 md:space-x-2 lg:space-x-4">
       {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
+        <div key={navItem.label}>
+          <Popover>
+            <PopoverTrigger asChild>
               <Link href={navItem.href ?? '#'}>
-                <Text
-                  p={2}
-                  fontSize={'sm'}
-                  fontWeight={500}
-                  color={linkColor}
-                  _hover={{
-                    textDecoration: 'none',
-                    color: linkHoverColor,
-                  }}
-                >
+                <Button variant="link" className="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors dark:text-gray-300 dark:hover:text-green-400">
                   {navItem.label}
-                </Text>
+                </Button>
               </Link>
             </PopoverTrigger>
 
             {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}
-              >
-                <Stack>
+              <PopoverContent className="w-56 rounded-xl p-4 shadow-xl">
+                <div className="flex flex-col space-y-2">
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
                   ))}
-                </Stack>
+                </div>
               </PopoverContent>
             )}
           </Popover>
-        </Box>
+        </div>
       ))}
-    </Stack>
+    </div>
   );
 };
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   return (
-    <Link href={href ?? '#'}>
-      <Stack direction={'row'} align={'center'} role={'group'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}
-          >
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: 1, transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}
-        >
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
+    <Link href={href ?? '#'} className="group flex items-center rounded-lg p-2 hover:bg-gray-50 dark:hover:bg-gray-800">
+      <div>
+        <div className="font-medium transition-all group-hover:text-green-600 dark:group-hover:text-green-400">
+          {label}
+        </div>
+        <div className="text-xs text-gray-500 dark:text-gray-400">{subLabel}</div>
+      </div>
+      <div className="ml-auto flex h-full items-center opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100">
+        <ChevronRight className="h-4 w-4 text-green-600 dark:text-green-400" />
+      </div>
     </Link>
   );
 };
 
 const MobileNav = () => {
   return (
-    <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={2}
-      display={{ md: 'none' }}
-    >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
+    <div className="flex flex-col space-y-4 p-4">
+      <div className="mb-4 font-bold text-xl text-gray-800 dark:text-white">
+        <Link href="/">AI Glimpse</Link>
+      </div>
+      <div className="space-y-2">
+        {NAV_ITEMS.map((navItem) => (
+          <MobileNavItem key={navItem.label} {...navItem} />
+        ))}
+      </div>
+    </div>
   );
 };
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Stack spacing={2} onClick={children && onToggle}>
-      <Link href={href ?? '#'}>
-        <Flex
-          py={1}
-          justify={'space-between'}
-          align={'center'}
-          _hover={{
-            textDecoration: 'none',
-          }}
-        >
-          <Text
-            fontWeight={600}
-            color={useColorModeValue('gray.600', 'gray.200')}
-            fontSize="sm"
-          >
-            {label}
-          </Text>
-          {children && (
-            <Icon
-              as={ChevronDownIcon}
-              transition={'all .25s ease-in-out'}
-              transform={isOpen ? 'rotate(180deg)' : ''}
-              w={4}
-              h={4}
-            />
-          )}
-        </Flex>
-      </Link>
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
+      <div className="flex items-center justify-between py-2">
+        <Link href={href ?? '#'} className="text-sm font-semibold text-gray-700 hover:text-green-600 transition-colors dark:text-gray-300 dark:hover:text-green-400">
+          {label}
+        </Link>
+        {children && (
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm" className="p-1 h-8 w-8 rounded-full">
+              <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        )}
+      </div>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={1}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} href={child.href ?? '#'}>
-                <Text py={1} fontSize="sm">
-                  {child.label}
-                </Text>
+      {children && (
+        <CollapsibleContent>
+          <div className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 py-1 space-y-2">
+            {children.map((child) => (
+              <Link
+                key={child.label}
+                href={child.href ?? '#'}
+                className="flex py-2 text-sm text-gray-600 hover:text-green-600 transition-colors dark:text-gray-400 dark:hover:text-green-400"
+              >
+                {child.label}
+                {child.subLabel && (
+                  <span className="ml-2 text-xs text-gray-500">{child.subLabel}</span>
+                )}
               </Link>
             ))}
-        </Stack>
-      </Collapse>
-    </Stack>
+          </div>
+        </CollapsibleContent>
+      )}
+    </Collapsible>
   );
 };
 

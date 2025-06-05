@@ -24,3 +24,8 @@ resources:
   features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs
+
+
+## License
+- The website code(ui code) is licensed under the MIT license. 
+- The content(docs materials) of the website by Xiangzhuang Shen is licensed under CC BY-NC-SA 4.0

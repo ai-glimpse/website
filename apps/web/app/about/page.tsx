@@ -1,18 +1,10 @@
 'use client';
 
 import React from 'react';
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  VStack,
-  Icon,
-  SimpleGrid,
-  Button,
-} from '@chakra-ui/react';
 import { LightbulbIcon, UsersIcon, RocketIcon, HeartHandshakeIcon } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface FeatureProps {
   title: string;
@@ -23,42 +15,37 @@ interface FeatureProps {
 const Feature = ({ title, text, iconName }: FeatureProps): React.ReactElement => {
   const IconComponent =
     iconName === 'LightbulbIcon' ? LightbulbIcon :
-    iconName === 'UsersIcon' ? UsersIcon :
-    iconName === 'RocketIcon' ? RocketIcon :
-    HeartHandshakeIcon;
+      iconName === 'UsersIcon' ? UsersIcon :
+        iconName === 'RocketIcon' ? RocketIcon :
+          HeartHandshakeIcon;
 
   return (
-    <VStack
-      bg="white"
-      p={6}
-      borderRadius="lg"
-      boxShadow="md"
-      transition="all 0.3s"
-      _hover={{ transform: 'translateY(-5px)', boxShadow: 'lg' }}
+    <Card 
+      className="flex flex-col items-center bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
-      <Icon as={IconComponent} boxSize={12} color="pink.400" mb={4} />
-      <Text fontWeight={700} fontSize="xl" mb={2} color="gray.700">{title}</Text>
-      <Text color="gray.600" textAlign="center">{text}</Text>
-    </VStack>
+      <IconComponent className="mb-4 h-12 w-12 text-gray-400" />
+      <h3 className="mb-2 text-xl font-bold text-gray-700">{title}</h3>
+      <p className="text-center text-gray-600">{text}</p>
+    </Card>
   );
 };
 
 export default function Page(): React.ReactElement {
   return (
-    <Box bg="pink.50" py={20}>
-      <Container maxW="6xl">
-        <VStack spacing={16}>
-          <VStack spacing={4} as={Container} maxW="3xl" textAlign="center">
-            <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} fontWeight="bold" color="pink.600">
+    <div className="bg-white py-20">
+      <div className="container mx-auto max-w-6xl">
+        <div className="flex flex-col items-center space-y-16">
+          <div className="container mx-auto max-w-3xl space-y-4 text-center">
+            <h1 className="text-3xl font-bold text-gray-700 md:text-4xl lg:text-5xl">
               Empowering AI Education
-            </Heading>
-            <Text color="gray.700" fontSize={{ base: 'lg', md: 'xl' }}>
+            </h1>
+            <p className="text-lg text-gray-700 md:text-xl">
               We're on a mission to democratize AI education, making it accessible,
               engaging, and practical for learners of all levels.
-            </Text>
-          </VStack>
+            </p>
+          </div>
 
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={10} width="full">
+          <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
             <Feature
               iconName="LightbulbIcon"
               title="Innovative Learning"
@@ -79,39 +66,31 @@ export default function Page(): React.ReactElement {
               title="Open Contribution"
               text="Join us in shaping the future of AI education through open collaboration."
             />
-          </SimpleGrid>
+          </div>
 
-          <Box
-            bg="pink.100"
-            p={8}
-            borderRadius="xl"
-            textAlign="center"
-            boxShadow="xl"
-            maxW="3xl"
-            width="full"
+          <Card
+            className="max-w-3xl rounded-xl bg-gray-50 p-8 text-center shadow-xl"
           >
-            <Heading as="h3" size="lg" mb={4} color="pink.700">
+            <h3 className="mb-4 text-lg font-semibold text-gray-700 md:text-xl">
               Your Journey in AI Starts Here
-            </Heading>
-            <Text fontSize="lg" mb={6} color="gray.700">
+            </h3>
+            <p className="mb-6 text-lg text-gray-700">
               Whether you're taking your first steps in AI or looking to deepen your expertise,
               our platform offers the tools and community to support your growth. Dive in,
               experiment with our 'toys', and don't hesitate to share your insights or contribute to our project.
-            </Text>
+            </p>
             <Button
-              as={Link}
-              href="/docs"
-              bg="pink.500"
-              color="white"
+              asChild
+              className="bg-gray-500 font-bold hover:bg-green-600"
               size="lg"
-              fontWeight="bold"
-              _hover={{ bg: 'pink.600' }}
             >
-              Start Learning
+              <Link href="/docs">
+                Start Learning
+              </Link>
             </Button>
-          </Box>
-        </VStack>
-      </Container>
-    </Box>
+          </Card>
+        </div>
+      </div>
+    </div>
   );
 }

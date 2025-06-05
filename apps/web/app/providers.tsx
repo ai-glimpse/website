@@ -3,10 +3,7 @@
 import { RootProvider } from 'fumadocs-ui/provider';
 import { PythonProvider } from 'react-py';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-
-import { CacheProvider } from '@chakra-ui/next-js';
-import { ChakraProvider } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const inject = `
 const urlParams = new URLSearchParams(window.location.search);
@@ -24,25 +21,38 @@ if (item === 'true') {
 `;
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const [isServiceWorkerSupported, setIsServiceWorkerSupported] = useState(false);
+
+  useEffect(() => {
+    // Check if service workers are supported
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      setIsServiceWorkerSupported(true);
+    }
+  }, []);
+
+  const ProviderContent = ({ children }: { children: React.ReactNode }) => (
+    <TooltipProvider>
+      <script
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: inject }}
+      />
+      {children}
+    </TooltipProvider>
+  );
+
   return (
-    <CacheProvider>
-      <ChakraProvider>
-        <RootProvider
-          theme={{
-            enabled: false,
-          }}
-        >
-          <PythonProvider>
-            <TooltipProvider>
-              <script
-                suppressHydrationWarning
-                dangerouslySetInnerHTML={{ __html: inject }}
-              />
-              {children}
-            </TooltipProvider>
-          </PythonProvider>
-        </RootProvider>
-      </ChakraProvider>
-    </CacheProvider>
+    <RootProvider
+      theme={{
+        enabled: false,
+      }}
+    >
+      {isServiceWorkerSupported ? (
+        <PythonProvider>
+          <ProviderContent>{children}</ProviderContent>
+        </PythonProvider>
+      ) : (
+        <ProviderContent>{children}</ProviderContent>
+      )}
+    </RootProvider>
   );
 }

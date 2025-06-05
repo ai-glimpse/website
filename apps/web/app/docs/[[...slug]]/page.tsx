@@ -7,8 +7,7 @@ import {
 } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { getGithubLastEdit } from 'fumadocs-core/server'
-import { resolve } from 'url';
+
 import Comments from '@/app/components/comments';
 import { cn } from '@/app/utils/cn';
 import { buttonVariants } from '@/app/components/blog/button';
@@ -44,13 +43,8 @@ export default async function Page(props: {
 
   const MDX = page.data.body;
 
-  const lastEditDate = await getGithubLastEdit({
-    owner: 'ai-glimpse',
-    repo: 'website',
-    // example: "content/docs/index.mdx"
-    path: resolve('apps/web/content/docs/', page.file.path),
-    token: `Bearer ${process.env.GIT_TOKEN}`
-  });
+    // Use the last modified time from fumadocs built-in git support
+  const lastEditDate = page.data.lastModified;
 
   return (
     <DocsPage
