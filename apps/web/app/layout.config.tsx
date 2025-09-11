@@ -1,5 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import React from 'react';
 
+import LanguageSwitcher from '@/app/[lang]/components/LanguageSwitcher';
 import { i18n } from '@/lib/i18n';
 
 /**
@@ -9,12 +11,13 @@ import { i18n } from '@/lib/i18n';
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-export function baseOptions(): BaseLayoutProps {
+export function baseOptions(lang?: string): BaseLayoutProps {
   return {
     i18n,
     nav: {
       title: 'AI Glimpse',
-      url: '/',
+      url: lang ? `/${lang}` : '/',
+      children: React.createElement(LanguageSwitcher),
     },
     githubUrl: 'https://github.com/ai-glimpse',
   };

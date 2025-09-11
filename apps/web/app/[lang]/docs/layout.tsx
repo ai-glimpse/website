@@ -6,17 +6,18 @@ import { source } from '@/lib/source';
 
 export default async function Layout({ 
   children,
+  params,
 }: { 
   children: ReactNode;
   params: Promise<{ lang: string }>;
 }) {
-  // Use the same page tree for all languages to ensure consistent navigation
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const pageTreeRecord = source.pageTree as Record<string, any>;
-  const tree = pageTreeRecord.en || pageTreeRecord;
+  const { lang } = await params;
+  
+  // Get the page tree for the current language
+  const tree = source.getPageTree(lang);
   
   return (
-    <DocsLayout tree={tree} {...baseOptions()}>
+    <DocsLayout tree={tree} {...baseOptions(lang)}>
       {children}
     </DocsLayout>
   );
