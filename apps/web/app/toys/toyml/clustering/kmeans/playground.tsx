@@ -1,8 +1,11 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { PythonProvider } from 'react-py';
 
-import CodeEditor from '@/app/components/editor/CodeEditor';
+const CodeEditor = dynamic(() => import('@/app/components/editor/CodeEditor'), {
+  ssr: false,
+});
 
 export const snippets = [
   `from toyml.clustering import Kmeans

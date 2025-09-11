@@ -1,9 +1,3 @@
-import 'ace-builds/src-noconflict/ext-language_tools';
-import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/theme-github';
-import 'ace-builds/src-noconflict/theme-idle_fingers';
-import 'ace-builds/src-noconflict/theme-xcode';
-
 import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
@@ -45,6 +39,25 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
   const { code, packages } = props;
   const [input, setInput] = useState(code.trimEnd());
   const [showOutput, setShowOutput] = useState(false);
+  const [aceLoaded, setAceLoaded] = useState(false);
+
+  // Load ace editor modules dynamically
+  useEffect(() => {
+    const loadAceModules = async () => {
+      try {
+        await import('ace-builds/src-noconflict/mode-python');
+        await import('ace-builds/src-noconflict/theme-github');
+        await import('ace-builds/src-noconflict/theme-idle_fingers');
+        await import('ace-builds/src-noconflict/theme-xcode');
+        await import('ace-builds/src-noconflict/ext-language_tools');
+        setAceLoaded(true);
+      } catch (error) {
+        console.error('Failed to load ace modules:', error);
+      }
+    };
+    
+    loadAceModules();
+  }, []);
 
   useEffect(() => {
     setInput(code.trimEnd());
@@ -112,21 +125,27 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
 
           {isLoading && <Loader />}
 
-          <AceEditor
-            value={input}
-            mode="python"
-            name="CodeBlock"
-            fontSize="0.9rem"
-            className="min-h-[7rem] overflow-clip rounded shadow-md"
-            theme={'xcode'}
-            // theme={'github'}
-            onChange={(newValue) => setInput(newValue)}
-            width="100%"
-            maxLines={Infinity}
-            onLoad={editorOnLoad}
-            editorProps={{ $blockScrolling: true }}
-            setOptions={editorOptions}
-          />
+          {aceLoaded ? (
+            <AceEditor
+              value={input}
+              mode="python"
+              name="CodeBlock"
+              fontSize="0.9rem"
+              className="min-h-[7rem] overflow-clip rounded shadow-md"
+              theme={'xcode'}
+              // theme={'github'}
+              onChange={(newValue) => setInput(newValue)}
+              width="100%"
+              maxLines={Infinity}
+              onLoad={editorOnLoad}
+              editorProps={{ $blockScrolling: true }}
+              setOptions={editorOptions}
+            />
+          ) : (
+            <div className="min-h-[7rem] rounded shadow-md bg-gray-100 flex items-center justify-center">
+              <span>Loading editor...</span>
+            </div>
+          )}
           {isAwaitingInput && (
             <Input prompt={promptName} onSubmit={sendInput} />
           )}
