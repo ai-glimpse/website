@@ -1,7 +1,7 @@
 import { motion, Variants } from 'motion/react';
 import { useEffect, useMemo, useState } from 'react';
 
-import { cn } from '@/app/utils/cn';
+import { cn } from '@/app/[lang]/utils/cn';
 
 interface TypewriterProps {
   text: string | string[];

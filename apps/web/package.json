@@ -15,6 +15,7 @@
     "postinstall": "NODE_OPTIONS='--no-deprecation' bun run fumadocs-mdx"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.6.1",
     "@giscus/react": "^3.1.0",
     "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
@@ -38,11 +39,13 @@
     "clsx": "^2.1.1",
     "eslint-config-next": "15.3.3",
     "framer-motion": "^12.23.12",
+    "fumadocs-core": "^15.7.11",
     "fumadocs-mdx": "11.6.9",
     "fumadocs-ui": "15.7.10",
     "katex": "^0.16.22",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.12",
+    "negotiator": "^1.0.0",
     "next": "15.5.2",
     "punycode.js": "^2.3.1",
     "react": "^18.3.1",

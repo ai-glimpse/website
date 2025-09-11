@@ -3,10 +3,12 @@ import { createMDXSource } from 'fumadocs-mdx';
 import { icons } from 'lucide-react';
 import { createElement } from 'react';
 
-import { docs, meta, blog as blogPosts } from '@/.source';
+import { blog as blogPosts, docs, meta } from '@/.source';
+import { i18n } from '@/lib/i18n';
 
 export const source = loader({
   baseUrl: '/docs',
+  i18n,
   icon(icon) {
     if (!icon) {
       // You may set a default icon
@@ -20,5 +22,6 @@ export const source = loader({
 
 export const blog = loader({
   baseUrl: '/blog',
+  i18n,
   source: createMDXSource(blogPosts, []),
 });

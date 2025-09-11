@@ -1,13 +1,9 @@
-import './global.css';
 import 'katex/dist/katex.css';
+import './global.css';
+
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import React from 'react';
-
-import LargeWithLogoCentered from '@/app/components/Footer';
-import Navbar from '@/app/components/Navbar';
-
-import { Providers } from './providers';
+import type { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,10 +21,10 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html className={inter.className} suppressHydrationWarning>
       <head>
         <title>AI Glimpse</title>
         <link
@@ -51,12 +47,8 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon_io/site.webmanifest" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className="flex min-h-screen flex-col">
-        <Providers>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <LargeWithLogoCentered />
-        </Providers>
+      <body className="flex min-h-screen flex-col" suppressHydrationWarning>
+        {children}
       </body>
     </html>
   );

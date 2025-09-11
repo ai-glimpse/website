@@ -1,13 +1,13 @@
-import {
-  defineConfig,
-  defineDocs,
-  defineCollections,
-  frontmatterSchema,
-} from 'fumadocs-mdx/config';
 import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
+import {
+    defineCollections,
+    defineConfig,
+    defineDocs,
+    frontmatterSchema,
+} from 'fumadocs-mdx/config';
 import rehypeCitation from 'rehype-citation';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
 import { z } from 'zod';
 
 export const { docs, meta } = defineDocs({

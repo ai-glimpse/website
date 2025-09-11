@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-import { cosBase } from '@/app/components/Util';
+import { cosBase } from '@/app/[lang]/components/Util';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';

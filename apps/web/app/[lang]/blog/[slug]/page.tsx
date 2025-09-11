@@ -4,17 +4,17 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { Control } from '@/app/blog/[slug]/page.client';
-import { buttonVariants } from '@/app/components/blog/button';
-import Comments from '@/app/components/comments';
-import { createMetadata } from '@/app/utils/metadata';
+import { Control } from '@/app/[lang]/blog/[slug]/page.client';
+import { buttonVariants } from '@/app/[lang]/components/blog/button';
+import Comments from '@/app/[lang]/components/comments';
+import { createMetadata } from '@/app/[lang]/utils/metadata';
 import { blog } from '@/lib/source';
 
 export default async function Page(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }): Promise<React.ReactElement> {
   const params = await props.params;
-  const page = blog.getPage([params.slug]);
+  const page = blog.getPage([params.slug], params.lang);
 
   if (!page) notFound();
 
@@ -70,10 +70,10 @@ export default async function Page(props: {
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = blog.getPage([params.slug]);
+  const page = blog.getPage([params.slug], params.lang);
 
   if (!page) notFound();
 

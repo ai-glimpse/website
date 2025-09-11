@@ -5,8 +5,8 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import Typewriter from '@/app/components/text/typewriter';
-import ToyAIMember from '@/app/components/ToyAIMember';
+import Typewriter from '@/app/[lang]/components/text/typewriter';
+import ToyAIMember from '@/app/[lang]/components/ToyAIMember';
 import { Button } from '@/components/ui/button';
 
 import WithSpeechBubbles from './Testimonial';

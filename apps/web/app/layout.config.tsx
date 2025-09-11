@@ -1,5 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 
+import { i18n } from '@/lib/i18n';
+
 /**
  * Shared layout configurations
  *
@@ -7,15 +9,18 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
  * Home Layout: app/(home)/layout.tsx
  * Docs Layout: app/docs/layout.tsx
  */
-export const baseOptions: BaseLayoutProps = {
-  // nav: {
-  //   title: 'My App',
-  // },
-  // links: [
-  //   {
-  //     text: 'Documentation',
-  //     url: '/docs',
-  //     active: 'nested-url',
-  //   },
-  // ],
-};
+export function baseOptions(): BaseLayoutProps {
+  return {
+    i18n,
+    // nav: {
+    //   title: 'My App',
+    // },
+    // links: [
+    //   {
+    //     text: 'Documentation',
+    //     url: '/docs',
+    //     active: 'nested-url',
+    //   },
+    // ],
+  };
+}

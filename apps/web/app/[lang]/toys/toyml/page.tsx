@@ -4,10 +4,10 @@ import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 
 import {
-  FeatureItem,
-  FeatureSection,
-  FeatureTitle,
-} from '@/app/components/FeatureSection';
+    FeatureItem,
+    FeatureSection,
+    FeatureTitle,
+} from '@/app/[lang]/components/FeatureSection';
 
 const featureTitle: FeatureTitle = {
   name: 'ToyML',
