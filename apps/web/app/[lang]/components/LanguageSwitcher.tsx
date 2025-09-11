@@ -7,9 +7,9 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from '@/components/ui/popover';
 import { i18n } from '@/lib/i18n';
 
