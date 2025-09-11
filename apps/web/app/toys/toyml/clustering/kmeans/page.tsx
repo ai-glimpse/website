@@ -1,8 +1,6 @@
 "use client";
 
 import KmeansPlaygroundDemo from "@/app/toys/toyml/clustering/kmeans/playground";
-import CodeEditor from "@/app/components/editor/CodeEditor";
-import { PythonProvider } from "react-py";
 
 export default function KmeansPage() {
   return (

@@ -1,17 +1,19 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ReactNode, useEffect, useState } from "react";
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
-const Logo = (props: any) => {
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+
+
+const Logo = () => {
   return (
     <Avatar className="h-12 w-12 transition-transform hover:scale-110">
       <AvatarImage src="https://avatars.githubusercontent.com/u/154221423" alt="AI Glimpse" />
-      <AvatarFallback>AI</AvatarFallback>
+      <AvatarFallback>AG</AvatarFallback>
     </Avatar>
   );
 };

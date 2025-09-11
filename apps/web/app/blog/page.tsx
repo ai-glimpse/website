@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { blog } from '@/lib/source';
 
 export default function Page(): React.ReactElement {

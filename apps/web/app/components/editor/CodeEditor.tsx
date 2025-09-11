@@ -5,14 +5,14 @@ import 'ace-builds/src-noconflict/theme-xcode';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/theme-idle_fingers';
 import 'ace-builds/src-noconflict/ext-language_tools';
+
+import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 // import { useColorMode } from '@theme-ui/color-modes';
-import { CodeBlock } from 'fumadocs-ui/components/codeblock';
+import { usePython } from 'react-py';
 
 import Controls from './Controls';
-import Loader from './Loader';
 import Input from './Input';
-import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
-import { usePython } from 'react-py';
+import Loader from './Loader';
 
 const editorOptions = {
   enableBasicAutocompletion: true,

@@ -3,10 +3,12 @@ import 'katex/dist/katex.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
+
+import LargeWithLogoCentered from '@/app/components/Footer';
+import Navbar from '@/app/components/Navbar';
+
 import { Providers } from './providers';
 
-import Navbar from '@/app/components/Navbar';
-import LargeWithLogoCentered from '@/app/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 

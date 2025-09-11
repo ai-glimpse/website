@@ -1,9 +1,10 @@
 'use client';
 
 
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline';
-import { FeatureTitle, FeatureItem, FeatureSection } from '@/app/components/FeatureSection';
+import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline';
 import {usePathname} from "next/navigation";
+
+import { FeatureTitle, FeatureItem, FeatureSection } from '@/app/components/FeatureSection';
 
 
 const featureTitle: FeatureTitle = {
@@ -41,7 +42,7 @@ const featureItems: FeatureItem[] = [
 ]
 
 export default function ToyMLPage() {
-  let pathname = usePathname() || "/";
+  const pathname = usePathname() || "/";
 
   return (
     <FeatureSection featureTitle={featureTitle} featureItems={featureItems} rootPath={pathname}/>

@@ -1,9 +1,9 @@
 // app/providers.tsx
 'use client';
-import { RootProvider } from 'fumadocs-ui/provider';
-import { PythonProvider } from 'react-py';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { RootProvider } from 'fumadocs-ui/provider';
 import React, { useState, useEffect } from 'react';
+import { PythonProvider } from 'react-py';
 
 const inject = `
 const urlParams = new URLSearchParams(window.location.search);

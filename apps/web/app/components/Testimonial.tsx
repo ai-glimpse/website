@@ -1,10 +1,11 @@
 'use client'
 
-import { cosBase } from "@/app/components/Util";
-import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
+
+import { cosBase } from "@/app/components/Util";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const floatAnimation = "animate-[float_6s_ease-in-out_infinite]";
 

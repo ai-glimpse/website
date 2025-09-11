@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {LockClosedIcon, LockOpenIcon} from "@heroicons/react/24/outline";
 
 type FeatureTitle = {
   name: string;

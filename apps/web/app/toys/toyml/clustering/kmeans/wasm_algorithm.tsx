@@ -1,15 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
-import { Scatter } from 'react-chartjs-2';
-import { Chart, registerables } from 'chart.js';
 import 'chart.js/auto';
+
+import { Chart, registerables } from 'chart.js';
 import { ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Scatter } from 'react-chartjs-2';
+import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import {
   DropdownMenu,
@@ -17,6 +16,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -237,7 +238,7 @@ const KmeansWasmDemo: React.FC = () => {
               <Scatter data={chartData} options={chartOptions} />
             ) : (
               <div className="flex h-full items-center justify-center text-muted-foreground">
-                Click "Run K-means Algorithm" to generate visualization
+                Click &quot;Run K-means Algorithm&quot; to generate visualization
               </div>
             )}
           </div>

@@ -1,16 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-import Link from 'next/link';
 
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
+
+import Typewriter from '@/app/components/text/typewriter';
+import ToyAIMember from '@/app/components/ToyAIMember';
 import { Button } from '@/components/ui/button';
 
-import ToyAIMember from '@/app/components/ToyAIMember';
-import Typewriter from '@/app/components/text/typewriter';
 import WithSpeechBubbles from './Testimonial';
 
 export default function LandingPage() {

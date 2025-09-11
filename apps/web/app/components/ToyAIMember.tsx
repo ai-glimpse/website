@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement, useEffect, useState } from 'react';
+import { motion } from "framer-motion";
 import {
   BrainCircuit,
   Network,
@@ -8,12 +8,12 @@ import {
   MessageSquare,
   Bot,
   Gamepad2,
-  type LucideIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Card, CardContent } from "@/components/ui/card";
+import { ReactElement } from 'react';
+
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface CardProps {
   heading: string;
@@ -102,12 +102,6 @@ const FeatureCard = ({ heading, description, icon, href, active, index }: CardPr
 };
 
 export default function ToyAIMember() {
-  // State to control staggered animation
-  const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
   
   return (
     <section className="border-t-0 border-b-0 py-16 md:py-20 bg-white dark:bg-gray-900">

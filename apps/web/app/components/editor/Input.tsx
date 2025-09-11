@@ -1,6 +1,6 @@
+import { PaperAirplaneIcon } from '@heroicons/react/20/solid'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { PaperAirplaneIcon } from '@heroicons/react/20/solid'
 
 interface InputProps {
   prompt: string
@@ -30,7 +30,7 @@ export default function Input(props: InputProps) {
       <div className="mt-1 flex rounded-md shadow-sm">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <input
-            //@ts-ignore
+            //@ts-expect-error - ref type compatibility issue
             ref={inputRef}
             type="text"
             name="input"

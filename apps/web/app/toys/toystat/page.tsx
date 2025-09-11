@@ -1,8 +1,9 @@
 'use client';
 
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline';
-import { FeatureTitle, FeatureItem, FeatureSection } from '@/app/components/FeatureSection';
+import { LockClosedIcon } from '@heroicons/react/24/outline';
 import {usePathname} from "next/navigation";
+
+import { FeatureTitle, FeatureItem, FeatureSection } from '@/app/components/FeatureSection';
 
 const featureTitle: FeatureTitle = {
   name: "ToyStat",
@@ -30,7 +31,7 @@ const featureItems: FeatureItem[] = [
 ]
 
 export default function ToyStatPage() {
-  let pathname = usePathname() || "/";
+  const pathname = usePathname() || "/";
 
   return (
     <>

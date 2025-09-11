@@ -1,13 +1,15 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-import { blog } from '@/lib/source';
-import { createMetadata } from '@/app/utils/metadata';
-import { buttonVariants } from '@/app/components/blog/button';
-import { Control } from '@/app/blog/[slug]/page.client';
-import Comments from '@/app/components/comments';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
+import { Control } from '@/app/blog/[slug]/page.client';
+import { buttonVariants } from '@/app/components/blog/button';
+import Comments from '@/app/components/comments';
+import { createMetadata } from '@/app/utils/metadata';
+import { blog } from '@/lib/source';
+
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;

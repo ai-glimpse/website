@@ -1,7 +1,8 @@
 "use client";
 
-import CodeEditor from "@/app/components/editor/CodeEditor";
 import { PythonProvider } from "react-py";
+
+import CodeEditor from "@/app/components/editor/CodeEditor";
 
 export const snippets = [
   `from toyml.clustering import Kmeans

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
 import { motion, Variants } from "motion/react"
+import { useEffect, useState } from "react"
 
 import { cn } from '@/app/utils/cn';
 
@@ -103,6 +103,7 @@ const Typewriter = ({
     deleteSpeed,
     waitTime,
     texts,
+    initialDelay,
     currentTextIndex,
     loop,
   ])
