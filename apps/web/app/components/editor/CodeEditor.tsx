@@ -55,7 +55,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
         console.error('Failed to load ace modules:', error);
       }
     };
-    
+
     loadAceModules();
   }, []);
 
@@ -142,7 +142,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
               setOptions={editorOptions}
             />
           ) : (
-            <div className="min-h-[7rem] rounded shadow-md bg-gray-100 flex items-center justify-center">
+            <div className="flex min-h-[7rem] items-center justify-center rounded bg-gray-100 shadow-md">
               <span>Loading editor...</span>
             </div>
           )}
