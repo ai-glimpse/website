@@ -12,7 +12,7 @@ const config = {
   reactStrictMode: true,
   // Set the correct workspace root to silence the lockfile warning
   outputFileTracingRoot: join(__dirname, '../../'),
-  
+
   // Webpack configuration to handle punycode deprecation warnings
   webpack: (config, { isServer }) => {
     // Suppress punycode deprecation warnings
