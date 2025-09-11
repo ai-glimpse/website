@@ -1,23 +1,23 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
-  DocsPage,
   DocsBody,
   DocsDescription,
+  DocsPage,
   DocsTitle,
 } from 'fumadocs-ui/page';
 import { Edit } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
-import { buttonVariants } from '@/app/components/blog/button';
-import Comments from '@/app/components/comments';
-import { cn } from '@/app/utils/cn';
+import { buttonVariants } from '@/app/[lang]/components/blog/button';
+import Comments from '@/app/[lang]/components/comments';
+import { cn } from '@/app/[lang]/utils/cn';
 import { source } from '@/lib/source';
 
 export default async function Page(props: {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ slug?: string[]; lang: string }>;
 }) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
   const path = `apps/web/content/docs/${page.file.path}`;
@@ -69,10 +69,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ slug?: string[]; lang: string }>;
 }) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
   return {

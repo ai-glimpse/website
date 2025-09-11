@@ -1,14 +1,14 @@
 'use client';
 import {
-  TooltipContent,
   Tooltip,
+  TooltipContent,
   TooltipTrigger,
 } from '@radix-ui/react-tooltip';
 import { Share } from 'lucide-react';
 import { useState } from 'react';
 
-import { buttonVariants } from '@/app/components/blog/button';
-import { cn } from '@/app/utils/cn';
+import { buttonVariants } from '@/app/[lang]/components/blog/button';
+import { cn } from '@/app/[lang]/utils/cn';
 
 export function Control({ url }: { url: string }): React.ReactElement {
   const [open, setOpen] = useState(false);

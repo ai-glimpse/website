@@ -1,9 +1,7 @@
-import LandingPage from '@/app/components/LandingPage';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  return (
-    <>
-      <LandingPage />
-    </>
-  );
+import { i18n } from '@/lib/i18n';
+
+export default function HomePage() {
+  redirect(`/${i18n.defaultLanguage}`);
 }

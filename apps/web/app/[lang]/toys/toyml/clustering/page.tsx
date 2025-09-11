@@ -7,7 +7,7 @@ import {
   FeatureItem,
   FeatureSection,
   FeatureTitle,
-} from '@/app/components/FeatureSection';
+} from '@/app/[lang]/components/FeatureSection';
 
 const featureTitle: FeatureTitle = {
   name: 'Clustering',

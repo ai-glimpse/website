@@ -7,36 +7,35 @@ import {
   FeatureItem,
   FeatureSection,
   FeatureTitle,
-} from '@/app/components/FeatureSection';
+} from '@/app/[lang]/components/FeatureSection';
 
 const featureTitle: FeatureTitle = {
-  name: 'ToyDL',
-  description: 'Learning deep learning from scratch!',
+  name: 'ToyStat',
+  description: 'Learning statistics from scratch!',
 };
 
 const featureItems: FeatureItem[] = [
   {
-    name: 'TODO: Mini-Torch',
-    description: 'Implementation if mini-torch!',
+    name: 'TODO: Distribution',
+    description: 'The distributions of data samples',
     icon: LockClosedIcon,
     path: '#',
     iconColor: 'bg-red-300',
   },
   {
-    name: 'TODO: CNN',
-    description: 'CNN implementation by mini-torch',
+    name: 'TODO: Agreement',
+    description: 'The agreement measurement of data samples',
     icon: LockClosedIcon,
     path: '#',
     iconColor: 'bg-red-300',
   },
 ];
 
-export default function ToyDLPage() {
+export default function ToyStatPage() {
   const pathname = usePathname() || '/';
 
   return (
     <>
-      {/*<FlyoutNavbar/>*/}
       <FeatureSection
         featureTitle={featureTitle}
         featureItems={featureItems}
