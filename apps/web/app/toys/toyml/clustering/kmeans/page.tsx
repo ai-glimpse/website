@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import KmeansPlaygroundDemo from "@/app/toys/toyml/clustering/kmeans/playground";
+import KmeansPlaygroundDemo from '@/app/toys/toyml/clustering/kmeans/playground';
 
 export default function KmeansPage() {
   return (

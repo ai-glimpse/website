@@ -28,9 +28,15 @@
 }
 
 @keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Improved scrollbar styling */
@@ -162,8 +168,12 @@ html {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Base styles - converted to Tailwind v4.0 syntax */
@@ -171,19 +181,21 @@ html {
   * {
     border-color: var(--color-neutral-200);
   }
-  
+
   .dark * {
     border-color: var(--color-neutral-800);
   }
-  
+
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* Improved image handling */
   img {
     max-width: 100%;
@@ -196,5 +208,3 @@ section {
   position: relative;
   overflow: hidden;
 }
-
-

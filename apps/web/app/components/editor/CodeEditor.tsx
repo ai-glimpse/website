@@ -21,7 +21,12 @@ const editorOptions = {
 };
 
 const editorOnLoad = (editor: unknown) => {
-  const aceEditor = editor as { renderer: { setScrollMargin: (a: number, b: number, c: number, d: number) => void }; moveCursorTo: (row: number, col: number) => void };
+  const aceEditor = editor as {
+    renderer: {
+      setScrollMargin: (a: number, b: number, c: number, d: number) => void;
+    };
+    moveCursorTo: (row: number, col: number) => void;
+  };
   aceEditor.renderer.setScrollMargin(10, 10, 0, 0);
   aceEditor.moveCursorTo(0, 0);
 };
@@ -127,7 +132,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           )}
 
           {showOutput && (
-            <div className="mt-2 text-left space-y-2">
+            <div className="mt-2 space-y-2 text-left">
               <div className="output-block">
                 <div className="output-title">Output (stdout)</div>
                 <pre className="output-content">{stdout}</pre>

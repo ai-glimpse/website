@@ -21,14 +21,14 @@ export function Control({ url }: { url: string }): React.ReactElement {
     <Tooltip open={open} onOpenChange={setOpen}>
       <TooltipTrigger
         className={cn(
-          buttonVariants({ className: 'gap-2', variant: 'secondary' }),
+          buttonVariants({ className: 'gap-2', variant: 'secondary' })
         )}
         onClick={onClick}
       >
         <Share className="size-4" />
         Share Post
       </TooltipTrigger>
-      <TooltipContent className="rounded-lg border bg-popover p-2 text-sm text-popover-foreground">
+      <TooltipContent className="bg-popover text-popover-foreground rounded-lg border p-2 text-sm">
         Copied
       </TooltipContent>
     </Tooltip>

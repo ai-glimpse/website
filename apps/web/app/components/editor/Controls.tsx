@@ -1,28 +1,28 @@
-import clsx from 'clsx'
-import React from 'react'
+import clsx from 'clsx';
+import React from 'react';
 
 interface ControlProps {
   items: {
-    label: string
-    icon: React.ComponentType<{ className?: string }>
-    onClick: () => void
-    disabled?: boolean
-    hidden?: boolean
-  }[]
-  isAwaitingInput?: boolean
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    onClick: () => void;
+    disabled?: boolean;
+    hidden?: boolean;
+  }[];
+  isAwaitingInput?: boolean;
 }
 
 export default function Controls(props: ControlProps) {
-  const { items, isAwaitingInput } = props
-  const visibleItems = items.filter((item) => !item.hidden)
+  const { items, isAwaitingInput } = props;
+  const visibleItems = items.filter((item) => !item.hidden);
 
   return (
     <div className="pointer-events-none z-10 -mb-16 flex justify-end p-2">
       <div className="pointer-events-auto space-x-2 rounded-md bg-white p-1 opacity-80 shadow-md hover:opacity-100">
         {isAwaitingInput && (
-          <div className="inline-flex items-center rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold leading-6 text-white shadow">
+          <div className="inline-flex items-center rounded-md bg-sky-500 px-4 py-2 text-sm leading-6 font-semibold text-white shadow">
             <svg
-              className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+              className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -52,7 +52,7 @@ export default function Controls(props: ControlProps) {
               onClick={item.onClick}
               disabled={item.disabled}
               className={clsx(
-                'relative inline-flex items-center border border-none border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-0',
+                'relative inline-flex items-center border border-none border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:ring-0 focus:outline-none',
                 !item.disabled
                   ? 'opacity-75 hover:cursor-pointer hover:bg-gray-50 hover:opacity-100'
                   : 'opacity-50 hover:cursor-not-allowed',
@@ -61,7 +61,7 @@ export default function Controls(props: ControlProps) {
               )}
             >
               <item.icon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                className="mr-2 -ml-1 h-5 w-5 text-gray-400"
                 aria-hidden="true"
               />
               {item.label}
@@ -70,5 +70,5 @@ export default function Controls(props: ControlProps) {
         </span>
       </div>
     </div>
-  )
+  );
 }

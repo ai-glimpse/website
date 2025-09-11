@@ -1,9 +1,8 @@
-/* eslint-disable import/no-relative-packages -- required */
 import {
-  BrainCircuit,
-  Network,
-  CandlestickChart,
   BotMessageSquareIcon,
+  BrainCircuit,
+  CandlestickChart,
+  Network,
   type LucideIcon,
 } from 'lucide-react';
 

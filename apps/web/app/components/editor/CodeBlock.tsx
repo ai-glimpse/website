@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { usePython } from 'react-py'
+import { useState } from 'react';
+import { usePython } from 'react-py';
 
 export default function CodeBlock() {
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState('');
 
   // Use the usePython hook to run code and access both stdout and stderr
-  const { runPython, stdout, stderr, isLoading, isRunning } = usePython()
+  const { runPython, stdout, stderr, isLoading, isRunning } = usePython();
 
   return (
     <>
@@ -22,8 +22,8 @@ export default function CodeBlock() {
           value={!isRunning ? 'Run' : 'Running...'}
           disabled={isLoading || isRunning}
           onClick={(e) => {
-            e.preventDefault()
-            runPython(input)
+            e.preventDefault();
+            runPython(input);
           }}
         />
       </form>
@@ -36,5 +36,5 @@ export default function CodeBlock() {
         <code>{stderr}</code>
       </pre>
     </>
-  )
+  );
 }

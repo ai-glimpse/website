@@ -5,7 +5,6 @@ import { createElement } from 'react';
 
 import { docs, meta, blog as blogPosts } from '@/.source';
 
-
 export const source = loader({
   baseUrl: '/docs',
   icon(icon) {
@@ -18,7 +17,6 @@ export const source = loader({
   },
   source: createMDXSource(docs, meta),
 });
-
 
 export const blog = loader({
   baseUrl: '/blog',

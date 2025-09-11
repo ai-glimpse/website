@@ -1,9 +1,8 @@
 'use client';
 
-import Giscus from "@giscus/react";
+import Giscus from '@giscus/react';
 
 export default function Comments() {
-
   return (
     <div className="mt-8">
       <Giscus

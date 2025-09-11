@@ -21,7 +21,8 @@ if (item === 'true') {
 `;
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [isServiceWorkerSupported, setIsServiceWorkerSupported] = useState(false);
+  const [isServiceWorkerSupported, setIsServiceWorkerSupported] =
+    useState(false);
 
   useEffect(() => {
     // Check if service workers are supported

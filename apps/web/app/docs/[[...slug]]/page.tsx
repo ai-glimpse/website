@@ -13,7 +13,6 @@ import Comments from '@/app/components/comments';
 import { cn } from '@/app/utils/cn';
 import { source } from '@/lib/source';
 
-
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
@@ -31,7 +30,7 @@ export default async function Page(props: {
         buttonVariants({
           variant: 'secondary',
           size: 'sm',
-          className: 'text-xs gap-1.5',
+          className: 'gap-1.5 text-xs',
         })
       )}
     >
@@ -40,10 +39,9 @@ export default async function Page(props: {
     </a>
   );
 
-
   const MDX = page.data.body;
 
-    // Use the last modified time from fumadocs built-in git support
+  // Use the last modified time from fumadocs built-in git support
   const lastEditDate = page.data.lastModified;
 
   return (
