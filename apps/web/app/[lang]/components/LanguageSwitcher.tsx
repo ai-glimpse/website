@@ -7,9 +7,9 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from '@/components/ui/popover';
 import { i18n } from '@/lib/i18n';
 
@@ -22,7 +22,7 @@ export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const params = useParams();
   const pathname = usePathname();
-  const currentLang = params?.lang as string || i18n.defaultLanguage;
+  const currentLang = (params?.lang as string) || i18n.defaultLanguage;
 
   const switchLanguage = (newLang: string) => {
     const pathSegments = pathname.split('/');
@@ -47,7 +47,7 @@ export default function LanguageSwitcher() {
           {i18n.languages.map((lang) => {
             const language = languages[lang as keyof typeof languages];
             const isActive = lang === currentLang;
-            
+
             return (
               <Link
                 key={lang}

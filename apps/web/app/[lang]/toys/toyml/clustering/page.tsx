@@ -4,9 +4,9 @@ import { LockClosedIcon, LockOpenIcon } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 
 import {
-    FeatureItem,
-    FeatureSection,
-    FeatureTitle,
+  FeatureItem,
+  FeatureSection,
+  FeatureTitle,
 } from '@/app/[lang]/components/FeatureSection';
 
 const featureTitle: FeatureTitle = {

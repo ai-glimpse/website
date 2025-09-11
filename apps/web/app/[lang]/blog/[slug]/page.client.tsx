@@ -1,8 +1,8 @@
 'use client';
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from '@radix-ui/react-tooltip';
 import { Share } from 'lucide-react';
 import { useState } from 'react';

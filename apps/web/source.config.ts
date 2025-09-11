@@ -1,9 +1,9 @@
 import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
 import {
-    defineCollections,
-    defineConfig,
-    defineDocs,
-    frontmatterSchema,
+  defineCollections,
+  defineConfig,
+  defineDocs,
+  frontmatterSchema,
 } from 'fumadocs-mdx/config';
 import rehypeCitation from 'rehype-citation';
 import rehypeKatex from 'rehype-katex';

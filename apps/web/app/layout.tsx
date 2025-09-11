@@ -18,11 +18,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html className={inter.className} suppressHydrationWarning>
       <head>
