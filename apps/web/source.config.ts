@@ -10,11 +10,9 @@ import rehypeKatex from 'rehype-katex';
 import rehypeCitation from 'rehype-citation';
 import { z } from 'zod';
 
-
 export const { docs, meta } = defineDocs({
   dir: 'content/docs',
 });
-
 
 export const blog = defineCollections({
   dir: 'content/blog',
@@ -24,7 +22,6 @@ export const blog = defineCollections({
   }),
   type: 'doc',
 });
-
 
 export default defineConfig({
   lastModifiedTime: 'git',
@@ -44,7 +41,7 @@ export default defineConfig({
               if (line.type !== 'element') continue;
 
               const lastSpan = line.children.findLast(
-                (v) => v.type === 'element',
+                (v) => v.type === 'element'
               );
 
               const head = lastSpan?.children[0];
@@ -56,9 +53,7 @@ export default defineConfig({
         },
       ],
     },
-    remarkPlugins: [
-      remarkMath,
-    ],
+    remarkPlugins: [remarkMath],
     rehypePlugins: (v) => [
       rehypeKatex,
       [

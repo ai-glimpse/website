@@ -1,7 +1,11 @@
-"use client";
+'use client';
 
-import CodeEditor from "@/app/components/editor/CodeEditor";
-import { PythonProvider } from "react-py";
+import dynamic from 'next/dynamic';
+import { PythonProvider } from 'react-py';
+
+const CodeEditor = dynamic(() => import('@/app/components/editor/CodeEditor'), {
+  ssr: false,
+});
 
 export const snippets = [
   `from toyml.clustering import Kmeans
@@ -21,8 +25,8 @@ run()`,
 ];
 
 const packages = {
-  official: ["asciitree"],
-  micropip: ["toyml"],
+  official: ['asciitree'],
+  micropip: ['toyml'],
 };
 
 export default function KmeansPlaygroundDemo() {

@@ -1,18 +1,11 @@
+import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
-import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/theme-xcode';
-import 'ace-builds/src-noconflict/theme-github';
-import 'ace-builds/src-noconflict/theme-idle_fingers';
-import 'ace-builds/src-noconflict/ext-language_tools';
-// import { useColorMode } from '@theme-ui/color-modes';
-import { CodeBlock } from 'fumadocs-ui/components/codeblock';
+import { usePython } from 'react-py';
 
 import Controls from './Controls';
-import Loader from './Loader';
 import Input from './Input';
-import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
-import { usePython } from 'react-py';
+import Loader from './Loader';
 
 const editorOptions = {
   enableBasicAutocompletion: true,
@@ -21,9 +14,15 @@ const editorOptions = {
   showPrintMargin: false,
 };
 
-const editorOnLoad = (editor: any) => {
-  editor.renderer.setScrollMargin(10, 10, 0, 0);
-  editor.moveCursorTo(0, 0);
+const editorOnLoad = (editor: unknown) => {
+  const aceEditor = editor as {
+    renderer: {
+      setScrollMargin: (a: number, b: number, c: number, d: number) => void;
+    };
+    moveCursorTo: (row: number, col: number) => void;
+  };
+  aceEditor.renderer.setScrollMargin(10, 10, 0, 0);
+  aceEditor.moveCursorTo(0, 0);
 };
 
 export interface Packages {
@@ -40,6 +39,25 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
   const { code, packages } = props;
   const [input, setInput] = useState(code.trimEnd());
   const [showOutput, setShowOutput] = useState(false);
+  const [aceLoaded, setAceLoaded] = useState(false);
+
+  // Load ace editor modules dynamically
+  useEffect(() => {
+    const loadAceModules = async () => {
+      try {
+        await import('ace-builds/src-noconflict/mode-python');
+        await import('ace-builds/src-noconflict/theme-github');
+        await import('ace-builds/src-noconflict/theme-idle_fingers');
+        await import('ace-builds/src-noconflict/theme-xcode');
+        await import('ace-builds/src-noconflict/ext-language_tools');
+        setAceLoaded(true);
+      } catch (error) {
+        console.error('Failed to load ace modules:', error);
+      }
+    };
+
+    loadAceModules();
+  }, []);
 
   useEffect(() => {
     setInput(code.trimEnd());
@@ -107,27 +125,33 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
 
           {isLoading && <Loader />}
 
-          <AceEditor
-            value={input}
-            mode="python"
-            name="CodeBlock"
-            fontSize="0.9rem"
-            className="min-h-[7rem] overflow-clip rounded shadow-md"
-            theme={'xcode'}
-            // theme={'github'}
-            onChange={(newValue) => setInput(newValue)}
-            width="100%"
-            maxLines={Infinity}
-            onLoad={editorOnLoad}
-            editorProps={{ $blockScrolling: true }}
-            setOptions={editorOptions}
-          />
+          {aceLoaded ? (
+            <AceEditor
+              value={input}
+              mode="python"
+              name="CodeBlock"
+              fontSize="0.9rem"
+              className="min-h-[7rem] overflow-clip rounded shadow-md"
+              theme={'xcode'}
+              // theme={'github'}
+              onChange={(newValue) => setInput(newValue)}
+              width="100%"
+              maxLines={Infinity}
+              onLoad={editorOnLoad}
+              editorProps={{ $blockScrolling: true }}
+              setOptions={editorOptions}
+            />
+          ) : (
+            <div className="flex min-h-[7rem] items-center justify-center rounded bg-gray-100 shadow-md">
+              <span>Loading editor...</span>
+            </div>
+          )}
           {isAwaitingInput && (
             <Input prompt={promptName} onSubmit={sendInput} />
           )}
 
           {showOutput && (
-            <div className="mt-2 text-left space-y-2">
+            <div className="mt-2 space-y-2 text-left">
               <div className="output-block">
                 <div className="output-title">Output (stdout)</div>
                 <pre className="output-content">{stdout}</pre>

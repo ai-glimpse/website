@@ -1,13 +1,14 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-import { blog } from '@/lib/source';
-import { createMetadata } from '@/app/utils/metadata';
-import { buttonVariants } from '@/app/components/blog/button';
-import { Control } from '@/app/blog/[slug]/page.client';
-import Comments from '@/app/components/comments';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
+import { Control } from '@/app/blog/[slug]/page.client';
+import { buttonVariants } from '@/app/components/blog/button';
+import Comments from '@/app/components/comments';
+import { createMetadata } from '@/app/utils/metadata';
+import { blog } from '@/lib/source';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -45,24 +46,24 @@ export default async function Page(props: {
       <article className="container grid grid-cols-1 px-0 py-8 lg:grid-cols-[2fr_1fr] lg:px-4">
         <div className="prose p-4">
           <InlineTOC items={page.data.toc} />
-          <page.data.body components={defaultMdxComponents}/>
+          <page.data.body components={defaultMdxComponents} />
         </div>
         <div className="flex flex-col gap-4 border-l p-4 text-sm">
           <div>
-            <p className="mb-1 text-muted-foreground">Written by</p>
+            <p className="text-muted-foreground mb-1">Written by</p>
             <p className="font-medium">{page.data.author}</p>
           </div>
           <div>
-            <p className="mb-1 text-sm text-muted-foreground">At</p>
+            <p className="text-muted-foreground mb-1 text-sm">At</p>
             <p className="font-medium">
               {new Date(page.data.date ?? page.file.name).toDateString()}
             </p>
           </div>
           <Control url={page.url} />
-          <div style={{ borderBottom: "1px solid #E5E7EB" }}></div>
+          <div style={{ borderBottom: '1px solid #E5E7EB' }}></div>
           <Comments />
         </div>
-      {/* <Comments /> */}
+        {/* <Comments /> */}
       </article>
     </>
   );

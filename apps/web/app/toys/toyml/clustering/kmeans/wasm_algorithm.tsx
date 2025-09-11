@@ -1,22 +1,39 @@
 'use client';
 
-import React, { useState } from 'react';
-import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
-import { Scatter } from 'react-chartjs-2';
-import { Chart, registerables } from 'chart.js';
 import 'chart.js/auto';
-import { ChevronDown } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card } from "@/components/ui/card";
+import { Chart, registerables, TooltipItem } from 'chart.js';
+import { ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Scatter } from 'react-chartjs-2';
+import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
+
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+// Type definitions
+interface DataPoint {
+  x: number;
+  y: number;
+}
+
+interface ChartDataset {
+  label: string;
+  data: DataPoint[];
+  backgroundColor: string;
+  borderColor: string;
+  borderWidth: number;
+  pointRadius: number;
+  pointHoverRadius: number;
+}
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -28,10 +45,7 @@ const randomGaussian = (mean: number, stddev: number) => {
   while (u === 0) u = Math.random();
   while (v === 0) v = Math.random();
   return (
-    mean +
-    stddev *
-    Math.sqrt(-2.0 * Math.log(u)) *
-    Math.cos(2.0 * Math.PI * v)
+    mean + stddev * Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
   );
 };
 
@@ -44,7 +58,10 @@ const KmeansWasmDemo: React.FC = () => {
     []
   );
 
-  const generateSeparablePoints = (k: number, numPoints: number): number[][] => {
+  const generateSeparablePoints = (
+    k: number,
+    numPoints: number
+  ): number[][] => {
     const pointsPerCluster = Math.floor(numPoints / k);
     const points: number[][] = [];
     const clusterCenters = Array.from({ length: k }, () => [
@@ -103,8 +120,8 @@ const KmeansWasmDemo: React.FC = () => {
   // Define a clean color palette for clusters
   const clusterColors = [
     { bg: 'rgba(59, 130, 246, 0.7)', border: 'rgb(59, 130, 246)' }, // Blue
-    { bg: 'rgba(239, 68, 68, 0.7)', border: 'rgb(239, 68, 68)' },   // Red
-    { bg: 'rgba(34, 197, 94, 0.7)', border: 'rgb(34, 197, 94)' },   // Green
+    { bg: 'rgba(239, 68, 68, 0.7)', border: 'rgb(239, 68, 68)' }, // Red
+    { bg: 'rgba(34, 197, 94, 0.7)', border: 'rgb(34, 197, 94)' }, // Green
     { bg: 'rgba(168, 85, 247, 0.7)', border: 'rgb(168, 85, 247)' }, // Purple
     { bg: 'rgba(249, 115, 22, 0.7)', border: 'rgb(249, 115, 22)' }, // Orange
     { bg: 'rgba(236, 72, 153, 0.7)', border: 'rgb(236, 72, 153)' }, // Pink
@@ -113,24 +130,27 @@ const KmeansWasmDemo: React.FC = () => {
   ];
 
   const chartData = {
-    datasets: results
-      .reduce((acc, { point, label }) => {
-        const colorIndex = label % clusterColors.length;
-        const colors = clusterColors[colorIndex];
-        
-        acc[label] = acc[label] || {
-          label: `Cluster ${label + 1}`,
-          data: [],
-          backgroundColor: colors.bg,
-          borderColor: colors.border,
-          borderWidth: 2,
-          pointRadius: 4,
-          pointHoverRadius: 6,
-        };
-        acc[label].data.push({ x: point[0], y: point[1] });
-        return acc;
-      }, [] as any)
-      .filter((d: any) => d),
+    datasets: Object.values(
+      results.reduce(
+        (acc, { point, label }) => {
+          const colorIndex = label % clusterColors.length;
+          const colors = clusterColors[colorIndex];
+
+          acc[label] = acc[label] || {
+            label: `Cluster ${label + 1}`,
+            data: [],
+            backgroundColor: colors.bg,
+            borderColor: colors.border,
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+          };
+          acc[label].data.push({ x: point[0], y: point[1] });
+          return acc;
+        },
+        {} as Record<string, ChartDataset>
+      )
+    ),
   };
 
   const chartOptions = {
@@ -142,9 +162,9 @@ const KmeansWasmDemo: React.FC = () => {
       },
       tooltip: {
         callbacks: {
-          label: (context: any) => {
-            const { x, y } = context.raw;
-            return `(${x.toFixed(2)}, ${y.toFixed(2)})`;
+          label: (context: TooltipItem<'scatter'>) => {
+            const raw = context.raw as DataPoint;
+            return `(${raw.x.toFixed(2)}, ${raw.y.toFixed(2)})`;
           },
         },
       },
@@ -174,7 +194,7 @@ const KmeansWasmDemo: React.FC = () => {
 
   return (
     <div className="not-prose my-6">
-      <Card className="p-6 border">
+      <Card className="border p-6">
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="space-y-2">
@@ -201,22 +221,27 @@ const KmeansWasmDemo: React.FC = () => {
               <Label>Initialization Method</Label>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-between"
-                  >
+                  <Button variant="outline" className="w-full justify-between">
                     {centroidsInitMethodValue}
                     <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-full">
                   <DropdownMenuItem
-                    onClick={() => setCentroidsInitMethodValue('random' as CentroidsInitMethod)}
+                    onClick={() =>
+                      setCentroidsInitMethodValue(
+                        'random' as CentroidsInitMethod
+                      )
+                    }
                   >
                     Random
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => setCentroidsInitMethodValue('kmeans++' as CentroidsInitMethod)}
+                    onClick={() =>
+                      setCentroidsInitMethodValue(
+                        'kmeans++' as CentroidsInitMethod
+                      )
+                    }
                   >
                     Kmeans++
                   </DropdownMenuItem>
@@ -224,20 +249,18 @@ const KmeansWasmDemo: React.FC = () => {
               </DropdownMenu>
             </div>
           </div>
-          
-          <Button
-            onClick={runKmeans}
-            className="w-full"
-          >
+
+          <Button onClick={runKmeans} className="w-full">
             Run K-means Algorithm
           </Button>
-          
-          <div className="h-[400px] rounded-lg border bg-card p-4">
+
+          <div className="bg-card h-[400px] rounded-lg border p-4">
             {results.length > 0 ? (
               <Scatter data={chartData} options={chartOptions} />
             ) : (
-              <div className="flex h-full items-center justify-center text-muted-foreground">
-                Click "Run K-means Algorithm" to generate visualization
+              <div className="text-muted-foreground flex h-full items-center justify-center">
+                Click &quot;Run K-means Algorithm&quot; to generate
+                visualization
               </div>
             )}
           </div>

@@ -1,23 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react'
-
-import { PaperAirplaneIcon } from '@heroicons/react/20/solid'
+import { PaperAirplaneIcon } from '@heroicons/react/20/solid';
+import { useEffect, useRef, useState } from 'react';
 
 interface InputProps {
-  prompt: string
-  onSubmit: (value: string) => void
+  prompt: string;
+  onSubmit: (value: string) => void;
 }
 
 export default function Input(props: InputProps) {
-  const { prompt, onSubmit } = props
-  const [input, setInput] = useState('')
+  const { prompt, onSubmit } = props;
+  const [input, setInput] = useState('');
 
-  const inputRef = useRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement>();
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
-  }, [])
+  }, []);
 
   return (
     <div className="mt-4 lg:w-1/2">
@@ -30,12 +29,12 @@ export default function Input(props: InputProps) {
       <div className="mt-1 flex rounded-md shadow-sm">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <input
-            //@ts-ignore
+            //@ts-expect-error - ref type compatibility issue
             ref={inputRef}
             type="text"
             name="input"
             id="input"
-            className="block w-full rounded-l-md border-none bg-neutral-200 px-2 py-1.5 placeholder-gray-400 shadow-sm focus:ring-0 dark:bg-neutral-600 sm:text-sm"
+            className="block w-full rounded-l-md border-none bg-neutral-200 px-2 py-1.5 placeholder-gray-400 shadow-sm focus:ring-0 sm:text-sm dark:bg-neutral-600"
             placeholder={prompt}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && onSubmit(input)}
@@ -43,7 +42,7 @@ export default function Input(props: InputProps) {
         </div>
         <button
           type="button"
-          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-none border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:cursor-pointer hover:bg-gray-100 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+          className="relative -ml-px inline-flex items-center space-x-2 rounded-r-md border border-none border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 hover:cursor-pointer hover:bg-gray-100 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:outline-none"
           onClick={() => onSubmit(input)}
         >
           <PaperAirplaneIcon
@@ -54,5 +53,5 @@ export default function Input(props: InputProps) {
         </button>
       </div>
     </div>
-  )
+  );
 }

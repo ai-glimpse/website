@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 export default function Loader() {
   return (
-    <div className="pointer-events-none absolute bottom-0 right-0 z-10 flex justify-end p-2">
-      <div className="inline-flex items-center rounded-md bg-sky-500 px-4 py-2 text-sm font-semibold leading-6 text-white shadow">
+    <div className="pointer-events-none absolute right-0 bottom-0 z-10 flex justify-end p-2">
+      <div className="inline-flex items-center rounded-md bg-sky-500 px-4 py-2 text-sm leading-6 font-semibold text-white shadow">
         <svg
-          className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+          className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -27,5 +27,5 @@ export default function Loader() {
         Setting up environment...
       </div>
     </div>
-  )
+  );
 }
