@@ -2,8 +2,7 @@ import { defineI18nUI } from 'fumadocs-ui/i18n';
 import { RootProvider } from 'fumadocs-ui/provider';
 import React from 'react';
 
-import LargeWithLogoCentered from '@/app/[lang]/components/Footer';
-import Navbar from '@/app/[lang]/components/Navbar';
+import ConditionalLayout from '@/app/[lang]/components/ConditionalLayout';
 import { i18n } from '@/lib/i18n';
 
 import { Providers } from './providers';
@@ -42,9 +41,7 @@ export default async function LocaleLayout({
   return (
     <RootProvider i18n={provider(lang)}>
       <Providers>
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <LargeWithLogoCentered />
+        <ConditionalLayout>{children}</ConditionalLayout>
       </Providers>
     </RootProvider>
   );

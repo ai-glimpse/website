@@ -12,15 +12,25 @@ import { i18n } from '@/lib/i18n';
 export function baseOptions(): BaseLayoutProps {
   return {
     i18n,
-    // nav: {
-    //   title: 'My App',
-    // },
-    // links: [
-    //   {
-    //     text: 'Documentation',
-    //     url: '/docs',
-    //     active: 'nested-url',
-    //   },
-    // ],
+    nav: {
+      title: 'AI Glimpse',
+      url: '/',
+    },
+    links: [
+      {
+        text: 'Docs',
+        url: '/docs/ml',
+        active: 'nested-url',
+      },
+      {
+        text: 'Blog',
+        url: '/blog',
+      },
+      {
+        text: 'About',
+        url: '/about',
+      },
+    ],
+    githubUrl: 'https://github.com/ai-glimpse',
   };
 }
