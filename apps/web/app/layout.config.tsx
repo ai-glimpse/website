@@ -16,21 +16,6 @@ export function baseOptions(): BaseLayoutProps {
       title: 'AI Glimpse',
       url: '/',
     },
-    links: [
-      {
-        text: 'Docs',
-        url: '/docs/ml',
-        active: 'nested-url',
-      },
-      {
-        text: 'Blog',
-        url: '/blog',
-      },
-      {
-        text: 'About',
-        url: '/about',
-      },
-    ],
     githubUrl: 'https://github.com/ai-glimpse',
   };
 }
