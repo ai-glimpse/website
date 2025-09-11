@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+.next/
+out/
+build/
+
+# Generated files
+.source/
+*.generated.*
+
+# Config files
+bun.lock
+package-lock.json
+
+# MDX and content files (preserve formatting)
+*.mdx
+*.md
+
+# Cache directories
+.turbo/
+.cache/

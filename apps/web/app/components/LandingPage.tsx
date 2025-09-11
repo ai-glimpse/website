@@ -1,14 +1,18 @@
-'use client'
+'use client';
 
-import Image from "next/image";
-import ToyAIMember from "@/app/components/ToyAIMember";
-import Typewriter from "@/app/components/text/typewriter";
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+
+import ToyAIMember from '@/app/components/ToyAIMember';
+import Typewriter from '@/app/components/text/typewriter';
 import WithSpeechBubbles from './Testimonial';
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
