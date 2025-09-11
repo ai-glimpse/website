@@ -1,6 +1,6 @@
 'use client';
 
-import { LightbulbIcon, UsersIcon, RocketIcon, HeartHandshakeIcon } from 'lucide-react';
+import { HeartHandshakeIcon, LightbulbIcon, RocketIcon, UsersIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -41,7 +41,7 @@ export default function Page(): React.ReactElement {
               Empowering AI Education
             </h1>
             <p className="text-lg text-gray-700 md:text-xl">
-              We're on a mission to democratize AI education, making it accessible,
+              We&apos;re on a mission to democratize AI education, making it accessible,
               engaging, and practical for learners of all levels.
             </p>
           </div>
@@ -76,9 +76,9 @@ export default function Page(): React.ReactElement {
               Your Journey in AI Starts Here
             </h3>
             <p className="mb-6 text-lg text-gray-700">
-              Whether you're taking your first steps in AI or looking to deepen your expertise,
+              Whether you&apos;re taking your first steps in AI or looking to deepen your expertise,
               our platform offers the tools and community to support your growth. Dive in,
-              experiment with our 'toys', and don't hesitate to share your insights or contribute to our project.
+              experiment with our &apos;toys&apos;, and don&apos;t hesitate to share your insights or contribute to our project.
             </p>
             <Button
               asChild

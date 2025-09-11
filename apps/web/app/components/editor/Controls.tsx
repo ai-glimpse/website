@@ -4,7 +4,7 @@ import React from 'react'
 interface ControlProps {
   items: {
     label: string
-    icon: any
+    icon: React.ComponentType<{ className?: string }>
     onClick: () => void
     disabled?: boolean
     hidden?: boolean

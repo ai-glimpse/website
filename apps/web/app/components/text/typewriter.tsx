@@ -1,5 +1,5 @@
-import { motion, Variants } from "motion/react"
-import { useEffect, useState } from "react"
+import { motion, Variants } from "motion/react";
+import { useEffect, useMemo, useState } from "react";
 
 import { cn } from '@/app/utils/cn';
 
@@ -51,7 +51,7 @@ const Typewriter = ({
   const [isDeleting, setIsDeleting] = useState(false)
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
 
-  const texts = Array.isArray(text) ? text : [text]
+  const texts = useMemo(() => Array.isArray(text) ? text : [text], [text])
 
   useEffect(() => {
     let timeout: NodeJS.Timeout

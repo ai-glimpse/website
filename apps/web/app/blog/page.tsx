@@ -40,7 +40,7 @@ export default function Page(): React.ReactElement {
           AI Glimpse Blog
         </h1>
         <p className="text-sm md:text-base">
-          Let's break the game rule by the way
+          Let&apos;s break the game rule by the way
         </p>
       </div>
       <div className="grid grid-cols-1 border md:grid-cols-3 lg:grid-cols-4">

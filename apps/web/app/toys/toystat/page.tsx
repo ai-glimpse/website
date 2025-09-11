@@ -1,9 +1,9 @@
 'use client';
 
 import { LockClosedIcon } from '@heroicons/react/24/outline';
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
-import { FeatureTitle, FeatureItem, FeatureSection } from '@/app/components/FeatureSection';
+import { FeatureItem, FeatureSection, FeatureTitle } from '@/app/components/FeatureSection';
 
 const featureTitle: FeatureTitle = {
   name: "ToyStat",

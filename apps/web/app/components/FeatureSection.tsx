@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 
 type FeatureTitle = {
@@ -9,7 +10,7 @@ type FeatureItem = {
   name: string;
   description: string;
   path: string;
-  icon: any;
+  icon: LucideIcon;
   iconColor?: string; // Optional field for icon color
 };
 
@@ -79,5 +80,6 @@ export default function FeatureSection( { featureTitle, featureItems, rootPath }
   )
 }
 
-export type { FeatureTitle, FeatureItem };
 export { FeatureSection };
+export type { FeatureItem, FeatureTitle };
+

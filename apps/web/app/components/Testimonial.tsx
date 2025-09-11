@@ -148,7 +148,7 @@ export default function WithSpeechBubbles() {
             <TestimonialContent>
               <TestimonialHeading>Explain it simply</TestimonialHeading>
               <TestimonialText>
-                If you can't explain it simply, you don't understand it well enough.
+                If you can&apos;t explain it simply, you don&apos;t understand it well enough.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
@@ -159,10 +159,10 @@ export default function WithSpeechBubbles() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>You just don't know it</TestimonialHeading>
+              <TestimonialHeading>You just don&apos;t know it</TestimonialHeading>
               <TestimonialText>
-                Not knowing something doesn't mean you're dumb
-                — it just means you don't know it.
+                Not knowing something doesn&apos;t mean you&apos;re dumb
+                — it just means you don&apos;t know it.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar

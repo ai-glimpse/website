@@ -1,5 +1,5 @@
 import { PaperAirplaneIcon } from '@heroicons/react/20/solid'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 
 interface InputProps {

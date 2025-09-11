@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/theme-xcode';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/theme-idle_fingers';
-import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/theme-xcode';
 
 import { ArrowPathIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
-// import { useColorMode } from '@theme-ui/color-modes';
+import React, { useEffect, useState } from 'react';
+import AceEditor from 'react-ace';
 import { usePython } from 'react-py';
 
 import Controls from './Controls';
@@ -21,9 +20,10 @@ const editorOptions = {
   showPrintMargin: false,
 };
 
-const editorOnLoad = (editor: any) => {
-  editor.renderer.setScrollMargin(10, 10, 0, 0);
-  editor.moveCursorTo(0, 0);
+const editorOnLoad = (editor: unknown) => {
+  const aceEditor = editor as { renderer: { setScrollMargin: (a: number, b: number, c: number, d: number) => void }; moveCursorTo: (row: number, col: number) => void };
+  aceEditor.renderer.setScrollMargin(10, 10, 0, 0);
+  aceEditor.moveCursorTo(0, 0);
 };
 
 export interface Packages {

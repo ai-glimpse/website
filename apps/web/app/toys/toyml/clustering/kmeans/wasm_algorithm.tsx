@@ -2,7 +2,7 @@
 
 import 'chart.js/auto';
 
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, TooltipItem } from 'chart.js';
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 import { Scatter } from 'react-chartjs-2';
@@ -11,13 +11,29 @@ import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+// Type definitions
+interface DataPoint {
+  x: number;
+  y: number;
+}
+
+interface ChartDataset {
+  label: string;
+  data: DataPoint[];
+  backgroundColor: string;
+  borderColor: string;
+  borderWidth: number;
+  pointRadius: number;
+  pointHoverRadius: number;
+}
 
 // Register Chart.js components
 Chart.register(...registerables);
@@ -114,8 +130,8 @@ const KmeansWasmDemo: React.FC = () => {
   ];
 
   const chartData = {
-    datasets: results
-      .reduce((acc, { point, label }) => {
+    datasets: Object.values(
+      results.reduce((acc, { point, label }) => {
         const colorIndex = label % clusterColors.length;
         const colors = clusterColors[colorIndex];
         
@@ -130,8 +146,8 @@ const KmeansWasmDemo: React.FC = () => {
         };
         acc[label].data.push({ x: point[0], y: point[1] });
         return acc;
-      }, [] as any)
-      .filter((d: any) => d),
+      }, {} as Record<string, ChartDataset>)
+    ),
   };
 
   const chartOptions = {
@@ -143,9 +159,9 @@ const KmeansWasmDemo: React.FC = () => {
       },
       tooltip: {
         callbacks: {
-          label: (context: any) => {
-            const { x, y } = context.raw;
-            return `(${x.toFixed(2)}, ${y.toFixed(2)})`;
+          label: (context: TooltipItem<'scatter'>) => {
+            const raw = context.raw as DataPoint;
+            return `(${raw.x.toFixed(2)}, ${raw.y.toFixed(2)})`;
           },
         },
       },

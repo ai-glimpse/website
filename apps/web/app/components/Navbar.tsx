@@ -2,25 +2,25 @@
 
 import { ChevronDown, ChevronRight, Menu as MenuIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FaGithub, FaTwitter } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
 import { Button } from '@/components/ui/button';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from '@/components/ui/popover';
 import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
+    Sheet,
+    SheetContent,
+    SheetTrigger,
 } from '@/components/ui/sheet';
 
 export default function Navbar() {

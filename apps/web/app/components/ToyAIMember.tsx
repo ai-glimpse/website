@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import {
-  BrainCircuit,
-  Network,
-  CandlestickChart,
-  MessageSquare,
-  Bot,
-  Gamepad2,
+    Bot,
+    BrainCircuit,
+    CandlestickChart,
+    Gamepad2,
+    MessageSquare,
+    Network,
 } from 'lucide-react';
 import Link from 'next/link';
 import { ReactElement } from 'react';
