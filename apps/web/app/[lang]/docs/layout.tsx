@@ -13,11 +13,10 @@ export default async function Layout({
 }) {
   const { lang } = await params;
   
-  // For i18n, the pageTree is a Record<string, Root>
-  // We need to get the tree for the specific language
+  // Use the same page tree for all languages to ensure consistent navigation
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pageTreeRecord = source.pageTree as Record<string, any>;
-  const tree = pageTreeRecord[lang] || pageTreeRecord.en || pageTreeRecord;
+  const tree = pageTreeRecord.en || pageTreeRecord;
   
   return (
     <DocsLayout tree={tree} {...baseOptions()}>
