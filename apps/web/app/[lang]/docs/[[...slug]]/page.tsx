@@ -2,6 +2,7 @@ import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
   DocsDescription,
+  DocsPage,
   DocsTitle,
 } from 'fumadocs-ui/page';
 import { Edit } from 'lucide-react';
@@ -9,7 +10,6 @@ import { notFound } from 'next/navigation';
 
 import { buttonVariants } from '@/app/[lang]/components/blog/button';
 import Comments from '@/app/[lang]/components/comments';
-import { StableDocsPage } from '@/app/[lang]/components/StableDocsPage';
 import { cn } from '@/app/[lang]/utils/cn';
 import { source } from '@/lib/source';
 
@@ -45,7 +45,7 @@ export default async function Page(props: {
   const lastEditDate = page.data.lastModified;
 
   return (
-    <StableDocsPage
+    <DocsPage
       {...(lastEditDate ? { lastUpdate: new Date(lastEditDate) } : {})}
       toc={page.data.toc}
       full={page.data.full}
@@ -60,7 +60,7 @@ export default async function Page(props: {
         <MDX components={{ ...defaultMdxComponents }} />
       </DocsBody>
       <Comments />
-    </StableDocsPage>
+    </DocsPage>
   );
 }
 
