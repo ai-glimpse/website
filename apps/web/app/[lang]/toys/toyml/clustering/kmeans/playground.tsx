@@ -15,7 +15,7 @@ export const snippets = [
 
 
 def run():
-    dataset = [[1.0, 2.0], [1.0, 4.0], [1.0, 0.0], 
+    dataset = [[1.0, 2.0], [1.0, 4.0], [1.0, 0.0],
                [10.0, 2.0], [10.0, 4.0], [11.0, 0.0]]
     # train
     kmeans = Kmeans(k=2, random_seed=42).fit(dataset)

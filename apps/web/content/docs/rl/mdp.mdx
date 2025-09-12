@@ -24,9 +24,9 @@ An MDP is defined by a 5-tuple $(S, A, P, R, \gamma)$:
 
 1. **S**: A set of states
 2. **A**: A set of actions
-3. **P**: A state transition probability function  
+3. **P**: A state transition probability function
    $P(s' | s, a)$ is the probability of transitioning to state $s'$ when taking action $a$ in state $s$
-4. **R**: A reward function  
+4. **R**: A reward function
    $R(s, a, s')$ is the reward received after transitioning from state $s$ to state $s'$ due to action $a$
 5. **$\gamma$**: A discount factor $\gamma \in [0, 1]$ that trades off the importance of immediate and future rewards
 
@@ -141,31 +141,31 @@ def value_iteration(grid, V, gamma, theta):
             for j in range(grid.shape[1]):
                 if grid[i, j] != 0:  # Skip terminal states
                     continue
-                
+
                 v = V[i, j]
                 values = []
-                
+
                 for action in actions:
                     next_i, next_j = i + action[0], j + action[1]
-                    
+
                     # Check if the action leads outside the grid
                     if next_i < 0 or next_i >= grid.shape[0] or next_j < 0 or next_j >= grid.shape[1]:
                         next_i, next_j = i, j  # Stay in the same place
-                    
+
                     reward = -1  # Step cost
                     if grid[next_i, next_j] == 1:  # Goal
                         reward = 10
                     elif grid[next_i, next_j] == -1:  # Pit
                         reward = -10
-                    
+
                     values.append(reward + gamma * V[next_i, next_j])
-                
+
                 V[i, j] = max(values)
                 delta = max(delta, abs(v - V[i, j]))
-        
+
         if delta < theta:
             break
-    
+
     return V
 
 # Run value iteration
@@ -190,4 +190,4 @@ MDPs are used in many domains:
 - Finance and economics
 - Network routing
 
-In the next section, we'll explore Q-learning, a model-free reinforcement learning algorithm for solving MDPs. 
+In the next section, we'll explore Q-learning, a model-free reinforcement learning algorithm for solving MDPs.
