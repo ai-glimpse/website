@@ -15,6 +15,7 @@ export default function ConditionalLayout({
 }: ConditionalLayoutProps) {
   const pathname = usePathname();
   const isDocsPage = pathname.includes('/docs');
+  const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/zh';
 
   if (isDocsPage) {
     // For docs pages, don't render the custom navbar and footer
@@ -22,7 +23,17 @@ export default function ConditionalLayout({
     return <>{children}</>;
   }
 
-  // For non-docs pages, render with navbar and footer
+  if (isHomePage) {
+    // For home page, only render the navbar since landing page has its own footer
+    return (
+      <>
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+      </>
+    );
+  }
+
+  // For other pages, render with navbar and footer
   return (
     <>
       <Navbar />

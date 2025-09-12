@@ -1,103 +1,145 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-import Typewriter from '@/app/[lang]/components/text/typewriter';
-import ToyAIMember from '@/app/[lang]/components/ToyAIMember';
-import { Button } from '@/components/ui/button';
-
-import WithSpeechBubbles from './Testimonial';
 
 export default function LandingPage() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
   return (
-    <div className="flex w-full flex-col">
-      <section className="relative overflow-hidden bg-white py-16 md:py-24 dark:bg-gray-900">
-        {/* Background decoration */}
-        <div className="absolute top-0 right-0 left-0 -z-10 h-[500px] w-full bg-gradient-to-b from-green-50/80 to-transparent dark:from-green-950/20"></div>
+    <div className="min-h-screen bg-white dark:bg-gray-900">
+      {/* Main Hero Section */}
+      <section className="flex items-center justify-center px-6">
+        <div className="mx-auto max-w-4xl text-center">
+          {/* Large Title - reduced size */}
+          <h1 className="mb-4 text-4xl font-light tracking-wide text-gray-900 md:text-6xl lg:text-7xl dark:text-gray-100">
+            AI
+            <br />
+            GLIMPSE
+          </h1>
+          
+          {/* Badge */}
+          <div className="mb-4 inline-flex items-center rounded-full border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
+            <span className="mr-2 inline-block h-2 w-2 rounded-full bg-green-500"></span>
+            Learning AI from Scratch
+          </div>
 
-        <div className="container mx-auto max-w-5xl px-4">
-          <motion.div
-            className="flex flex-col items-center space-y-6 py-8 text-center md:space-y-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-3xl leading-tight font-bold text-pretty sm:text-4xl md:text-6xl lg:text-7xl">
-              Learning <br />
-              <Typewriter
-                text={[
-                  'Statistics',
-                  'Statistical Machine Learning',
-                  'Deep Learning',
-                  'Reinforcement Learning',
-                  'Natural Language Processing',
-                  'Large Language Model',
-                ]}
-                speed={70}
-                className="text-green-600 dark:text-green-400"
-                waitTime={1500}
-                deleteSpeed={40}
-                cursorChar={'_'}
-              />
-              <span className="mt-2 block text-3xl text-gray-500 sm:text-4xl md:text-6xl lg:text-7xl">
-                from scratch
-              </span>
-            </h1>
-
-            <motion.p
-              className="max-w-2xl text-lg text-gray-600 md:text-xl dark:text-gray-400"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              Explore artificial intelligence through practical, hands-on
-              learning resources
-            </motion.p>
-
-            <motion.div
-              className="mt-4 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-            >
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full bg-green-600 px-8 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600"
-              >
-                <Link href="/docs/ml">
-                  Explore Docs
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="rounded-full border-green-200 px-8 hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-900/30"
-              >
-                <Link href="/blog">Read Blog</Link>
-              </Button>
-            </motion.div>
-          </motion.div>
+          {/* Description - reduced margin */}
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 md:text-xl dark:text-gray-400">
+            AI Glimpse is an educational platform for learning artificial intelligence. 
+            We&apos;re building resources to make AI knowledge accessible to everyone through 
+            practical, hands-on tutorials and comprehensive documentation.
+          </p>
         </div>
       </section>
 
-      <ToyAIMember />
-      <WithSpeechBubbles />
+      {/* Mission Sections */}
+      <section className="border-t border-gray-100 py-8 dark:border-gray-800">
+        <div className="mx-auto max-w-4xl px-6">
+          {/* Learning is better when shared */}
+          <div className="mb-8 text-center">
+            <h2 className="mb-3 text-3xl font-light text-gray-900 md:text-4xl dark:text-gray-100">
+              Learning is better when shared
+            </h2>
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+              <em>Educational progress is a collective effort.</em> We believe that we&apos;ll most effectively advance 
+              understanding of AI by collaborating with the wider community of learners and educators. 
+              We plan to frequently publish tutorials, documentation, and code. We think sharing our 
+              knowledge will not only benefit the public, but also improve our own learning culture.
+            </p>
+          </div>
+
+          {/* AI that works for everyone */}
+          <div className="mb-8 text-center">
+            <h2 className="mb-3 text-3xl font-light text-gray-900 md:text-4xl dark:text-gray-100">
+              AI education for everyone
+            </h2>
+            
+            <div className="space-y-4">
+              <div>
+                <p className="mb-1 text-lg font-medium text-gray-900 dark:text-gray-100">
+                  <em>Emphasis on practical learning.</em>
+                </p>
+                <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+                  Instead of focusing solely on theoretical concepts, we are excited to build 
+                  practical tutorials that help you understand AI through hands-on implementation.
+                </p>
+              </div>
+              
+              <div>
+                <p className="mb-1 text-lg font-medium text-gray-900 dark:text-gray-100">
+                  <em>More accessible, comprehensive, and structured learning paths.</em>
+                </p>
+                <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+                  We see enormous potential for AI education in every field of study. While current 
+                  resources excel at advanced topics, we&apos;re building content that can guide learners 
+                  from basic statistics to advanced machine learning concepts.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quotes Section */}
+      <section className="border-t border-gray-100 py-8 dark:border-gray-800">
+        <div className="mx-auto max-w-4xl px-6">
+          <h2 className="mb-6 text-center text-2xl font-light text-gray-900 md:text-3xl dark:text-gray-100">
+            Standing on the shoulders of giants
+          </h2>
+          
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {/* Feynman Quote */}
+            <div className="text-center">
+              <p className="mb-2 text-base italic text-gray-600 dark:text-gray-400">
+                &quot;What I cannot create I do not understand.&quot;
+              </p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Richard Feynman
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">
+                Theoretical physicist
+              </p>
+            </div>
+
+            {/* Einstein Quote */}
+            <div className="text-center">
+              <p className="mb-2 text-base italic text-gray-600 dark:text-gray-400">
+                &quot;If you can&apos;t explain it simply, you don&apos;t understand it well enough.&quot;
+              </p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Albert Einstein
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">
+                Theoretical physicist
+              </p>
+            </div>
+
+            {/* Zawinski Quote */}
+            <div className="text-center">
+              <p className="mb-2 text-base italic text-gray-600 dark:text-gray-400">
+                &quot;Not knowing something doesn&apos;t mean you&apos;re dumb — it just means you don&apos;t know it.&quot;
+              </p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Jamie Zawinski
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-500">
+                Computer programmer
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-100 py-6 dark:border-gray-800">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            AI Glimpse © 2025 · 
+            <Link href="/docs" className="ml-1 hover:text-gray-900 dark:hover:text-gray-100">
+              Documentation
+            </Link> · 
+            <Link href="/blog" className="ml-1 hover:text-gray-900 dark:hover:text-gray-100">
+              Blog
+            </Link>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
