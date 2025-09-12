@@ -65,28 +65,28 @@ class GridWorld:
         self.grid_size = grid_size
         self.state = (0, 0)  # Starting position
         self.goal = (grid_size-1, grid_size-1)  # Goal position
-        
+
         # Define obstacles (optional)
         self.obstacles = [(1, 1), (2, 2)]
-        
+
         # Define possible actions: 0=up, 1=right, 2=down, 3=left
         self.actions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
         self.num_actions = len(self.actions)
-        
+
     def reset(self):
         self.state = (0, 0)
         return self.state
-    
+
     def step(self, action):
         action_vec = self.actions[action]
         next_state = (self.state[0] + action_vec[0], self.state[1] + action_vec[1])
-        
+
         # Check boundaries
         if next_state[0] < 0 or next_state[0] >= self.grid_size or \
            next_state[1] < 0 or next_state[1] >= self.grid_size or \
            next_state in self.obstacles:
             next_state = self.state  # Stay in the same place
-        
+
         # Calculate reward
         if next_state == self.goal:
             reward = 10  # Goal reached
@@ -94,58 +94,58 @@ class GridWorld:
         else:
             reward = -1  # Step penalty
             done = False
-        
+
         self.state = next_state
         return next_state, reward, done
 
 def q_learning(env, episodes=1000, alpha=0.1, gamma=0.99, epsilon=0.1, epsilon_decay=0.995):
     # Initialize Q-table
     q_table = np.zeros((env.grid_size, env.grid_size, env.num_actions))
-    
+
     # Lists to store metrics for plotting
     rewards_per_episode = []
-    
+
     for episode in range(episodes):
         state = env.reset()
         done = False
         total_reward = 0
-        
+
         while not done:
             # Epsilon-greedy action selection
             if random.random() < epsilon:
                 action = random.randint(0, env.num_actions - 1)  # Explore
             else:
                 action = np.argmax(q_table[state[0], state[1]])  # Exploit
-            
+
             # Take the action
             next_state, reward, done = env.step(action)
             total_reward += reward
-            
+
             # Q-learning update
             old_value = q_table[state[0], state[1], action]
             next_max = np.max(q_table[next_state[0], next_state[1]])
-            
+
             new_value = old_value + alpha * (reward + gamma * next_max - old_value)
             q_table[state[0], state[1], action] = new_value
-            
+
             state = next_state
-        
+
         # Decay epsilon
         epsilon = max(0.01, epsilon * epsilon_decay)
-        
+
         # Record metrics
         rewards_per_episode.append(total_reward)
-        
+
         if episode % 100 == 0:
             print(f"Episode {episode}: Total reward = {total_reward}, Epsilon = {epsilon:.3f}")
-    
+
     plt.figure(figsize=(10, 5))
     plt.plot(rewards_per_episode)
     plt.xlabel('Episode')
     plt.ylabel('Total Reward')
     plt.title('Q-Learning Progress')
     plt.show()
-    
+
     return q_table
 
 # Run Q-learning
@@ -156,7 +156,7 @@ q_table = q_learning(env)
 def print_policy(q_table, env):
     arrows = ['↑', '→', '↓', '←']
     policy = np.empty((env.grid_size, env.grid_size), dtype=str)
-    
+
     for i in range(env.grid_size):
         for j in range(env.grid_size):
             if (i, j) == env.goal:
@@ -166,7 +166,7 @@ def print_policy(q_table, env):
             else:
                 best_action = np.argmax(q_table[i, j])
                 policy[i, j] = arrows[best_action]
-    
+
     print("Learned Policy:")
     print(policy)
 
@@ -222,4 +222,4 @@ Q-Learning is guaranteed to converge to the optimal action-value function $Q^*$ 
 - **Dueling Q-Networks**: Separates state value and advantage functions
 - **Distributional Q-Learning**: Models the distribution of returns instead of just the mean
 
-In the next section, we'll explore Policy Gradient methods, which provide a different approach to reinforcement learning. 
+In the next section, we'll explore Policy Gradient methods, which provide a different approach to reinforcement learning.

@@ -43,46 +43,46 @@ def tokenize(text):
 def build_bigram_model(corpus):
     """Build a bigram language model from a corpus."""
     tokens = tokenize(corpus)
-    
+
     # Count word frequencies
     unigram_counts = Counter(tokens)
-    
+
     # Count bigram frequencies
     bigram_counts = defaultdict(Counter)
     for i in range(len(tokens) - 1):
         bigram_counts[tokens[i]][tokens[i+1]] += 1
-    
+
     # Build probability model
     model = {}
     for w1 in bigram_counts:
         total_count = sum(bigram_counts[w1].values())
         model[w1] = {w2: count / total_count for w2, count in bigram_counts[w1].items()}
-    
+
     return model
 
 def generate_text(model, start_word, length=10):
     """Generate text using the bigram model."""
     import random
-    
+
     text = [start_word]
     current_word = start_word
-    
+
     for _ in range(length):
         if current_word not in model:
             # If the word is not in our model, we need to stop
             break
-            
+
         # Get probabilities for next words
         next_word_probs = model[current_word]
-        
+
         # Choose a random word based on probabilities
         words = list(next_word_probs.keys())
         probs = list(next_word_probs.values())
-        
+
         next_word = random.choices(words, weights=probs)[0]
         text.append(next_word)
         current_word = next_word
-        
+
     return ' '.join(text)
 
 # Example usage
@@ -124,4 +124,4 @@ N-gram models have several limitations:
 - Poor handling of long-distance dependencies
 - Need large amounts of data for higher-order n-grams
 
-Modern language models based on neural networks (like RNNs, LSTMs, and Transformers) address many of these limitations, but n-gram models remain valuable for their simplicity and interpretability. 
+Modern language models based on neural networks (like RNNs, LSTMs, and Transformers) address many of these limitations, but n-gram models remain valuable for their simplicity and interpretability.

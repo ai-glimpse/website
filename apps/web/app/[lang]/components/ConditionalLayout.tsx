@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-import LargeWithLogoCentered from '@/app/[lang]/components/Footer';
 import Navbar from '@/app/[lang]/components/Navbar';
+import SimpleFooter from '@/app/[lang]/components/SimpleFooter';
 
 interface ConditionalLayoutProps {
   children: React.ReactNode;
@@ -15,7 +15,8 @@ export default function ConditionalLayout({
 }: ConditionalLayoutProps) {
   const pathname = usePathname();
   const isDocsPage = pathname.includes('/docs');
-  const isHomePage = pathname === '/' || pathname === '/en' || pathname === '/zh';
+  const isHomePage =
+    pathname === '/' || pathname === '/en' || pathname === '/zh';
 
   if (isDocsPage) {
     // For docs pages, don't render the custom navbar and footer
@@ -38,7 +39,7 @@ export default function ConditionalLayout({
     <>
       <Navbar />
       <main className="flex-grow">{children}</main>
-      <LargeWithLogoCentered />
+      <SimpleFooter />
     </>
   );
 }
