@@ -2,10 +2,14 @@ import 'katex/dist/katex.css';
 import './global.css';
 
 import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
-// Use system fonts as fallback for build environments with no internet access
-const fontClass = 'font-sans';
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+});
 
 export const metadata: Metadata = {
   title: 'AI Glimpse',
@@ -20,7 +24,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html className={fontClass} suppressHydrationWarning>
+    <html className={inter.className} suppressHydrationWarning>
       <head>
         <title>AI Glimpse</title>
         <link
