@@ -10,7 +10,7 @@ export default function Input(props: InputProps) {
   const { prompt, onSubmit } = props;
   const [input, setInput] = useState('');
 
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -29,7 +29,6 @@ export default function Input(props: InputProps) {
       <div className="mt-1 flex rounded-md shadow-sm">
         <div className="relative flex flex-grow items-stretch focus-within:z-10">
           <input
-            //@ts-expect-error - ref type compatibility issue
             ref={inputRef}
             type="text"
             name="input"
