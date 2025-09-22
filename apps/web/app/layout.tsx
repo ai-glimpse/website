@@ -2,10 +2,7 @@ import 'katex/dist/katex.css';
 import './global.css';
 
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'AI Glimpse',
@@ -20,7 +17,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html className={inter.className} suppressHydrationWarning>
+    <html className="font-sans" suppressHydrationWarning>
       <head>
         <title>AI Glimpse</title>
         <link
