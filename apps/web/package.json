@@ -41,7 +41,7 @@
     "eslint-config-next": "15.3.3",
     "framer-motion": "^12.23.16",
     "fumadocs-core": "^15.7.13",
-    "fumadocs-mdx": "11.10.0",
+    "fumadocs-mdx": "12.0.0",
     "fumadocs-ui": "15.7.13",
     "katex": "^0.16.22",
     "lucide-react": "^0.544.0",
