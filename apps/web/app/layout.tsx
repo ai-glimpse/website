@@ -4,7 +4,6 @@ import './global.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
-
 export const metadata: Metadata = {
   title: 'AI Glimpse',
   description: 'Learning AI from scratch',
