@@ -38,7 +38,7 @@
     "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "15.5.3",
     "framer-motion": "^12.23.16",
     "fumadocs-core": "^15.7.13",
     "fumadocs-mdx": "11.10.0",
