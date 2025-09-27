@@ -5,6 +5,7 @@
 .map.ts
 .contentlayer
 .content-collections
+.source
 
 # test & build
 /coverage
