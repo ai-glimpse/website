@@ -4,7 +4,7 @@ import 'chart.js/auto';
 
 import { Chart, registerables, TooltipItem } from 'chart.js';
 import { ChevronDown } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Scatter } from 'react-chartjs-2';
 import init, { CentroidsInitMethod, Kmeans } from 'toymlrs';
 
@@ -92,7 +92,7 @@ const KmeansWasmDemo: React.FC = () => {
     return points;
   };
 
-  const runKmeans = async () => {
+  const runKmeans = useCallback(async () => {
     await init();
     console.log('Toyml in Rust(toymlrs): WASM initialized');
 
@@ -115,7 +115,12 @@ const KmeansWasmDemo: React.FC = () => {
     }));
 
     setResults(resultPoints);
-  };
+  }, [kValue, centroidsInitMethodValue, numPoints]);
+
+  // Auto-run k-means algorithm when component mounts
+  useEffect(() => {
+    runKmeans();
+  }, [runKmeans]); // Include runKmeans in dependency array
 
   // Define a clean color palette for clusters
   const clusterColors = [
