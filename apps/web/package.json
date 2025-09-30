@@ -47,7 +47,7 @@
     "lucide-react": "^0.544.0",
     "motion": "^12.23.16",
     "negotiator": "^1.0.0",
-    "next": "15.5.3",
+    "next": "15.5.4",
     "punycode.js": "^2.3.1",
     "react": "^18.3.1",
     "react-ace": "^14.0.1",
