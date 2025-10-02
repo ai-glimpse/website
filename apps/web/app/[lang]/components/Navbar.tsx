@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/popover';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-import LanguageSwitcher from './LanguageSwitcher';
+import ConditionalLanguageSwitcher from './ConditionalLanguageSwitcher';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,7 +77,10 @@ export default function Navbar() {
         </div>
 
         <div className="flex justify-end space-x-1 md:space-x-4">
-          <LanguageSwitcher />
+          <ConditionalLanguageSwitcher
+            showOnDocs={false}
+            showOnNonDocs={true}
+          />
           <Button
             asChild
             variant="ghost"
@@ -191,7 +194,7 @@ const MobileNav = () => {
         <div className="text-xl font-bold text-gray-800 dark:text-white">
           <Link href="/">AI Glimpse</Link>
         </div>
-        <LanguageSwitcher />
+        <ConditionalLanguageSwitcher showOnDocs={false} showOnNonDocs={true} />
       </div>
       <div className="space-y-2">
         {NAV_ITEMS.map((navItem) => (

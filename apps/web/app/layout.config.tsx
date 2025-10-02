@@ -1,7 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import React from 'react';
 
-import LanguageSwitcher from '@/app/[lang]/components/LanguageSwitcher';
+import ConditionalLanguageSwitcher from '@/app/[lang]/components/ConditionalLanguageSwitcher';
 import { i18n } from '@/lib/i18n';
 
 /**
@@ -17,7 +17,11 @@ export function baseOptions(lang?: string): BaseLayoutProps {
     nav: {
       title: 'AI Glimpse',
       url: lang ? `/${lang}` : '/',
-      children: React.createElement(LanguageSwitcher),
+      // Only show language switcher in fumadocs (docs pages)
+      children: React.createElement(ConditionalLanguageSwitcher, {
+        showOnDocs: true,
+        showOnNonDocs: false,
+      }),
     },
     githubUrl: 'https://github.com/ai-glimpse',
   };
