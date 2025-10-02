@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe } from 'lucide-react';
+import { Languages } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -39,7 +39,7 @@ export default function LanguageSwitcher() {
           className="h-8 w-8 rounded-full p-0 hover:bg-gray-100 dark:hover:bg-gray-800"
           aria-label="Switch language"
         >
-          <Globe className="h-4 w-4" />
+          <Languages className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-48 p-2" align="end">
