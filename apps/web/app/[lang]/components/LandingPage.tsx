@@ -7,18 +7,15 @@ export default function LandingPage() {
       <section className="px-6 py-12">
         <div className="mx-auto max-w-4xl">
           {/* Large Title */}
-          <h1 className="mb-4 text-center text-4xl font-light tracking-wide text-gray-900 md:text-6xl lg:text-7xl dark:text-gray-100">
-            AI
-            <br />
-            GLIMPSE
+          <h1 className="mb-2 text-center text-4xl font-light tracking-wide text-gray-900 md:text-6xl lg:text-7xl dark:text-gray-100">
+            AI GLIMPSE
           </h1>
 
-          {/* Badge */}
-          <div className="mb-6 flex justify-center">
-            <div className="inline-flex items-center rounded-full border border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
-              <span className="mr-2 inline-block h-2 w-2 rounded-full bg-green-500"></span>
+          {/* Elegant Slogan */}
+          <div className="mb-8 flex justify-center">
+            <p className="text-center text-base font-light tracking-wider text-gray-500 md:text-lg dark:text-gray-400">
               Learning AI from Scratch
-            </div>
+            </p>
           </div>
         </div>
 
