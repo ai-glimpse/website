@@ -1,7 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import React from 'react';
 
-import LanguageSwitcher from '@/app/[lang]/components/LanguageSwitcher';
 import { i18n } from '@/lib/i18n';
 
 /**
@@ -17,7 +15,8 @@ export function baseOptions(lang?: string): BaseLayoutProps {
     nav: {
       title: 'AI Glimpse',
       url: lang ? `/${lang}` : '/',
-      children: React.createElement(LanguageSwitcher),
+      // Don't show our custom language switcher in fumadocs - it has its own
+      children: undefined,
     },
     githubUrl: 'https://github.com/ai-glimpse',
   };

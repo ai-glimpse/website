@@ -2,6 +2,7 @@
 
 import { ChevronDown, ChevronRight, Menu as MenuIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FaGithub, FaTwitter } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
@@ -18,11 +19,26 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { i18n } from '@/lib/i18n';
 
-import LanguageSwitcher from './LanguageSwitcher';
+import ConditionalLanguageSwitcher from './ConditionalLanguageSwitcher';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const params = useParams();
+  const currentLang = (params?.lang as string) || i18n.defaultLanguage;
+
+  // Create language-aware navigation items
+  const NAV_ITEMS: Array<NavItem> = [
+    {
+      label: 'Docs',
+      href: `/${currentLang}/docs/ml`,
+    },
+    {
+      label: 'Blog',
+      href: `/${currentLang}/blog`,
+    },
+  ];
   const [mounted, setMounted] = useState(false);
 
   // Handle scroll effect for navbar
@@ -61,7 +77,7 @@ export default function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-[280px] sm:w-[350px]">
-              <MobileNav />
+              <MobileNav navItems={NAV_ITEMS} />
             </SheetContent>
           </Sheet>
         </div>
@@ -72,12 +88,15 @@ export default function Navbar() {
           </h1>
 
           <div className="ml-10 hidden md:flex">
-            <DesktopNav />
+            <DesktopNav navItems={NAV_ITEMS} />
           </div>
         </div>
 
         <div className="flex justify-end space-x-1 md:space-x-4">
-          <LanguageSwitcher />
+          <ConditionalLanguageSwitcher
+            showOnDocs={false}
+            showOnNonDocs={true}
+          />
           <Button
             asChild
             variant="ghost"
@@ -130,10 +149,10 @@ export default function Navbar() {
   );
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({ navItems }: { navItems: NavItem[] }) => {
   return (
     <div className="flex space-x-1 md:space-x-2 lg:space-x-4">
-      {NAV_ITEMS.map((navItem) => (
+      {navItems.map((navItem) => (
         <div key={navItem.label}>
           <Popover>
             <PopoverTrigger asChild>
@@ -184,17 +203,17 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
   );
 };
 
-const MobileNav = () => {
+const MobileNav = ({ navItems }: { navItems: NavItem[] }) => {
   return (
     <div className="flex flex-col space-y-4 p-4">
       <div className="mb-4 flex items-center justify-between">
         <div className="text-xl font-bold text-gray-800 dark:text-white">
           <Link href="/">AI Glimpse</Link>
         </div>
-        <LanguageSwitcher />
+        <ConditionalLanguageSwitcher showOnDocs={false} showOnNonDocs={true} />
       </div>
       <div className="space-y-2">
-        {NAV_ITEMS.map((navItem) => (
+        {navItems.map((navItem) => (
           <MobileNavItem key={navItem.label} {...navItem} />
         ))}
       </div>
@@ -260,14 +279,3 @@ interface NavItem {
   children?: Array<NavItem>;
   href?: string;
 }
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'Docs',
-    href: '/docs/ml',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-  },
-];
