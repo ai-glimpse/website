@@ -54,7 +54,7 @@ const Typewriter = ({
   const texts = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const currentText = texts[currentTextIndex];
 

@@ -20,7 +20,7 @@ export default async function Page(props: {
   const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
-  const path = `apps/web/content/docs/${page.file.path}`;
+  const path = `apps/web/content/docs/${page.path}`;
   const footer = (
     <a
       href={`https://github.com/ai-glimpse/website/blob/main/${path}`}
@@ -41,12 +41,8 @@ export default async function Page(props: {
 
   const MDX = page.data.body;
 
-  // Use the last modified time from fumadocs built-in git support
-  const lastEditDate = page.data.lastModified;
-
   return (
     <DocsPage
-      {...(lastEditDate ? { lastUpdate: new Date(lastEditDate) } : {})}
       toc={page.data.toc}
       full={page.data.full}
       tableOfContent={{

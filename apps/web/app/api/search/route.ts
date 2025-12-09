@@ -4,6 +4,13 @@ import { createFromSource } from 'fumadocs-core/search/server';
 import { source } from '@/lib/source';
 
 export const { GET } = createFromSource(source, {
+  buildIndex: (page) => ({
+    id: page.url,
+    title: page.data.title ?? '',
+    description: page.data.description,
+    structuredData: page.data.structuredData ?? { headings: [], contents: [] },
+    url: page.url,
+  }),
   localeMap: {
     // Configure Chinese language support with mandarin tokenizer
     zh: {

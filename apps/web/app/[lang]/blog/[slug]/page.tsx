@@ -56,9 +56,7 @@ export default async function Page(props: {
           <div>
             <p className="text-muted-foreground mb-1 text-sm">At</p>
             <p className="font-medium">
-              {new Date(
-                (page.data.date as string) ?? page.file.name
-              ).toDateString()}
+              {new Date((page.data.date as string) ?? page.path).toDateString()}
             </p>
           </div>
           <Control url={page.url} />

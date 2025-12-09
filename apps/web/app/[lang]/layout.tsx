@@ -1,5 +1,5 @@
 import { defineI18nUI } from 'fumadocs-ui/i18n';
-import { RootProvider } from 'fumadocs-ui/provider';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 import React from 'react';
 
 import ConditionalLayout from '@/app/[lang]/components/ConditionalLayout';
