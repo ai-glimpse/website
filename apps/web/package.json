@@ -44,7 +44,7 @@
     "fumadocs-mdx": "12.0.3",
     "fumadocs-ui": "16.0.4",
     "katex": "^0.16.22",
-    "lucide-react": "^0.544.0",
+    "lucide-react": "^0.556.0",
     "motion": "^12.23.22",
     "negotiator": "^1.0.0",
     "next": "15.5.7",
