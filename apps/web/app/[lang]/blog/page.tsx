@@ -56,9 +56,7 @@ export default function Page(): React.ReactElement {
             </p>
 
             <p className="text-muted-foreground mt-auto pt-4 text-xs">
-              {new Date(
-                (post.data.date as string) ?? post.path
-              ).toDateString()}
+              {new Date((post.data.date as string) ?? post.path).toDateString()}
             </p>
           </Link>
         ))}
