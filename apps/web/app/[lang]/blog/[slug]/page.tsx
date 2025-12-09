@@ -57,7 +57,7 @@ export default async function Page(props: {
             <p className="text-muted-foreground mb-1 text-sm">At</p>
             <p className="font-medium">
               {new Date(
-                (page.data.date as string) ?? page.file.name
+                (page.data.date as string) ?? page.path
               ).toDateString()}
             </p>
           </div>
