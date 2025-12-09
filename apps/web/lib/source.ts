@@ -3,7 +3,7 @@ import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
 import { icons } from 'lucide-react';
 import { createElement } from 'react';
 
-import { blog as blogCollection, docs as docsCollection, meta as metaCollection } from '@/.source';
+import { blog as blogCollection, docs as docsCollection, meta as metaCollection } from '@/.source/server';
 import { i18n } from '@/lib/i18n';
 
 export const source = loader({
